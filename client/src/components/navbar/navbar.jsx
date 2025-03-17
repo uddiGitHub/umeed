@@ -1,74 +1,129 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import styles from './navbar.module.css';
+import { LuSearch } from "react-icons/lu";
+
 
 const Navbar = () => {
-    const [spanStyle, setSpanStyle] = useState({ 
-        left: 0, 
-        width: 0 
-    });
+    const location = useLocation();
+    const [spanStyle, setSpanStyle] = useState({ left: 0, width: 0 });
+    const [isSearchActive, setIsSearchActive] = useState(false);
     const navRef = useRef(null);
-    const logoRef = useRef(null); 
+    const logoRef = useRef(null);
+    const inputRef = useRef(null);
 
-    const updateSpanStyle = (index) => {
-        const links = navRef.current.querySelectorAll('a');
-        if (!links[index]) return;
-        
-        const { offsetLeft, offsetWidth } = links[index];
+    // navigation links
+    const navLinks = [
+        { path: "/", name: "Home" },
+        { path: "/Aboutus", name: "About Us" },
+        { path: "/Articles", name: "Articles" },
+        { path: "/Donation", name: "Donation" },
+        { path: "/Contactus", name: "Contact Us" }
+    ];
+
+    const updateSpanPosition = (index) => {
+        const links = navRef.current?.querySelectorAll('a');
+        if (!links || !links[index]) return;
+
         setSpanStyle({
-            left: offsetLeft,
-            width: offsetWidth
+            left: links[index].offsetLeft,
+            width: links[index].offsetWidth
         });
     };
-
+    // index finder
     useEffect(() => {
-        const initializePosition = () => {
-            if (logoRef.current.complete) {
-                updateSpanStyle(0);
-            } else {
-                logoRef.current.addEventListener('load', () => updateSpanStyle(0));
-            }
+        const activeIndex = navLinks.findIndex(link =>
+            location.pathname === link.path
+        );
+        if (activeIndex >= 0) {
+            updateSpanPosition(activeIndex);
+        }
+        if (location.pathname !== "/") {
+            setIsSearchActive(false);
+        }
+    }, [location.pathname]);
+
+    // search box focus
+    useEffect(() => {
+        if (isSearchActive && inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, [isSearchActive]);
+
+
+    // logo loader
+    useEffect(() => {
+        const handleLogoLoad = () => {
+            const activeIndex = navLinks.findIndex(link =>
+                location.pathname === link.path
+            );
+            updateSpanPosition(activeIndex >= 0 ? activeIndex : 0);
         };
 
-        initializePosition();
-
-        const resizeObserver = new ResizeObserver(() => updateSpanStyle(0));
-        if (navRef.current) {
-            resizeObserver.observe(navRef.current);
+        if (logoRef.current.complete) {
+            handleLogoLoad();
+        } else {
+            logoRef.current.addEventListener('load', handleLogoLoad);
         }
 
         return () => {
-            resizeObserver.disconnect();
             if (logoRef.current) {
-                logoRef.current.removeEventListener('load', initializePosition);
+                logoRef.current.removeEventListener('load', handleLogoLoad);
             }
         };
     }, []);
 
     return (
-        <header className={styles.header}>
-            <nav className={styles.navbody} ref={navRef}>
-                <img 
+        <header className={`${styles.header} ${isSearchActive ? styles.blur : ''}`}>
+            <nav className={styles.navbody} ref={navRef}
+                onMouseLeave={() => {
+                    if (location.pathname === "/Donation") {
+                        setSpanStyle({ left: 0, width: 0 });
+                    }
+                }}>
+
+                <img
                     ref={logoRef}
-                    src="./src/assets/logo.png" 
-                    alt="Logo" 
-                    className={styles.logo} 
+                    src="./src/assets/logo-transparent.png"
+                    alt="Logo"
+                    className={styles.logo}
                 />
                 <span style={spanStyle}></span>
-                <a href="/" 
-                   onMouseEnter={() => updateSpanStyle(0)}
-                   onMouseLeave={() => updateSpanStyle(0)}>Home</a>
-                   <a href="#" 
-                   onMouseEnter={() => updateSpanStyle(1)}
-                   onMouseLeave={() => updateSpanStyle(0)}>About Us</a>
-                <a href="#" 
-                   onMouseEnter={() => updateSpanStyle(2)}
-                   onMouseLeave={() => updateSpanStyle(0)}>Articles</a>
-                <a href="#" 
-                   onMouseEnter={() => updateSpanStyle(3)}
-                   onMouseLeave={() => updateSpanStyle(0)}>Donation</a>
-                <a href="#" 
-                   onMouseEnter={() => updateSpanStyle(4)}
-                   onMouseLeave={() => updateSpanStyle(0)}>Contact Us</a>
+
+                {navLinks.map((link, index) => (
+                    <Link
+                        key={link.path}
+                        to={link.path}
+                        className={link.path === "/Donation" ? styles.donationBorder : ""}
+                        onMouseEnter={() => {
+                            if (link.path === "/Donation") return;
+                            updateSpanPosition(index);
+                        }}
+                        onMouseLeave={() => {
+                            const activeIndex = navLinks.findIndex(l =>
+                                location.pathname === l.path && l.path !== "/Donation"
+                            );
+                            if (activeIndex >= 0) {
+                                updateSpanPosition(activeIndex);
+                            }
+                        }}
+                    >
+                        {link.name}
+                    </Link>
+                ))}
+                {location.pathname === "/Articles" && (
+                    <div className={`${styles.searchBox} ${isSearchActive ? styles.active : ''}`}>
+                        <input
+                            ref={inputRef}
+                            type="text"
+                            placeholder="Search"
+                            onBlur={() => setIsSearchActive(false)}
+                        />
+                        <button onClick={() => setIsSearchActive(!isSearchActive)}>
+                            <LuSearch />
+                        </button>
+                    </div>
+                )}
             </nav>
         </header>
     );

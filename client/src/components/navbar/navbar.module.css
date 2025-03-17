@@ -3,6 +3,10 @@
     justify-content: center;
     width: 100%;
 }
+.header.blur {
+    backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.9);
+}
 
 .navbody {
     position: relative; 
@@ -52,4 +56,56 @@
     z-index: -1;
     transition: all 0.3s ease;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.donationBorder {
+    background: #e8be3a;
+    border-radius: 15px;
+    padding: 8px 15px !important; 
+    margin: 0 5px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.donationBorder:hover {
+    border: #000000 0.5px solid;
+    background: #e8be3a;
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.6);
+    animation: button-glow 1.5s ease-in-out infinite;
+}
+
+.searchBox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+}
+
+.searchBox input {
+    width: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    opacity: 0;
+    background: transparent;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+}
+
+.searchBox.active input {
+    border: #000000 1px solid;
+    border-radius: 20px;
+    width: 200px;
+    opacity: 1;
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.8);
+    /* transform: translateY(px); */
+}
+
+.searchBox button {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: none;
+    background: transparent;
 }
