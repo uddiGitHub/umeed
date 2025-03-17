@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  font-size: 1.5rem;
+  color: #2d3748; 
+}
+
+:root {
+  --color-bg: #ffffff; 
+}
