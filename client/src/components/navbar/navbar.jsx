@@ -2,9 +2,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import styles from './navbar.module.css';
 import { LuSearch } from "react-icons/lu";
+import { TbHttpOptions } from "react-icons/tb";
 
 
 const Navbar = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const location = useLocation();
     const [spanStyle, setSpanStyle] = useState({ left: 0, width: 0 });
     const [isSearchActive, setIsSearchActive] = useState(false);
@@ -25,11 +28,25 @@ const Navbar = () => {
         const links = navRef.current?.querySelectorAll('a');
         if (!links || !links[index]) return;
 
-        setSpanStyle({
+        setSpanStyle(isMobile ? {
+            left: 0,
+            width: '100%',
+            top: links[index].offsetTop,
+            height: links[index].offsetHeight
+          } : {
             left: links[index].offsetLeft,
-            width: links[index].offsetWidth
-        });
+            width: links[index].offsetWidth,
+          });
     };
+    // mobile view
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+            if (window.innerWidth > 768) setIsMenuOpen(false);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
     // index finder
     useEffect(() => {
         const activeIndex = navLinks.findIndex(link =>
@@ -82,36 +99,50 @@ const Navbar = () => {
                     }
                 }}>
 
-                <img
-                    ref={logoRef}
-                    src="./src/assets/logo-transparent.png"
-                    alt="Logo"
-                    className={styles.logo}
-                />
-                <span style={spanStyle}></span>
-
-                {navLinks.map((link, index) => (
-                    <Link
-                        key={link.path}
-                        to={link.path}
-                        className={link.path === "/Donation" ? styles.donationBorder : ""}
-                        onMouseEnter={() => {
-                            if (link.path === "/Donation") return;
-                            updateSpanPosition(index);
-                        }}
-                        onMouseLeave={() => {
-                            const activeIndex = navLinks.findIndex(l =>
-                                location.pathname === l.path && l.path !== "/Donation"
-                            );
-                            if (activeIndex >= 0) {
-                                updateSpanPosition(activeIndex);
-                            }
-                        }}
+                <div className={styles.navContainer}>
+                    <img
+                        ref={logoRef}
+                        src="./src/assets/logo-transparent-copy.png"
+                        alt="Logo"
+                        className={styles.logo}
+                    />
+                    <button
+                        className={styles.hamburger}
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
                     >
-                        {link.name}
-                    </Link>
-                ))}
-                {location.pathname === "/Articles" && (
+                        <TbHttpOptions />
+                    </button>
+                    <div className={`${styles.navLinks} ${isMenuOpen ? styles.showMenu : ''}`}>
+                        <span style={spanStyle}></span>
+                        {navLinks.map((link, index) => (
+                            <Link
+                                key={link.path}
+                                to={link.path}
+                                className={link.path === "/Donation" ? styles.donationBorder : ""}
+                                onClick={() => {
+                                    if (isMobile) {
+                                      setIsMenuOpen(false);
+                                      updateSpanPosition(index);
+                                    }
+                                  }}
+                                onMouseEnter={() => {
+                                    if (link.path === "/Donation") return;
+                                    updateSpanPosition(index);
+                                }}
+                                onMouseLeave={() => {
+                                    const activeIndex = navLinks.findIndex(l =>
+                                        location.pathname === l.path && l.path !== "/Donation"
+                                    );
+                                    if (activeIndex >= 0) {
+                                        updateSpanPosition(activeIndex);
+                                    }
+                                }}
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
+                    </div>
+                    {location.pathname === "/Articles" && (
                     <div className={`${styles.searchBox} ${isSearchActive ? styles.active : ''}`}>
                         <input
                             ref={inputRef}
@@ -124,6 +155,8 @@ const Navbar = () => {
                         </button>
                     </div>
                 )}
+                </div>
+                
             </nav>
         </header>
     );

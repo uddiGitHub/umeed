@@ -1,6 +1,6 @@
 import Navbar from './components/navbar/navbar.jsx'
 import { Routes , Route } from 'react-router-dom'
-import Home from './pages/Home/home.jsx'
+import Home from './pages/Home/Home.jsx'
 import Aboutus from './pages/Aboutus/aboutus.jsx'
 import Contactus from './pages/ContactUs/Contactus.jsx'
 import Articles from './pages/Articles/Articles.jsx'
@@ -8,7 +8,7 @@ import Donation from './pages/Donation/Donation.jsx'
 function App() {
   return (
     <>
-      <div className="bg-[var(--color-bg)] w-full h-full flex relative">
+      <div className="bg-[var(--color-bg)] w-full h-full relative">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
