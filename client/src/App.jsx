@@ -5,6 +5,7 @@ import Aboutus from './pages/Aboutus/aboutus.jsx'
 import Contactus from './pages/ContactUs/Contactus.jsx'
 import Articles from './pages/Articles/Articles.jsx'
 import Donation from './pages/Donation/Donation.jsx'
+import Newsletter from './pages/Newsletter/Newsletter.jsx'
 function App() {
   return (
     <>
@@ -16,6 +17,7 @@ function App() {
           <Route path="/Contactus" element={<Contactus />} />
           <Route path="/Articles" element={<Articles />} />
           <Route path="/Donation" element={<Donation />} />
+          <Route path='/Newsletter' element={<Newsletter />}></Route>
         </Routes>
       </div>
     </>

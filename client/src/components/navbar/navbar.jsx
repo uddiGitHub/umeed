@@ -20,6 +20,7 @@ const Navbar = () => {
         { path: "/", name: "Home" },
         { path: "/Aboutus", name: "About Us" },
         { path: "/Articles", name: "Articles" },
+        { path: "/Newsletter", name: "Newsletter" },
         { path: "/Donation", name: "Donation" },
         { path: "/Contactus", name: "Contact Us" }
     ];
@@ -142,7 +143,7 @@ const Navbar = () => {
                             </Link>
                         ))}
                     </div>
-                    {location.pathname === "/Articles" && (
+                    {(location.pathname === "/Articles" || location.pathname === "/Newsletter") && (
                     <div className={`${styles.searchBox} ${isSearchActive ? styles.active : ''}`}>
                         <input
                             ref={inputRef}
