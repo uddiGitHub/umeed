@@ -58,7 +58,7 @@
 }
 
 .donationBorder {
-    background: #e8be3a;
+    background: hsl(46, 79%, 57%);
     border-radius: 15px;
     padding: 8px 15px !important; 
     margin: 0 5px;
@@ -67,7 +67,7 @@
 }
 
 .donationBorder:hover {
-    background: #e8be3a;
+    background: hsl(46, 79%, 57%);
     box-shadow: 0 0 5px rgba(255, 68, 68, 0.6);
     animation: button-glow 1.5s ease-in-out infinite;
 }
