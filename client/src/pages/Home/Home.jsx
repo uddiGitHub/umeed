@@ -126,20 +126,6 @@ const Home = () => {
         ))}
       </div>
 
-      {/* Verticals Section */}
-      <div className={styles.verticals}>
-        <h1>Our Verticals</h1>
-      </div>
-      <div className={styles.verticalsContainer}>
-        {verticalsContent.map((vertical, index) => (
-          <div key={index} className={styles.verticalCard}>
-            <img className={styles.verticalCardImg} src={art} alt={vertical.title} />
-            <h2>{vertical.title}</h2>
-            <p>{vertical.text}</p>
-          </div>
-        ))}
-      </div>
-
 
       {/* Colored Section */}
       <div className={styles.coloredSection}>
@@ -165,6 +151,36 @@ const Home = () => {
           </div>
         ))}
       </div>
+
+
+      {/* Verticals Section */}
+      <div className={styles.verticals}>
+        <h1>Our Verticals</h1>
+      </div>
+      <div className={styles.verticalsContainer}>
+        {verticalsContent.map((vertical, index) => (
+          <div key={index} className={styles.verticalCard}>
+            <img className={styles.verticalCardImg} src={art} alt={vertical.title} />
+            <h2>{vertical.title}</h2>
+            <p>{vertical.text}</p>
+          </div>
+        ))}
+      </div>
+      
+      {/* Get Involved Section */}
+      <div className={styles.getInvolved}>
+        <div className={styles.getInvolvedContainer}>
+          <div className={styles.getInvolvedText}>
+            <h1>Be a Momo to Our Toto?</h1>
+            <p>Join us in our mission to challenge societal norms, break the silence on gender-based violence, and create a more equitable future for all. Get involved in our campaigns, come to our events, or support us however, you can, every bit counts.</p>
+            <button> Get Involved </button>
+          </div>
+          <div className={styles.getInvolvedImgContainer}>
+            <img className={styles.getInvolvedImg} src={gay} alt="gay" />
+          </div>
+        </div>
+      </div>
+      
 
       <div className={styles.peopleSection}>
         {/* Peoples View Section */}
@@ -197,18 +213,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className={styles.getInvolved}>
-        <div className={styles.getInvolvedContainer}>
-          <div className={styles.getInvolvedText}>
-            <h1>Be a Momo to Our Toto?</h1>
-            <p>Join us in our mission to challenge societal norms, break the silence on gender-based violence, and create a more equitable future for all. Get involved in our campaigns, come to our events, or support us however, you can, every bit counts.</p>
-            <button> Get Involved </button>
-          </div>
-          <div className={styles.getInvolvedImgContainer}>
-            <img className={styles.getInvolvedImg} src={gay} alt="gay" />
-          </div>
-        </div>
-      </div>
+      
     </>
   )
 }

@@ -262,7 +262,7 @@
 
 .commentsContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 10px;
     perspective: 1000px;
     margin-bottom: 4rem;
@@ -283,7 +283,7 @@
 }
 
 .commentBox:hover {
-    transform: scale(1.15) rotate(var(--rotate)) translateZ(50px) !important;
+    transform: scale(1.15) rotate(var(--rotate)) translateZ(5px) !important;
     opacity: 1;
     z-index: 10;
     border: 0.5px solid black;
@@ -315,7 +315,7 @@
 }
 
 .commentBox .profileDescription h1 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin: 0;
     color: #333;
 }
@@ -325,19 +325,19 @@
     margin: 0;
     color: #666;
 }
-
 .commentBox .comment {
     font-size: 0.9rem;
     color: #444;
-    line-height: 1.5;
-    max-height: 0;
+    line-height: 1.2;
+    max-height: 200px;
     overflow: hidden;
     transition: all 0.3s ease;
 }
 
-.commentBox:hover .comment {
-    max-height: 200px;
-    padding-top: 1rem;
+.commentsContainer:hover .commentBox:not(:hover) {
+    transform: scale(0.95) !important;
+    opacity: 0.7;
+    filter: blur(1px);
 }
 
 /* get Involved Section */

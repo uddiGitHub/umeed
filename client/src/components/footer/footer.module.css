@@ -1,0 +1,145 @@
+.footer {
+    background: hsla(46, 79%, 57%);
+    clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 100%);
+    padding: 3rem 0 0.5rem;
+    position: relative;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    overflow: visible;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+    filter: grayscale(20%) brightness(0.5);
+}
+
+.logoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.socialLinks {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.socialLink {
+    color: black;
+    font-size: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    padding: 0.5rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.socialLink:hover,
+.socialLink:focus {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.socialLink:focus {
+    outline: 2px solid hsla(0, 3%, 6%, 0.5);
+    outline-offset: 2px;
+}
+
+.copyright {
+    text-align: center;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 600px;
+}
+
+.copyright p {
+    font-size: 0.85rem;
+    line-height: 1.2;
+    padding: 0;
+    margin: 0;
+}
+
+.developerLink {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    padding: 0 0.25rem;
+}
+
+.developerLink::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: hsl(0, 0%, 0%);
+    transition: width 0.3s ease;
+}
+
+.developerLink:hover::after {
+    width: 100%;
+}
+
+/* Animation effects */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* @media (max-width: 768px) {
+    .container {
+      padding: 0 1rem;
+      gap: 1.5rem;
+    }
+  
+    .socialLinks {
+      gap: 1rem;
+    }
+  
+    .socialLink {
+      font-size: 1.25rem;
+      padding: 0.4rem;
+    }
+  
+    .copyright {
+      font-size: 0.85rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .footer {
+      padding: 2rem 0;
+    }
+  
+    .logo {
+      width: 120px;
+    }
+  
+    .socialLink {
+      font-size: 1.1rem;
+    }
+  } */

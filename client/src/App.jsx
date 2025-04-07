@@ -1,11 +1,15 @@
 import Navbar from './components/navbar/navbar.jsx'
-import { Routes , Route } from 'react-router-dom'
+import Footer from './components/footer/footer.jsx'
+
+import { Routes, Route, } from 'react-router-dom'
 import Home from './pages/Home/Home.jsx'
 import Aboutus from './pages/Aboutus/aboutus.jsx'
 import Contactus from './pages/ContactUs/Contactus.jsx'
 import Articles from './pages/Articles/Articles.jsx'
 import Donation from './pages/Donation/Donation.jsx'
 import Newsletter from './pages/Newsletter/Newsletter.jsx'
+
+
 function App() {
   return (
     <>
@@ -19,6 +23,7 @@ function App() {
           <Route path="/Donation" element={<Donation />} />
           <Route path='/Newsletter' element={<Newsletter />}></Route>
         </Routes>
+        <Footer />
       </div>
     </>
   )
