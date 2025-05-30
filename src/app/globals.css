@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+:root {
+  --bg: whitesmoke;
+  --textColor: black;
+  --color-background: var(--bg);
+
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
