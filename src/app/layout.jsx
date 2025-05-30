@@ -2,7 +2,7 @@ import { Tinos } from "next/font/google";
 import "@/app/globals.css";
 
 import Navbar from '@/components/navbar/navbar.jsx'
-
+import Footer from '@/components/footer/footer.jsx';
 
 // font is set to Tinos
 const tinos = Tinos({
@@ -22,6 +22,7 @@ export default function RootLayout({ children }) {
       <body className={tinos.className}>
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
