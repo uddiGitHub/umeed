@@ -4,7 +4,6 @@ import styles from "./home.module.css";
 
 import Image from "next/image";
 // Importing images
-import logo_transparent from "@/assets/images/logo-transparent.png";
 import bannerImagePath from "@/assets/images/bannerImg.png";
 import gay from "@/assets/images/gay.png";
 
