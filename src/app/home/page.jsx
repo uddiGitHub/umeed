@@ -206,7 +206,7 @@ export default function Home() {
             {["Hear", "what", "people", "think", "about"].map((word, index) => (
               <h1 key={index}>{word}</h1>
             ))}
-            <Image className={styles.logo} src={logo_transparent} alt="umeedLogo" />
+            <Image src='/Umeedlogo.png' width={150} height={150} alt="umeedLogo" />
           </div>
         </div>
         <div className={styles.peoplesViewComments}>
