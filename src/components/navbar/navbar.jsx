@@ -22,8 +22,8 @@ const Navbar = () => {
         { path: "/about_us", name: "About Us" },
         // { path: "/Articles", name: "Articles" },
         // { path: "/Newsletter", name: "Newsletter" },
-        // { path: "/Donation", name: "Donation" },
-        // { path: "/Contactus", name: "Contact Us" }
+        { path: "/Donation", name: "Donation" },
+        { path: "/contact", name: "Contact Us" }
     ];
 
     const updateSpanPosition = (index) => {
