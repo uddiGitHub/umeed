@@ -1,10 +1,16 @@
+// next.config.js
 export default {
   async redirects() {
     return [
       {
-        source: '/',
-        destination: '/home',
-        permanent: true, 
+        source: '/home',
+        destination: '/pages/home',
+        permanent: true,
+      },
+      {
+        source: '/admin',
+        destination: '/admin/login',
+        permanent: false,
       },
     ];
   },

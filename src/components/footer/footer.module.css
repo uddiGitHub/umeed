@@ -3,6 +3,7 @@
     clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 100%);
     padding: 3rem 0 0.5rem;
     position: relative;
+    border-radius: 10px;
 }
 
 .container {

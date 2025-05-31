@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import styles from '@/app/about_us/aboutus.module.css';
+import styles from '@/app/pages/about_us/aboutus.module.css';
 import Image from 'next/image';
 import { FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
@@ -41,7 +41,9 @@ function Aboutus() {
       {/* Our Story */}
       <div className={styles.storyContainer}>
         <div className={styles.story}>
-          <h1>Our Story So Far</h1>
+          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+            Our Story So Far
+          </h2>
           <p>
             Friends of Toto was born from a deeply personal journey. It started when Pragya, a victim-survivor of sexual assault and passionate advocate for gender justice, realized that her own story could be a source of strength for others. She wanted to ensure that no one else would feel alone in their experiences. Pragya is the voice behind Toto!
           </p>

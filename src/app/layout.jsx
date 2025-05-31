@@ -1,8 +1,8 @@
 import { Tinos } from "next/font/google";
 import "@/app/globals.css";
 
-import Navbar from '@/components/navbar/navbar.jsx'
-import Footer from '@/components/footer/footer.jsx';
+import { ClerkProvider } from "@clerk/nextjs";
+import AuthHeader from "@/components/AuthHeader";
 
 // font is set to Tinos
 const tinos = Tinos({
@@ -18,12 +18,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={tinos.className}>
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={tinos.className}>
+          <AuthHeader />
+          {/* <Navbar /> */}
+          {children}
+          {/* <Footer /> */}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

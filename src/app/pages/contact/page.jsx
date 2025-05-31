@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import styles from "@/app/contact/contactus.module.css";
+import styles from "@/app/pages/contact/contactus.module.css";
 import { FiPhoneCall } from "react-icons/fi";
 import { MdEmail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
@@ -22,7 +22,7 @@ function contactus() {
             Yes, we still answer those. Shocking, we know.
           </p>
         </div>
-        <div className={styles.contactusInfo}>
+        {/* <div className={styles.contactusInfo}>
           <div className={styles.infoItem}>
             <FiPhoneCall className={styles.icon} />
             <p className={styles.infoLabel}>Phone:</p>
@@ -44,7 +44,7 @@ function contactus() {
               <p className={styles.infoDetail}>India</p>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className={styles.contactFormContainer}>
           <form className={styles.contactForm}>

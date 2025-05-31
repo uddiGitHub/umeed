@@ -18,12 +18,12 @@ const Navbar = () => {
     const inputRef = useRef(null);
 
     const navLinks = [
-        { path: "/home", name: "Home" },
-        { path: "/about_us", name: "About Us" },
+        { path: "/pages/home", name: "Home" },
+        { path: "/pages/about_us", name: "About Us" },
         // { path: "/Articles", name: "Articles" },
         // { path: "/Newsletter", name: "Newsletter" },
         { path: "/Donation", name: "Donation" },
-        { path: "/contact", name: "Contact Us" }
+        { path: "/pages/contact", name: "Contact Us" }
     ];
 
     const updateSpanPosition = (index) => {
@@ -42,15 +42,23 @@ const Navbar = () => {
     };
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
+        const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
-            const handleResize = () => {
-                setIsMobile(window.innerWidth <= 768);
-                if (window.innerWidth > 768) setIsMenuOpen(false);
+            if (window.innerWidth > 768) setIsMenuOpen(false);
+        };
+
+        const debounce = (func, delay) => {
+            let timer;
+            return () => {
+                clearTimeout(timer);
+                timer = setTimeout(func, delay);
             };
-            window.addEventListener('resize', handleResize);
-            return () => window.removeEventListener('resize', handleResize);
-        }
+        };
+
+        const debouncedResize = debounce(handleResize, 150);
+
+        window.addEventListener('resize', debouncedResize);
+        return () => window.removeEventListener('resize', debouncedResize);
     }, []);
 
     useEffect(() => {
