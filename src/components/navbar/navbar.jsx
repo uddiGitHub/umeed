@@ -20,7 +20,7 @@ const Navbar = () => {
     const navLinks = [
         { path: "/pages/home", name: "Home" },
         { path: "/pages/about_us", name: "About Us" },
-        // { path: "/Articles", name: "Articles" },
+        { path: "/pages/articles", name: "Articles" },
         // { path: "/Newsletter", name: "Newsletter" },
         { path: "/Donation", name: "Donation" },
         { path: "/pages/contact", name: "Contact Us" }
@@ -135,7 +135,7 @@ const Navbar = () => {
                         ))}
                     </div>
 
-                    {(pathname === "/Articles" || pathname === "/Newsletter") && (
+                    {(pathname === "/pages/articles" || pathname === "/Newsletter") && (
                         <div className={`${styles.searchBox} ${isSearchActive ? styles.active : ''}`}>
                             <input
                                 ref={inputRef}

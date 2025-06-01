@@ -59,7 +59,7 @@ export default async function AdminPage() {
         </div>
         
         <div className="mt-8 text-center text-sm text-gray-500">
-          <p>Need help? Contact Umeed@gmail.com</p>
+          <p>Need help? Contact {process.env.ORG_EMAIL}</p>
         </div>
       </div>
     );
@@ -85,12 +85,8 @@ export default async function AdminPage() {
             </BreadcrumbList>
           </Breadcrumb>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-5">
-            {Array.from({ length: 2 }).map((_, i) => (
-              <div key={i} className="bg-muted/50 aspect-square rounded-xl" />
-            ))}
-          </div>
+        <div>
+          <h1>Blog posting components</h1>
         </div>
       </SidebarInset>
     </SidebarProvider>
