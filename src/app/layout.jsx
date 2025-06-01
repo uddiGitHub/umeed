@@ -22,9 +22,7 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body className={tinos.className}>
           <AuthHeader />
-          {/* <Navbar /> */}
           {children}
-          {/* <Footer /> */}
         </body>
       </html>
     </ClerkProvider>

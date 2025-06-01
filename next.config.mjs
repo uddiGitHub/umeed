@@ -7,11 +7,6 @@ export default {
         destination: '/pages/home',
         permanent: true,
       },
-      {
-        source: '/admin',
-        destination: '/admin/login',
-        permanent: false,
-      },
     ];
   },
 };
