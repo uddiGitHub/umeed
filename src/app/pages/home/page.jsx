@@ -104,82 +104,83 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Impact Section */}
-      <section className={styles.impactContainer}>
-        <h1>Impact</h1>
-        <p className={styles.impactDescribtion}>
-          We have been able to create a positive impact in the community through
-          our events and initiatives.
-        </p>
-        {impactStats.map((stat, index) => (
-          <div key={index} className={styles.impactCard}>
-            <h2>
-              <Counter end={stat.end} />+
-            </h2>
-            <p>{stat.text}</p>
-          </div>
-        ))}
-      </section>
-
-      {/* Colored Section */}
-      <section className={styles.coloredSection}>
-        <div className={styles.coloredSectionBlock}>
-          <Image className={styles.coloredSectionImg} src={gay} alt="Vision" />
-          <div className={styles.coloredSectionText}>
-            <h1>Vision</h1>
-            <p>
-              We envision an inclusive and just world where all individuals,
-              regardless of their background, can thrive and contribute to
-              society. lerem ipsum dolor sit amet, consectetur adipiscing elit.
-              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-          </div>
-        </div>
-        <div className={styles.coloredSectionBlock}>
-          <div className={styles.coloredSectionText}>
-            <h1>Vision</h1>
-            <p>
-              We envision an inclusive and just world where all individuals,
-              regardless of their background, can thrive and contribute to
-              society. lerem ipsum dolor sit amet, consectetur adipiscing elit.
-              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-          </div>
-          <Image className={styles.coloredSectionImg} src={gay} alt="Vision" />
-        </div>
-      </section>
-
-      {/* Verticals Section */}
-      <section>
-        <div className={styles.verticals}>
-          <h1>Our Verticals</h1>
-        </div>
-        <div className={styles.verticalsContainer}>
-          {verticalsContent.map((vertical, index) => (
-            <div key={index} className={styles.verticalCard}>
-              <Image
-                className={styles.verticalCardImg}
-                src={gay}
-                alt={vertical.title}
-              />
-              <h2>{vertical.title}</h2>
-              <p>{vertical.text}</p>
+      <section className={styles.homePage}>
+        {/* Impact Section */}
+        <section className={styles.impactContainer}>
+          <h1>Impact</h1>
+          <p className={styles.impactDescribtion}>
+            We have been able to create a positive impact in the community through
+            our events and initiatives.
+          </p>
+          {impactStats.map((stat, index) => (
+            <div key={index} className={styles.impactCard}>
+              <h2>
+                <Counter end={stat.end} />+
+              </h2>
+              <p>{stat.text}</p>
             </div>
           ))}
-        </div>
-      </section>
+        </section>
 
-      {/* Get Involved Section */}
+        {/* Colored Section */}
+        <section className={styles.coloredSection}>
+          <div className={styles.coloredSectionBlock}>
+            <Image className={styles.coloredSectionImg} src={gay} alt="Vision" />
+            <div className={styles.coloredSectionText}>
+              <h1>Vision</h1>
+              <p>
+                We envision an inclusive and just world where all individuals,
+                regardless of their background, can thrive and contribute to
+                society. lerem ipsum dolor sit amet, consectetur adipiscing elit.
+                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+          </div>
+          <div className={styles.coloredSectionBlock}>
+            <div className={styles.coloredSectionText}>
+              <h1>Vision</h1>
+              <p>
+                We envision an inclusive and just world where all individuals,
+                regardless of their background, can thrive and contribute to
+                society. lerem ipsum dolor sit amet, consectetur adipiscing elit.
+                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+            <Image className={styles.coloredSectionImg} src={gay} alt="Vision" />
+          </div>
+        </section>
+
+        {/* Verticals Section */}
+        <section>
+          <div className={styles.verticals}>
+            <h1>Our Verticals</h1>
+          </div>
+          <div className={styles.verticalsContainer}>
+            {verticalsContent.map((vertical, index) => (
+              <div key={index} className={styles.verticalCard}>
+                <Image
+                  className={styles.verticalCardImg}
+                  src={gay}
+                  alt={vertical.title}
+                />
+                <h2>{vertical.title}</h2>
+                <p>{vertical.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Get Involved Section */}
         <section className={styles.getInvolved}>
           <div className={styles.getInvolvedContainer}>
             <div className={styles.getInvolvedText}>
@@ -196,36 +197,37 @@ export default function Home() {
               <Image className={styles.getInvolvedImg} src={gay} alt="gay" />
             </div>
           </div>
-      </section>
+        </section>
 
-      {/* Peoples Section */}
-      <section className={styles.peopleSection}>
-        <div className={styles.peoplesView}>
-          <div className={styles.peoplesViewText}>
-            {["Hear", "what", "people", "think", "about"].map((word, index) => (
-              <h1 key={index}>{word}</h1>
-            ))}
-            <Image src='/Umeedlogo.png' width={150} height={150} alt="umeedLogo" />
+        {/* Peoples Section */}
+        <section className={styles.peopleSection}>
+          <div className={styles.peoplesView}>
+            <div className={styles.peoplesViewText}>
+              {["Hear", "what", "people", "think", "about"].map((word, index) => (
+                <h1 key={index}>{word}</h1>
+              ))}
+              <Image src='/Umeedlogo.png' width={150} height={150} alt="umeedLogo" />
+            </div>
           </div>
-        </div>
-        <div className={styles.peoplesViewComments}>
-          <div className={styles.commentsContainer}>
-            {commentsData.map((comment, index) => (
-              <div key={index} className={styles.commentBox}>
-                <div className={styles.profile}>
-                  <img src={comment.img} alt={comment.name} />
-                  <div className={styles.profileDescription}>
-                    <h1>{comment.name}</h1>
-                    <p>{comment.bio}</p>
+          <div className={styles.peoplesViewComments}>
+            <div className={styles.commentsContainer}>
+              {commentsData.map((comment, index) => (
+                <div key={index} className={styles.commentBox}>
+                  <div className={styles.profile}>
+                    <img src={comment.img} alt={comment.name} />
+                    <div className={styles.profileDescription}>
+                      <h1>{comment.name}</h1>
+                      <p>{comment.bio}</p>
+                    </div>
+                  </div>
+                  <div className={styles.comment}>
+                    <p>{comment.comment}</p>
                   </div>
                 </div>
-                <div className={styles.comment}>
-                  <p>{comment.comment}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        </section>
       </section>
     </>
   );

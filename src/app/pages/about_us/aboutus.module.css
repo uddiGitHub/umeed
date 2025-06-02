@@ -1,4 +1,9 @@
 /* about us section */
+.aboutusPage{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 .aboutusContainer {
     display: flex;
     justify-content: center;

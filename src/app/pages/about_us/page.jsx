@@ -9,7 +9,7 @@ import sagarikaImage from '@/assets/images/SagarikaGhibliInk.png';
 
 function Aboutus() {
   return (
-    <>
+    <section className={styles.aboutusPage}>
       <div className={styles.aboutusContainer}>
         <div className={styles.ownerContainer}>
           <div className={styles.ownerImg}>
@@ -63,7 +63,7 @@ function Aboutus() {
           </p>
         </div>
       </div>
-    </>
+    </section>
   );
 }
 

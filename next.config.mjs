@@ -1,5 +1,5 @@
-// next.config.js
-export default {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   async redirects() {
     return [
       {
@@ -9,4 +9,9 @@ export default {
       },
     ];
   },
+  images: {
+    domains: ['images.unsplash.com'], 
+  },
 };
+
+export default nextConfig;
