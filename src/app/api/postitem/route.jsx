@@ -41,16 +41,16 @@ export async function POST(request) {
     const data = await request.json();
 
     try {
-        const savedPost = await PostItem({...data}).save();
-        return new Response(JSON.stringify(savedPost), { 
+        const savedPost = await PostItem({ ...data }).save();
+        return new Response(JSON.stringify(savedPost), {
             status: 201,
             headers: {
                 "Content-Type": "application/json"
             }
-         });
+        });
     } catch (error) {
-        return new Response(JSON.stringify({ error: error.message }), { 
+        return new Response(JSON.stringify({ error: error.message }), {
             status: 500,
-         });
+        });
     }
 }

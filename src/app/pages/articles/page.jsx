@@ -22,7 +22,7 @@ export default function ArticlesPage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     // const [totalCount, setTotalCount] = useState(0);
-    const postsPerPage = 6;
+    const postsPerPage = 8;
 
     const fetchArticles = async () => {
         try {
@@ -101,7 +101,7 @@ export default function ArticlesPage() {
                                         <p className={styles.excerpt}>{getExcerpt(article.content)}</p>
                                         <div className={styles.meta}>
                                             <button
-                                                onClick={() => router.push(`/articles/${article._id}`)}
+                                                onClick={() => router.push(`/pages/articles/${article._id}/`)}
                                                 className={styles.readMore}
                                             >
                                                 Read More

@@ -18,13 +18,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={tinos.className}>
+
+    <html lang="en">
+      <body className={tinos.className}>
+        <ClerkProvider>
           <AuthHeader />
           {children}
-        </body>
-      </html>
-    </ClerkProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }
