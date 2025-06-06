@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from 'react';
 import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./articles.module.css";
@@ -16,6 +17,14 @@ import {
 } from "@/components/ui/pagination";
 
 export default function ArticlesPage() {
+    return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ArticlesContent />
+    </Suspense>
+  );
+}
+
+function ArticlesContent() {
     const router = useRouter();
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
