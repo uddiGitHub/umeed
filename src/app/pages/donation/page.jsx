@@ -16,7 +16,7 @@ export default function Donation() {
         </h1>
         <p className="text-gray-600 mb-6">
           This masterpiece of generosity is still under construction. 
-          Because We’re still deciding how to take your money — credit card, crypto, or emotional manipulation.
+          Because we’re still deciding how to take your money — credit card, crypto, or emotional manipulation.
         </p>
         <button
           disabled
