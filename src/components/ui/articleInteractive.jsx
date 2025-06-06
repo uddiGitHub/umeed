@@ -48,7 +48,7 @@ export default function ArticleInteractive({ article, articleId, initialLikes, i
         };
 
         try {
-            const response = await fetch(`/api/articles/${articleId}/comments`, {
+            const response = await fetch(`/api/postitem/${articleId}/comments`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

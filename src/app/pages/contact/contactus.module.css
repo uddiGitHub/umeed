@@ -5,6 +5,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     max-width: 1200px;
+    align-items: center;
     margin: 4rem auto;
     opacity: 0;
     transform: translateY(20px);
@@ -81,8 +82,8 @@
 
 .formGroup input:focus,
 .formGroup textarea:focus {
-    border-color: hsla(46, 79%, 57%);
-    box-shadow: 0 0 0 3px rgba(66,153,225,0.2);
+    border-color: rgb(0, 0, 0);
+    box-shadow: 0 0 0 3px rgba(143, 143, 143, 0.3);
     outline: none;
 }
 
@@ -92,7 +93,7 @@
 }
 
 .contactForm button[type="submit"] {
-    background: #4299e1;
+    background: #000000;
     color: white;
     padding: 1rem 2rem;
     border: none;
@@ -106,9 +107,9 @@
 }
 
 .contactForm button[type="submit"]:hover {
-    background: #3182ce;
+    background: #000000;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(66,153,225,0.3);
+    box-shadow: 0 5px 15px rgba(143, 143, 143, 0.3);
 }
 
 .errorMessage {
@@ -153,14 +154,27 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 2rem;
-    align-items: self-start;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%); 
+    max-height: max-content;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+.contactusInfo:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    border-color: #d0d0d0;
 }
 
 .infoItem {
     display: flex;
     justify-content: center;
-    align-items: baseline;
+    /* align-items: baseline; */
     gap: 1rem;
 }
 
@@ -178,4 +192,37 @@
 
 .infoDetail {
     color: #4a5568;
+}
+
+.locationLink {
+  display: inline-block;
+}
+
+.mapLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.mapLink:hover {
+  text-decoration: underline;
+}
+
+.externalIcon {
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 540px) {
+    .contactusContainer {
+        grid-template-columns: 1fr;
+    }
+    .contactusInfo{
+        padding: 1rem;
+    }
+    .contactusHeaderText{
+        margin-bottom: 0;
+    }
 }

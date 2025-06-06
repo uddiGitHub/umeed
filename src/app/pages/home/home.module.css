@@ -3,6 +3,7 @@
     margin: 0 auto;
     padding: 0 20px;
 }
+
 /* Banner css */
 .bannerContainer {
     display: flex;
@@ -11,6 +12,7 @@
     width: 100%;
     overflow: hidden;
 }
+
 .bannerContainer::after {
     content: '';
     position: absolute;
@@ -21,7 +23,7 @@
     background: linear-gradient(to bottom,
             rgba(255, 255, 255, 1) 0%,
             rgba(255, 255, 255, 0) 100%);
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 .bannerImage {
@@ -32,9 +34,10 @@
     mask-image: linear-gradient(to bottom,
             rgba(0, 0, 0) 80%,
             rgba(0, 0, 0, 0) 100%);
-    
+
     opacity: 90%;
 }
+
 .bannerHeader {
     position: absolute;
     border-bottom: 2px solid black;
@@ -50,6 +53,11 @@
     color: rgb(255, 255, 255);
     text-align: center;
     text-shadow: 2px 2px 4px black;
+}
+@media screen and (max-width: 580px) {
+    .bannerHeader h1 {
+        font-size: 1.5rem;
+    }
 }
 
 /* Impact css */
@@ -95,6 +103,15 @@
 @media (max-width: 1024px) {
     .impactContainer {
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .impactContainer h1 {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 540px) {
+    .impactContainer {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
 }
 
@@ -145,7 +162,12 @@
     margin: 10px;
     border-radius: 5px;
 }
-
+.orderImg{
+    order: 1;
+}
+.orderText{
+    order: 2;
+}
 
 /* Verticals */
 .verticals {
@@ -195,10 +217,10 @@
 
 .verticalCard:hover~.verticalCard,
 .verticalsContainer:hover .verticalCard:not(:hover) {
-    transform: scale(0.9) translateZ(-10px);
+    transform: scale(1) translateZ(-10px);
     opacity: 0.8;
     filter: blur(2px);
-    margin: 0 -20px;
+    /* margin: 0 -20px; */
 }
 
 .verticalsContainer:hover .verticalCard {
@@ -208,17 +230,28 @@
 .verticalCardImg {
     width: 70%;
     height: fit-content;
+    border-radius: 10px;
 }
 
 .verticalCard h2 {
     font-size: 1.5rem;
     font-weight: bolder;
     margin-bottom: 0;
+    text-align: center;
 }
 
 .verticalCard p {
     font-size: 1rem;
     margin-top: 0;
+    text-align: center;
+}
+@media screen and (max-width: 580px) {
+    .verticalCard {
+        width: 90vw;
+    }
+    .verticals h1 {
+        font-size: 3rem;
+    }
 }
 
 /* get Involved Section */
@@ -226,6 +259,7 @@
     display: flex;
     justify-content: center;
 }
+
 .getInvolvedContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -238,22 +272,26 @@
     border-radius: 15px;
     overflow: hidden;
 }
+
 .getInvolvedText {
     display: flex;
     flex-direction: column;
     align-items: baseline;
 }
+
 .getInvolvedText h1 {
     font-size: 2rem;
     font-weight: bolder;
     /* color: white; */
 }
+
 .getInvolvedText p {
     font-size: 1.2rem;
     margin-top: 0;
     /* color: white; */
     padding-bottom: 15px;
 }
+
 .getInvolvedText button {
     background: #fff;
     font-size: 1.2rem;
@@ -265,16 +303,27 @@
     text-decoration: none;
     transition: all 0.3s ease-in-out;
 }
+
 .getInvolvedImgContainer {
     display: flex;
     justify-content: center;
 }
+
 .getInvolvedImg {
     justify-content: center;
     width: 60%;
     height: fit-content;
     border-radius: 5px;
-   
+
+}
+@media screen and (max-width: 1350px) {
+    .getInvolvedImg {
+        display: none;
+    }
+    .getInvolvedContainer {
+        grid-template-columns: 1fr;
+        padding: 10px 40px 10px 40px;
+    }
 }
 
 
@@ -284,6 +333,7 @@
     flex-direction: column;
     align-items: center;
 }
+
 .peoplesView {
     display: flex;
     align-items: center;
@@ -313,12 +363,13 @@
     padding-left: 10px;
     transform: translateY(-0px);
 }
+
 .peoplesViewComments {
     display: flex;
     align-items: center;
     padding: 0rem 2rem;
     justify-content: center;
-    overflow: visible; 
+    overflow: visible;
     width: 90%;
     transition: all 0.3s ease;
 }
@@ -347,7 +398,7 @@
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
     opacity: 0.9;
-    
+
 }
 
 .commentBox:hover {
@@ -393,6 +444,7 @@
     margin: 0;
     color: #666;
 }
+
 .commentBox .comment {
     font-size: 0.9rem;
     color: #444;
@@ -409,53 +461,71 @@
 
 /* Responsive */
 @media screen and (max-width: 1350px) {
-    .coloredSectionBlock h1{
+    .coloredSectionBlock h1 {
         font-size: 2rem;
     }
+
     .coloredSectionBlock p {
         font-size: 1.2rem;
     }
+
 }
+
 @media screen and (max-width: 1024px) {
     .coloredSectionBlock {
         grid-template-columns: 1fr;
     }
+
     .coloredSectionBlock h1 {
         text-align: center;
     }
+
     .coloredSectionBlock p {
         text-align: center;
     }
+
+    .coloredSectionImg {
+        max-width: 100%;
+        margin-top: 20px;
+    }
+    .orderImg{
+        order: 2;
+    }
+    .orderText{
+        order: 1;
+    }
 }
+
 @media (max-width: 768px) {
     .peoplesView img {
         transform: translateY(-9px);
     }
+
     .peoplesViewComments {
         padding: 0 1rem;
     }
-    
+
     .commentsContainer {
         grid-template-columns: 1fr;
         gap: 15px;
         margin-bottom: 2rem;
     }
-    
+
     .commentBox {
         padding: 1rem;
         transform: none !important;
         opacity: 1;
     }
-    
+
     .commentBox:hover {
         transform: scale(1.05) !important;
     }
-    
+
     .peoplesView h1 {
         font-size: 2.5rem;
         line-height: 1.2;
     }
-    
+
     .peoplesView img {
         width: 8rem;
     }
@@ -466,31 +536,31 @@
     .peoplesViewComments {
         padding: 0 0.5rem;
     }
-    
+
     .commentBox .profile {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .commentBox .comment {
         font-size: 0.8rem;
     }
-    
+
     .peoplesView h1 {
         font-size: 2rem;
         padding-left: 5px;
     }
-    
+
     .getInvolvedContainer {
         grid-template-columns: 1fr;
         padding: 20px;
         text-align: center;
     }
-    
+
     .getInvolvedText {
         align-items: center;
     }
-    
+
     .getInvolvedImg {
         width: 100% !important;
         margin-top: 20px;
@@ -501,7 +571,7 @@
     .commentBox:hover {
         transform: none !important;
     }
-    
+
     .verticalsContainer:hover .verticalCard:not(:hover),
     .commentsContainer:hover .commentBox:not(:hover) {
         transform: none !important;

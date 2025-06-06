@@ -28,7 +28,7 @@ const Navbar = () => {
         { path: "/pages/about_us", name: "About Us" },
         { path: "/pages/articles", name: "Articles" },
         // { path: "/Newsletter", name: "Newsletter" },
-        { path: "/Donation", name: "Donation" },
+        { path: "/pages/donation", name: "Donation" },
         { path: "/pages/contact", name: "Contact Us" }
     ];
 
@@ -115,7 +115,7 @@ const Navbar = () => {
         <header ref={headerRef} className={`${styles.header} ${isSearchActive ? styles.blur : ''}`}>
             <nav className={styles.navbody} ref={navRef}
                 onMouseLeave={() => {
-                    if (pathname === "/Donation") {
+                    if (pathname === "/pages/donation") {
                         setSpanStyle({ left: 0, width: 0 });
                     }
                 }}>
@@ -127,7 +127,7 @@ const Navbar = () => {
                         height={50}
                         className={styles.logo}
                         priority
-                        onLoadingComplete={() => {
+                        onLoad={() => {
                             const activeIndex = navLinks.findIndex(link => pathname === link.path);
                             updateSpanPosition(activeIndex >= 0 ? activeIndex : 0);
                         }}
@@ -148,7 +148,7 @@ const Navbar = () => {
                             <Link
                                 key={link.path}
                                 href={link.path}
-                                className={link.path === "/Donation" ? styles.donationBorder : ""}
+                                className={link.path === "/pages/donation" ? styles.donationBorder : ""}
                                 onClick={() => {
                                     if (isMobile) {
                                         setIsMenuOpen(false);
@@ -156,12 +156,12 @@ const Navbar = () => {
                                     }
                                 }}
                                 onMouseEnter={() => {
-                                    if (link.path === "/Donation") return;
+                                    if (link.path === "/pages/donation") return;
                                     updateSpanPosition(index);
                                 }}
                                 onMouseLeave={() => {
                                     const activeIndex = navLinks.findIndex(l =>
-                                        pathname === l.path && l.path !== "/Donation"
+                                        pathname === l.path && l.path !== "/pages/donation"
                                     );
                                     if (activeIndex >= 0) {
                                         updateSpanPosition(activeIndex);

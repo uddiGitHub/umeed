@@ -197,7 +197,7 @@
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: 0.2s;
 }
 
 .submitButton:hover {

@@ -5,6 +5,7 @@ import styles from "@/app/pages/contact/contactus.module.css";
 import { FiPhoneCall } from "react-icons/fi";
 import { MdEmail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
+import { FiExternalLink } from 'react-icons/fi';
 
 function contactus() {
   return (
@@ -22,29 +23,44 @@ function contactus() {
             Yes, we still answer those. Shocking, we know.
           </p>
         </div>
-        {/* <div className={styles.contactusInfo}>
+        <div className={styles.contactusInfo}>
           <div className={styles.infoItem}>
             <FiPhoneCall className={styles.icon} />
             <p className={styles.infoLabel}>Phone:</p>
             <div>
-              <p className={styles.infoDetail}>+91 70357-55453</p>
+              <p className={styles.infoDetail}>
+                {process.env.NEXT_PUBLIC_ORG_PHONE_NO}
+              </p>
             </div>
           </div>
           <div className={styles.infoItem}>
             <MdEmail className={styles.icon} />
             <p className={styles.infoLabel}>Email:</p>
             <div>
-              <p className={styles.infoDetail}>mail@gmail.com</p>
+              <a
+                href={`mailto:${process.env.NEXT_PUBLIC_ORG_EMAIL}`}
+                className={styles.infoDetail}
+              >
+                {process.env.NEXT_PUBLIC_ORG_EMAIL}
+              </a>
             </div>
           </div>
           <div className={styles.infoItem}>
             <FaLocationDot className={styles.icon} />
             <p className={styles.infoLabel}>Location:</p>
-            <div>
-              <p className={styles.infoDetail}>India</p>
+            <div className={styles.locationLink}>
+              <a
+                href="https://maps.google.com/?q=India"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.mapLink}
+              >
+                <span>India</span>
+                <FiExternalLink className={styles.externalIcon} />
+              </a>
             </div>
           </div>
-        </div> */}
+        </div>
 
         <div className={styles.contactFormContainer}>
           <form className={styles.contactForm}>

@@ -82,7 +82,7 @@ export default async function ArticlePage({ params }) {
       </article>
 
       {/* <ArticleInteractive 
-        article={article}
+        // article={article}
         articleId={id} 
         initialLikes={article.likes || 0} 
         initialComments={article.comments || []} 

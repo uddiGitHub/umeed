@@ -10,6 +10,8 @@ import gay from "@/assets/images/gay.png";
 
 // Counter component to animate the count
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 const Counter = ({ end }) => {
   const [count, setCount] = useState(0);
 
@@ -125,8 +127,8 @@ export default function Home() {
         {/* Colored Section */}
         <section className={styles.coloredSection}>
           <div className={styles.coloredSectionBlock}>
-            <Image className={styles.coloredSectionImg} src={gay} alt="Vision" />
-            <div className={styles.coloredSectionText}>
+            <Image className={`${styles.coloredSectionImg} ${styles.orderImg}`} src={gay} alt="Vision" />
+            <div className={`${styles.coloredSectionText} ${styles.orderText}`}>
               <h1>Vision</h1>
               <p>
                 We envision an inclusive and just world where all individuals,
@@ -191,7 +193,9 @@ export default function Home() {
                 future for all. Get involved in our campaigns, come to our
                 events, or support us however, you can, every bit counts.
               </p>
-              <button onClick={("#")}> Get Involved </button>
+              <Button className='bg-white text-black hover:bg-white' asChild>
+                <Link href="/pages/donation">Get Involved</Link>
+              </Button>
             </div>
             <div className={styles.getInvolvedImgContainer}>
               <Image className={styles.getInvolvedImg} src={gay} alt="gay" />

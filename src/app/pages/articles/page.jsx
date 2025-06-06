@@ -1,18 +1,18 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./articles.module.css";
 import Image from "next/image";
 
 import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
 } from "@/components/ui/pagination";
 
 export default function ArticlesPage() {
@@ -21,13 +21,17 @@ export default function ArticlesPage() {
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+
+    const searchParams = useSearchParams();
+    const searchQuery = searchParams.get('search') || '';
     // const [totalCount, setTotalCount] = useState(0);
     const postsPerPage = 8;
 
     const fetchArticles = async () => {
         try {
             setLoading(true);
-            const response = await fetch(`/api/postitem?page=${currentPage}&limit=${postsPerPage}`);
+            const url = `/api/postitem?page=${currentPage}&limit=${postsPerPage}&search=${encodeURIComponent(searchQuery)}`;
+            const response = await fetch(url);
             if (!response.ok) {
                 throw new Error("Failed to fetch articles");
             }
@@ -44,7 +48,7 @@ export default function ArticlesPage() {
 
     useEffect(() => {
         fetchArticles();
-    }, [currentPage]);
+    }, [currentPage, searchQuery]);
 
     const handlePageChange = (newPage) => {
         if (newPage >= 1 && newPage <= totalPages) {
@@ -61,6 +65,9 @@ export default function ArticlesPage() {
         if (content.length <= maxLength) return content;
         return content.substring(0, maxLength) + "...";
     };
+    const clearSearch = () => {
+        router.push('/pages/articles');
+    };
 
     return (
         <div className={styles.container}>
@@ -70,7 +77,16 @@ export default function ArticlesPage() {
                     <p>Gender, Equality, Q(LGBTAI)+ and Bla blah</p>
                 </div>
             </div>
-
+            <div className={styles.searchControls}>
+                {searchQuery && (
+                    <div className={styles.searchStatus}>
+                        <p>Showing results for: "{searchQuery}"</p>
+                        <button onClick={clearSearch} className={styles.clearSearch}>
+                            Clear search
+                        </button>
+                    </div>
+                )}
+            </div>
             {/* Article Content */}
             <section className={styles.mainContent}>
                 {loading ? (
@@ -133,7 +149,7 @@ export default function ArticlesPage() {
                                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                                     <PaginationItem key={page}>
                                         <PaginationLink
-                                            href="#"
+                                            href={`/pages/articles?search=${encodeURIComponent(searchQuery)}&page=${page}`}
                                             isActive={currentPage === page}
                                             onClick={(e) => {
                                                 e.preventDefault();
@@ -166,12 +182,18 @@ export default function ArticlesPage() {
                     </>
                 ) : (
                     <div className={styles.noArticles}>
-                        <Image
-                            src="/images/no-articles.png"
-                            alt="No articles"
-                            width={300}
-                            height={200}
-                        />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className={styles.noArticlesIcon}
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                clipRule="evenodd"
+                            />
+                        </svg>
                         <h3>No articles available</h3>
                         <p>Check back later for new content</p>
                     </div>

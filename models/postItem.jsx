@@ -17,7 +17,7 @@ const postItemSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        required: true,
+        required: false,
         trim: true,
     },
     content: {
