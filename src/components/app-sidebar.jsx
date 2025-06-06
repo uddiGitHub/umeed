@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useUser } from "@clerk/nextjs";
-import { DatePicker } from "@/components/date-picker";
+// import { DatePicker } from "@/components/date-picker";
 import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
@@ -34,7 +34,7 @@ export function AppSidebar({ ...props }) {
         <NavUser user={clerkUser} />
       </SidebarHeader>
       <SidebarContent>
-        <DatePicker />
+        {/* <DatePicker /> */}
         <SidebarSeparator className="mx-0" />
       </SidebarContent>
       <SidebarRail />
