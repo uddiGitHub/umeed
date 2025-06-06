@@ -2,10 +2,12 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import styles from './navbar.module.css';
 import { LuSearch } from "react-icons/lu";
-import { TbHttpOptions } from "react-icons/tb";
+// import { TbHttpOptions } from "react-icons/tb";
+import { FiMenu } from "react-icons/fi";
+import { RxCross2 } from "react-icons/rx";
 import Image from 'next/image';
 
 const Navbar = () => {
@@ -16,6 +18,10 @@ const Navbar = () => {
     const [isSearchActive, setIsSearchActive] = useState(false);
     const navRef = useRef(null);
     const inputRef = useRef(null);
+    const headerRef = useRef(null);
+
+    const router = useRouter();
+    const [searchQuery, setSearchQuery] = useState('');
 
     const navLinks = [
         { path: "/pages/home", name: "Home" },
@@ -69,6 +75,7 @@ const Navbar = () => {
         if (pathname !== "/") {
             setIsSearchActive(false);
         }
+        setIsMenuOpen(false);
     }, [pathname]);
 
     useEffect(() => {
@@ -77,8 +84,35 @@ const Navbar = () => {
         }
     }, [isSearchActive]);
 
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (
+                isMenuOpen &&
+                headerRef.current &&
+                !headerRef.current.contains(e.target)
+            ) {
+                setIsMenuOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [isMenuOpen]);
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (searchQuery.trim()) {
+            router.push(`/pages/articles?search=${encodeURIComponent(searchQuery)}`);
+            setIsSearchActive(false);
+            setSearchQuery('');
+        } else {
+            router.push('/pages/articles');
+        }
+
+    };
+
     return (
-        <header className={`${styles.header} ${isSearchActive ? styles.blur : ''}`}>
+        <header ref={headerRef} className={`${styles.header} ${isSearchActive ? styles.blur : ''}`}>
             <nav className={styles.navbody} ref={navRef}
                 onMouseLeave={() => {
                     if (pathname === "/Donation") {
@@ -101,8 +135,12 @@ const Navbar = () => {
                     <button
                         className={styles.hamburger}
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                     >
-                        <TbHttpOptions />
+                        <div className={styles.iconContainer}>
+                            <FiMenu className={`${styles.icon} ${isMenuOpen ? styles.hidden : ''}`} />
+                            <RxCross2 className={`${styles.icon} ${!isMenuOpen ? styles.hidden : ''}`} />
+                        </div>
                     </button>
                     <div className={`${styles.navLinks} ${isMenuOpen ? styles.showMenu : ''}`}>
                         <span style={spanStyle}></span>
@@ -135,21 +173,39 @@ const Navbar = () => {
                         ))}
                     </div>
 
-                    {(pathname === "/pages/articles" || pathname === "/Newsletter") && (
-                        <div className={`${styles.searchBox} ${isSearchActive ? styles.active : ''}`}>
+                    {(pathname === "/pages/articles") && (
+                        <form
+                            onSubmit={handleSearch}
+                            className={`${styles.searchBox} ${isSearchActive ? styles.active : ''}`}
+                        >
                             <input
                                 ref={inputRef}
                                 type="text"
                                 placeholder="Search"
-                                onBlur={() => setIsSearchActive(false)}
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                onBlur={() => !searchQuery && setIsSearchActive(false)}
                             />
-                            <button onClick={() => setIsSearchActive(!isSearchActive)}>
+                            <button
+                                type="submit"
+                                onClick={() => {
+                                    if (!isSearchActive) {
+                                        setIsSearchActive(true);
+                                    }
+                                }}
+                            >
                                 <LuSearch />
                             </button>
-                        </div>
+                        </form>
                     )}
                 </div>
             </nav>
+            {isMenuOpen && isMobile && (
+                <div 
+                    className={styles.backdrop} 
+                    onClick={() => setIsMenuOpen(false)}
+                />
+            )}
         </header>
     );
 };
