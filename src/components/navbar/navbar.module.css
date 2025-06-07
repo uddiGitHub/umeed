@@ -180,6 +180,10 @@
   .header {
     display: block;
   }
+  .donationBorder, .donationBorder:hover  {
+    background: none;
+    box-shadow: none;
+  }
 
   .navbody {
     justify-content: space-between;
@@ -187,7 +191,9 @@
   }
 
   .navbody span {
-    display: none;
+    background: none;
+    border: 1px solid black;
+
   }
 
   .hamburger {
@@ -203,7 +209,7 @@
     right: 5%;
     background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
-    padding: 1rem 0;
+    padding: 0;
     z-index: 1000;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
