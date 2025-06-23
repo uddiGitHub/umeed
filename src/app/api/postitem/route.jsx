@@ -2,7 +2,9 @@ import mongoose from "mongoose";
 import PostItem from "../../../../models/postItem.jsx";
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
+import { getAuth } from "@clerk/nextjs/server";
 import connectDB from "../../../../config/db.jsx";
+import { console } from "inspector";
 
 // Connect to database
 connectDB();
@@ -48,18 +50,14 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
-    // Authenticate user
-    const { userId } = auth();
+    const token = request.headers.get('authorization')?.replace('Bearer ', '');
+    const { userId } = token ? getAuth(request) : { userId: null };
+
     if (!userId) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Parse request body
     const data = await request.json();
-
     // Validate required fields
     if (!data.title || !data.content) {
       return NextResponse.json(
@@ -67,19 +65,20 @@ export async function POST(request) {
         { status: 400 }
       );
     }
-
-    // Create and save new post
+    console.log("Received data:", data);
+    // Post creation
     const newPost = new PostItem({
       ...data,
-      author: userId
+      author: data.author || "UMEED",
     });
 
     const savedPost = await newPost.save();
-
     return NextResponse.json(savedPost, { status: 201 });
+
   } catch (error) {
+    console.error("Database error:", error);
     return NextResponse.json(
-      { error: error.message },
+      { error: error.message || "Database operation failed" },
       { status: 500 }
     );
   }

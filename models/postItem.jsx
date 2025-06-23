@@ -38,7 +38,7 @@ const postItemSchema = new mongoose.Schema({
     author: {
         type: String,
         required: true,
-        trim: true,
+        // trim: true,
     },
     likes: {
         type: Number,

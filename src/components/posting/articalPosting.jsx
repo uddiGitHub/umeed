@@ -8,6 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Loader2 } from "lucide-react";
 import styles from "./articlePosting.module.css";
+import { useAuth } from "@clerk/nextjs";
+
 
 export default function ArticlePosting() {
   const [title, setTitle] = useState("");
@@ -17,6 +19,8 @@ export default function ArticlePosting() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
+  const { getToken } = useAuth();
+  const [author, setAuthor] = useState("UMEED");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,27 +28,32 @@ export default function ArticlePosting() {
     setError("");
 
     try {
+      const token = await getToken();
+      if (!token) {
+        setError("Missing authentication token");
+        return;
+      }
+
       const response = await fetch("/api/postitem", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          title,
-          category,
-          content,
-          img: image,
-        }),
+        body: JSON.stringify({ title, category, content, img: image, author }),
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error("Failed to create post");
+        throw new Error(result.error || "Failed to create post");
       }
 
-      const result = await response.json();
-      router.push(`/admin/posts/${result.post._id}`);
+      router.push(`/admin/posts/${result._id}`);
+
     } catch (err) {
-      setError(err.message || "Something went wrong");
+      setError(err.message);
+      console.error("Submission error:", err);
     } finally {
       setIsSubmitting(false);
     }
@@ -58,7 +67,7 @@ export default function ArticlePosting() {
 
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.field}>
-          <Label htmlFor="title">Title *</Label>
+          <Label htmlFor="title">Title <span className="text-red-500">*</span></Label>
           <Input
             id="title"
             value={title}
@@ -90,7 +99,7 @@ export default function ArticlePosting() {
         </div>
 
         <div className={styles.field}>
-          <Label htmlFor="content">Content *</Label>
+          <Label htmlFor="content">Content <span className="text-red-500">*</span></Label>
           <Textarea
             id="content"
             value={content}
@@ -99,6 +108,17 @@ export default function ArticlePosting() {
             rows={10}
             placeholder="Write your post content here..."
             style={{ minHeight: "200px" }}
+          />
+        </div>
+
+        <div className={styles.field}>
+          <Label htmlFor="author">Author</Label>
+          <Input
+            type="text"
+            id="author"
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+            placeholder="Default author UMEED"
           />
         </div>
 
