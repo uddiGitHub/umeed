@@ -123,13 +123,9 @@ function ArticlesContent() {
                                     )}
 
                                     <div className={styles.articleContent}>
-                                        <h2 className="scroll-m-20 text-left text-2xl font-bold tracking-tight text-balance">
-                                            {article.title}
-                                        </h2>
-                                        <div className={styles.richTextContent}>
-                                            {parse(article.content)}
-                                        </div>
 
+                                        <h2 className="scroll-m-20 text-left text-2xl font-bold tracking-tight text-balance">{article.title}</h2>
+                                        <p className={styles.excerpt}>{getExcerpt(article.content)}</p>
                                         <div className={styles.meta}>
                                             <button
                                                 onClick={() => router.push(`/pages/articles/${article._id}/`)}
