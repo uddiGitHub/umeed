@@ -88,6 +88,7 @@
     display: flex;
     justify-content: space-between;
     align-items: anchor-center;
+    margin-top: 15px;
     margin-bottom: 15px;
     font-size: 0.9rem;
     color: #6c757d;
@@ -194,63 +195,65 @@
 
 /* articles.module.css */
 .searchControls {
-  margin: 2rem 0;
-  padding: 0 1.25rem;
+    margin: 2rem 0;
+    padding: 0 1.25rem;
 }
 
 .searchStatus {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  background-color: #f8f9fa;
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  font-size: 0.9375rem;
-  color: #495057;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: #f8f9fa;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.9375rem;
+    color: #495057;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .clearSearch {
-  background: none;
-  border: none;
-  color: #2563eb;
-  cursor: pointer;
-  font-weight: 500;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  transition: all 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
+    background: none;
+    border: none;
+    color: #2563eb;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
 }
 
 .clearSearch:hover {
-  color: #1d4ed8;
-  background-color: #eff6ff;
-  text-decoration: none;
+    color: #1d4ed8;
+    background-color: #eff6ff;
+    text-decoration: none;
 }
 
 .clearSearch:focus-visible {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
 }
 
 .clearSearch::before {
-  content: "✕";
-  font-size: 0.875rem;
+    content: "✕";
+    font-size: 0.875rem;
 }
+
 @media (max-width: 640px) {
-  .searchStatus {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-  
-  .searchControls {
-    margin: 1.5rem 0;
-    padding: 0 1rem;
-  }
+    .searchStatus {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .searchControls {
+        margin: 1.5rem 0;
+        padding: 0 1rem;
+    }
 }
+
 /* Pagination */
 .pagination {
     display: flex;
@@ -321,4 +324,47 @@
     .meta {
         gap: 8px;
     }
+}
+
+.richTextContent {
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.richTextContent h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin: 0.67em 0;
+}
+
+.richTextContent h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0.75em 0;
+}
+
+.richTextContent h3 {
+  font-size: 1.17em;
+  font-weight: bold;
+  margin: 0.83em 0;
+}
+
+.richTextContent p {
+  margin: 1em 0;
+}
+
+.richTextContent ul {
+  list-style-type: disc;
+  padding-left: 2rem;
+  margin: 1em 0;
+}
+
+.richTextContent ol {
+  list-style-type: decimal;
+  padding-left: 2rem;
+  margin: 1em 0;
+}
+
+.richTextContent li {
+  margin: 0.25em 0;
 }

@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./articles.module.css";
 import Image from "next/image";
+import parse from 'html-react-parser';
 
 import {
     Pagination,
@@ -18,10 +19,10 @@ import {
 
 export default function ArticlesPage() {
     return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ArticlesContent />
-    </Suspense>
-  );
+        <Suspense fallback={<div>Loading...</div>}>
+            <ArticlesContent />
+        </Suspense>
+    );
 }
 
 function ArticlesContent() {
@@ -120,10 +121,15 @@ function ArticlesContent() {
                                             <span className={styles.category}>{article.category || "General"}</span>
                                         </div>
                                     )}
-                                    <div className={styles.articleContent}>
 
-                                        <h2 className="scroll-m-20 text-left text-2xl font-bold tracking-tight text-balance">{article.title}</h2>
-                                        <p className={styles.excerpt}>{getExcerpt(article.content)}</p>
+                                    <div className={styles.articleContent}>
+                                        <h2 className="scroll-m-20 text-left text-2xl font-bold tracking-tight text-balance">
+                                            {article.title}
+                                        </h2>
+                                        <div className={styles.richTextContent}>
+                                            {parse(article.content)}
+                                        </div>
+
                                         <div className={styles.meta}>
                                             <button
                                                 onClick={() => router.push(`/pages/articles/${article._id}/`)}

@@ -62,3 +62,42 @@
     transform: rotate(360deg);
   }
 }
+
+
+/* Add to your articlePosting.module.css */
+.editorContent h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin: 0.67em 0;
+}
+
+.editorContent h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0.75em 0;
+}
+
+.editorContent h3 {
+  font-size: 1.17em;
+  font-weight: bold;
+  margin: 0.83em 0;
+}
+
+.editorContent p {
+  margin: 1em 0;
+}
+.editorContent ul {
+  list-style-type: disc;
+  padding-left: 2rem;
+  margin: 1em 0;
+}
+
+.editorContent ol {
+  list-style-type: decimal;
+  padding-left: 2rem;
+  margin: 1em 0;
+}
+
+.editorContent li {
+  margin: 0.25em 0;
+}

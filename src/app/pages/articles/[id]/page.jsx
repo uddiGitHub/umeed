@@ -6,6 +6,8 @@ import Image from "next/image";
 import styles from "./typography.module.css";
 import ArticleInteractive from "@/components/ui/articleInteractive";
 
+import parse from 'html-react-parser';
+
 export default async function ArticlePage({ params }) {
   const { id } = await params;
 
@@ -41,10 +43,9 @@ export default async function ArticlePage({ params }) {
           </div>
         )}
 
+
         <div className={styles.content}>
-          {article.content.split('\n\n').map((paragraph, i) => (
-            <p key={i} className={styles.paragraph}>{paragraph}</p>
-          ))}
+          {parse(article.content)}
         </div>
 
         {/* <div className={styles.inContentImages}>

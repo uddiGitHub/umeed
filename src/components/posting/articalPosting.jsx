@@ -10,6 +10,14 @@ import { Loader2 } from "lucide-react";
 import styles from "./articlePosting.module.css";
 import { useAuth } from "@clerk/nextjs";
 
+// Tiptap imports
+import { useEditor, EditorContent } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
+import Underline from '@tiptap/extension-underline'
+import Placeholder from '@tiptap/extension-placeholder'
+
+import { MenuBar } from "../ui/MenuBar";
+
 
 export default function ArticlePosting() {
   const [title, setTitle] = useState("");
@@ -21,6 +29,40 @@ export default function ArticlePosting() {
   const router = useRouter();
   const { getToken } = useAuth();
   const [author, setAuthor] = useState("UMEED");
+
+  // Initialize Tiptap editor
+  const editor = useEditor({
+    extensions: [
+      StarterKit.configure({
+        heading: {
+          levels: [1, 2, 3],
+        },
+        bulletList: {
+          HTMLAttributes: {
+            class: 'list-disc pl-4',
+          },
+        },
+        listItem: {
+          HTMLAttributes: {
+            class: 'list-item',
+          },
+        },
+        orderedList: {
+          HTMLAttributes: {
+            class: 'list-decimal pl-4',
+          },
+        },
+      }),
+      Underline,
+      Placeholder.configure({
+        placeholder: 'Write your post content here...',
+      }),
+    ],
+    content: "",
+    onUpdate: ({ editor }) => {
+      setContent(editor.getHTML());
+    },
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,7 +91,8 @@ export default function ArticlePosting() {
         throw new Error(result.error || "Failed to create post");
       }
 
-      router.push(`/admin/posts/${result._id}`);
+      // router.push(`/admin/posts/${result._id}`); //later change this when edit article feature is implemented
+      router.push("/pages/articles");
 
     } catch (err) {
       setError(err.message);
@@ -100,15 +143,15 @@ export default function ArticlePosting() {
 
         <div className={styles.field}>
           <Label htmlFor="content">Content <span className="text-red-500">*</span></Label>
-          <Textarea
-            id="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-            rows={10}
-            placeholder="Write your post content here..."
-            style={{ minHeight: "200px" }}
-          />
+
+          <div className="border rounded-lg">
+            <MenuBar editor={editor} />
+            <EditorContent
+              editor={editor}
+              className={`p-4 min-h-[200px] border-t focus:outline-none ${styles.editorContent}`}
+              style={{ minHeight: '200px' }}
+            />
+          </div>
         </div>
 
         <div className={styles.field}>
@@ -126,6 +169,7 @@ export default function ArticlePosting() {
           type="submit"
           disabled={isSubmitting}
           className={styles.button}
+          id="submit-post-button"
         >
           {isSubmitting ? (
             <>

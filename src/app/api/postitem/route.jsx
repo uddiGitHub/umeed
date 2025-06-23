@@ -5,6 +5,8 @@ import { auth } from "@clerk/nextjs/server";
 import { getAuth } from "@clerk/nextjs/server";
 import connectDB from "../../../../config/db.jsx";
 import { console } from "inspector";
+import sanitizeHtml from "sanitize-html";
+
 
 // Connect to database
 connectDB();
@@ -65,7 +67,16 @@ export async function POST(request) {
         { status: 400 }
       );
     }
-    console.log("Received data:", data);
+    const cleanContent = sanitizeHtml(data.content, {
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat(['p', 'b', 'i', 'em', 'strong', 'a', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'blockquote', 'img', 'br']),
+      allowedAttributes: {
+        a: ['href', 'target'],
+        img: ['src', 'alt'],
+        '*': ['style'], // allow inline styles cautiously
+      },
+      allowedSchemes: ['http', 'https', 'data'],
+    });
+    // console.log("Received data:", data);
     // Post creation
     const newPost = new PostItem({
       ...data,
