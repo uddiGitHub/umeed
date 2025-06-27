@@ -215,6 +215,41 @@
   opacity: 0.7;
 }
 
+.submitButton {
+  background-color: #4f46e5;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  align-self: flex-start;
+}
+
+.submitButton:hover {
+  background-color: #4338ca;
+}
+
+.resultMessage {
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+/* Responsive layout */
+@media (max-width: 640px) {
+  .contactFormContainer {
+    padding: 1.5rem;
+  }
+
+  .submitButton {
+    width: 100%;
+    text-align: center;
+  }
+}
+
 @media screen and (max-width: 540px) {
     .contactusContainer {
         grid-template-columns: 1fr;

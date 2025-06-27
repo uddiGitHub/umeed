@@ -8,6 +8,30 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FiExternalLink } from 'react-icons/fi';
 
 function contactus() {
+  const [result, setResult] = React.useState("");
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setResult("Sending....");
+    const formData = new FormData(event.target);
+
+    formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORM_ACCESS_KEY);
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      setResult("Form Submitted Successfully");
+      event.target.reset();
+    } else {
+      console.log("Error", data);
+      setResult(data.message);
+    }
+  };
   return (
     <>
       <div className={styles.contactusContainer}>
@@ -63,22 +87,54 @@ function contactus() {
         </div>
 
         <div className={styles.contactFormContainer}>
-          <form className={styles.contactForm}>
+          <form onSubmit={onSubmit} className={styles.contactForm}>
+            <input type="hidden" name="access_key" value={process.env.NEXT_PUBLIC_WEB3FORM_ACCESS_KEY} />
+            <input type="hidden" name="subject" value="New Contact Message from Umeed" />
+            <input type="hidden" name="from_name" value="Umeed.com Contact Form" />
+
+            {/* Optional: Set a reply-to so user replies go to the sender */}
+            {/* <input type="hidden" name="replyto" value="user@example.com" /> */}
+
             <div className={styles.formGroup}>
-              <label htmlFor="name">Name</label>
-              <input type="text" id="name" name="name" required />
+              <label htmlFor="name">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Name"
+                required
+              />
             </div>
+
             <div className={styles.formGroup}>
-              <label htmlFor="email">Email</label>
-              <input type="email" id="email" name="email" required />
+              <label htmlFor="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                pattern="[a-zA-Z0-9._%+-]+@gmail\.com"
+                title="Please enter a valid Gmail address"
+                placeholder="Gmail Address"
+                required
+              />
             </div>
+
             <div className={styles.formGroup}>
-              <label htmlFor="message">Message</label>
-              <textarea id="message" name="message" required></textarea>
+              <label htmlFor="message">Your Message</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Write your message here..."
+                rows="5"
+                required
+              ></textarea>
             </div>
-            <button type="submit">Send Message</button>
+
+            <button type="submit" className={styles.submitButton}>Send Message</button>
           </form>
+          <span className={styles.resultMessage}>{result}</span>
         </div>
+
       </div>
     </>
   );
