@@ -7,7 +7,7 @@ let bucket;
 const initBucket = async () => {
   if (!bucket) {
     if (mongoose.connection.readyState !== 1) {
-      await mongoose.connect(process.env.MONGO_URI);
+      await mongoose.connect(process.env.MONGO_URI_TEST);
     }
     const db = mongoose.connection.db;
     bucket = new mongoose.mongo.GridFSBucket(db, { bucketName: 'pdfStore' });
