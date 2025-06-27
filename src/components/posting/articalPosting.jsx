@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Loader2 } from "lucide-react";
-import styles from "./articlePosting.module.css";
+import styles from "./posting.module.css";
 import { useAuth } from "@clerk/nextjs";
 
 // Tiptap imports
@@ -103,84 +103,86 @@ export default function ArticlePosting() {
   };
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.heading}>Create New Article Post</h2>
+    <div className={styles.pageWrapper}>
+      <div className={styles.containerArticlePosting}>
+        <h2 className={styles.heading}>Create New Article Post</h2>
 
-      {error && <div className={styles.error}>{error}</div>}
+        {error && <div className={styles.error}>{error}</div>}
 
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.field}>
-          <Label htmlFor="title">Title <span className="text-red-500">*</span></Label>
-          <Input
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-            placeholder="Enter post title"
-          />
-        </div>
-
-        <div className={styles.field}>
-          <Label htmlFor="category">Category</Label>
-          <Input
-            id="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            placeholder="Enter category"
-          />
-        </div>
-
-        <div className={styles.field}>
-          <Label htmlFor="image">Image URL</Label>
-          <Input
-            id="image"
-            type="url"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-            placeholder="https://example.com/image.jpg"
-          />
-        </div>
-
-        <div className={styles.field}>
-          <Label htmlFor="content">Content <span className="text-red-500">*</span></Label>
-
-          <div className="border rounded-lg">
-            <MenuBar editor={editor} />
-            <EditorContent
-              editor={editor}
-              className={`p-4 min-h-[200px] border-t focus:outline-none ${styles.editorContent}`}
-              style={{ minHeight: '200px' }}
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.field}>
+            <Label htmlFor="title">Title <span className="text-red-500">*</span></Label>
+            <Input
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+              placeholder="Enter post title"
             />
           </div>
-        </div>
 
-        <div className={styles.field}>
-          <Label htmlFor="author">Author</Label>
-          <Input
-            type="text"
-            id="author"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-            placeholder="Default author UMEED"
-          />
-        </div>
+          <div className={styles.field}>
+            <Label htmlFor="category">Category</Label>
+            <Input
+              id="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              placeholder="Enter category"
+            />
+          </div>
 
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className={styles.button}
-          id="submit-post-button"
-        >
-          {isSubmitting ? (
-            <>
-              <Loader2 className={styles.loader} />
-              Creating Post...
-            </>
-          ) : (
-            "Create Post"
-          )}
-        </button>
-      </form>
+          <div className={styles.field}>
+            <Label htmlFor="image">Image URL</Label>
+            <Input
+              id="image"
+              type="url"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+              placeholder="https://example.com/image.jpg"
+            />
+          </div>
+
+          <div className={styles.field}>
+            <Label htmlFor="content">Content <span className="text-red-500">*</span></Label>
+
+            <div className="border rounded-lg">
+              <MenuBar editor={editor} />
+              <EditorContent
+                editor={editor}
+                className={`p-4 min-h-[200px] border-t focus:outline-none ${styles.editorContent}`}
+                style={{ minHeight: '200px' }}
+              />
+            </div>
+          </div>
+
+          <div className={styles.field}>
+            <Label htmlFor="author">Author</Label>
+            <Input
+              type="text"
+              id="author"
+              value={author}
+              onChange={(e) => setAuthor(e.target.value)}
+              placeholder="Default author UMEED"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className={styles.button}
+            id="submit-post-button"
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className={styles.loader} />
+                Creating Post...
+              </>
+            ) : (
+              "Create Post"
+            )}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

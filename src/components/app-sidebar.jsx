@@ -11,10 +11,14 @@ import {
   SidebarRail,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
+import { useRouter } from "next/navigation";
 
-
-export function AppSidebar({ ...props }) {
+export function AppSidebar({ selectedComponent, ...props }) {
   const { isLoaded, user } = useUser();
+  const router = useRouter();
+  const handleComponentChange = (component) => {
+    router.push(`/admin?type=${component}`);
+  };
   if (!isLoaded) {
     return (
       <div className="flex h-screen w-64 items-center justify-center bg-gray-100">
@@ -35,6 +39,29 @@ export function AppSidebar({ ...props }) {
       </SidebarHeader>
       <SidebarContent>
         {/* <DatePicker /> */}
+        {/* Posting Type Selector */}
+        <div className="flex flex-col space-y-2 p-4">
+          <div className="flex flex-col space-y-2">
+            <button
+              onClick={() => handleComponentChange('article')}
+              className={`px-4 py-2 rounded-md text-left transition-colors ${selectedComponent === 'article'
+                  ? 'bg-black text-white'
+                  : 'hover:bg-gray-100'
+                }`}
+            >
+              Post Article
+            </button>
+            <button
+              onClick={() => handleComponentChange('newsletter')}
+              className={`px-4 py-2 rounded-md text-left transition-colors ${selectedComponent === 'newsletter'
+                  ? 'bg-black text-white'
+                  : 'hover:bg-gray-100'
+                }`}
+            >
+              Post Newsletter 
+            </button>
+          </div>
+        </div>
         <SidebarSeparator className="mx-0" />
       </SidebarContent>
       <SidebarRail />

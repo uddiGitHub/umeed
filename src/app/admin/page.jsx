@@ -18,9 +18,13 @@ import {
 } from "@/components/ui/sidebar"
 
 import ArticlePosting from "@/components/posting/articalPosting";
+import NewsletterPosting from "@/components/posting/newsletterPosting";
 
-export default async function AdminPage() {
+export default async function AdminPage({ searchParams }) {
+  const resolvedSearchParams = await searchParams;
+  const type = resolvedSearchParams?.type ?? "article";
   const { userId } = await auth();
+
 
   if (!userId) {
     redirect("/sign_in");
@@ -71,7 +75,7 @@ export default async function AdminPage() {
     <main>
       {/* <h1 className="text-center font-bold text-[2rem]">Admin Dasboard</h1> */}
       <SidebarProvider>
-        <AppSidebar />
+        <AppSidebar selectedComponent={type} />
         <SidebarInset>
           <header className="bg-background sticky top-0 flex h-16 shrink-0 items-center gap-2 border-b px-4">
             <SidebarTrigger className="-ml-1" />
@@ -87,7 +91,10 @@ export default async function AdminPage() {
               </BreadcrumbList>
             </Breadcrumb>
           </header>
-          <ArticlePosting />
+          <div className="flex justify-center p-4">
+            {type === "article" && <ArticlePosting />}
+            {type === "newsletter" && <NewsletterPosting />}
+          </div>
         </SidebarInset>
       </SidebarProvider>
     </main>

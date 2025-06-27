@@ -8,7 +8,7 @@ const MenuBar = ({ editor }) => {
     return (
         <div className="flex flex-wrap gap-1 p-2 border-b bg-white rounded-t-lg shadow-sm">
             {/* Headings */}
-            <button
+            {/* <button
                 type="button"
                 onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
                 className={`p-2 rounded-md ${editor.isActive('heading', { level: 1 })
@@ -17,7 +17,7 @@ const MenuBar = ({ editor }) => {
                 title="Heading 1"
             >
                 <span className="font-bold text-lg">H1</span>
-            </button>
+            </button> */}
 
             <button
                 type="button"

@@ -108,7 +108,7 @@ function ArticlesContent() {
                     <>
                         <div className={styles.articlesGrid}>
                             {articles.map((article) => (
-                                <article key={article._id} className={styles.articleCard}>
+                                <article key={article._id} onClick={() => router.push(`/pages/articles/${article._id}/`)} className={styles.articleCard}>
                                     {article.img && (
                                         <div className={styles.imageContainer}>
                                             <Image
