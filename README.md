@@ -26,9 +26,12 @@ Create a `.env` file in the project root with:
 MONGO_URI_TEST=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<defaultdbname>
 
 # Clerk authentication keys
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_XXXXXXXXXXXXXXXXXXXXXXXXXXXX
-CLERK_SECRET_KEY=sk_test_XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_live_XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+CLERK_SECRET_KEY=sk_live_XXXXXXXXXXXXXXXXXXXXXXXXXXXX
 NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/admin
+
+# Web3form Access Key
+NEXT_PUBLIC_WEB3FORM_ACCESS_KEY=YOUR_ACCESS_KEY
 
 # Admin and organization info
 ADMIN_EMAIL=admin1@example.com,admin2@example.com # You can specify multiple admin email addresses.

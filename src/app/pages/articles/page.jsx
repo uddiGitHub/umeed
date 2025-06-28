@@ -1,11 +1,11 @@
 "use client";
 
-import { Suspense } from 'react';
+import { Suspense, useTransition } from 'react';
 import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./articles.module.css";
 import Image from "next/image";
-import parse from 'html-react-parser';
+// import parse from 'html-react-parser';
 
 import {
     Pagination,
@@ -31,6 +31,7 @@ function ArticlesContent() {
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [isNavigating, startNavigation] = useTransition();
 
     const searchParams = useSearchParams();
     const searchQuery = searchParams.get('search') || '';
@@ -78,9 +79,19 @@ function ArticlesContent() {
     const clearSearch = () => {
         router.push('/pages/articles');
     };
+    const navigateToArticle = (id) => {
+        startNavigation(() => {
+            router.push(`/pages/articles/${id}/`);
+        });
+    };
 
     return (
         <div className={styles.container}>
+            {isNavigating && (
+                <div className={styles.navigationOverlay}>
+                    <div className={styles.navigationSpinner}></div>
+                </div>
+            )}
             <div className={styles.hero}>
                 <div className={styles.heroContent}>
                     <h1>Our Latest Articles</h1>
@@ -108,7 +119,7 @@ function ArticlesContent() {
                     <>
                         <div className={styles.articlesGrid}>
                             {articles.map((article) => (
-                                <article key={article._id} onClick={() => router.push(`/pages/articles/${article._id}/`)} className={styles.articleCard}>
+                                <article key={article._id} onClick={() => navigateToArticle(article._id)} className={styles.articleCard}>
                                     {article.img && (
                                         <div className={styles.imageContainer}>
                                             <Image
@@ -128,7 +139,10 @@ function ArticlesContent() {
                                         <p className={styles.excerpt}>{getExcerpt(article.content)}</p>
                                         <div className={styles.meta}>
                                             <button
-                                                onClick={() => router.push(`/pages/articles/${article._id}/`)}
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    navigateToArticle(article._id);
+                                                }}
                                                 className={styles.readMore}
                                             >
                                                 Read More

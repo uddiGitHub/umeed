@@ -70,8 +70,11 @@
 }
 
 .activeCard {
-  background-color: #dbeafe;
+  background-color: hsl(46, 95%, 93%);
   border-color: #000000;
+}
+.activeCard:hover {
+  background-color: hsl(46, 95%, 93%);
 }
 
 .title {
