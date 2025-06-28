@@ -13,13 +13,16 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com',
-        port: '',
-        pathname: '/**',
+        hostname: '**', // Allows all HTTPS domains
+      },
+      {
+        protocol: 'http',
+        hostname: '**', // Allows all HTTP domains
       },
     ],
   },
   
+  // ... rest of your configuration remains unchanged
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,

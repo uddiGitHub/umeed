@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./articles.module.css";
 import Image from "next/image";
-// import parse from 'html-react-parser';
+import parse from 'html-react-parser';
 
 import {
     Pagination,
@@ -73,8 +73,31 @@ function ArticlesContent() {
     };
 
     const getExcerpt = (content, maxLength = 100) => {
-        if (content.length <= maxLength) return content;
-        return content.substring(0, maxLength) + "...";
+        if (Array.isArray(content)) {
+            let plainText = '';
+            content.forEach(block => {
+                if (block._type === 'block' && block.children) {
+                    block.children.forEach(child => {
+                        if (child.text) {
+                            plainText += child.text + ' ';
+                        }
+                    });
+                }
+            });
+            plainText = plainText.trim();
+            return plainText.length <= maxLength
+                ? plainText
+                : plainText.substring(0, maxLength) + "...";
+        }
+        if (typeof content === 'string') {
+            const plainText = content.replace(/<[^>]*>/g, '');
+            return plainText.length <= maxLength
+                ? plainText
+                : plainText.substring(0, maxLength) + "...";
+        }
+        return typeof content === 'string'
+            ? (content.length <= maxLength ? content : content.substring(0, maxLength) + "...")
+            : "";
     };
     const clearSearch = () => {
         router.push('/pages/articles');
