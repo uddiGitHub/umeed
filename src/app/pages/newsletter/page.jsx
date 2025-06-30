@@ -7,9 +7,9 @@ export default function Newsletter() {
       <header className={styles.hero}>
         <div className={styles.heroContent}>
           <h1>Yearly Newsletters</h1>
-          <p>
+          {/* <p>
             Browse our community updates and reports
-          </p>
+          </p> */}
         </div>
       </header>
 

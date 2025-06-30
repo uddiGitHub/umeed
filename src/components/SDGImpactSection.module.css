@@ -46,19 +46,6 @@
   opacity: 0.8;
 }
 
-
-.sdgHeader p::after {
-  content: "";
-  position: absolute;
-  bottom: 1px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90px;
-  height: 4px;
-  background: hsla(46, 79%, 57%, 0.8);
-  border-radius: 2px;
-}
-
 .impactStats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

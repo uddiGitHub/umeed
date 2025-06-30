@@ -3,9 +3,8 @@
 import React from 'react';
 import styles from '@/app/pages/about_us/aboutus.module.css';
 import Image from 'next/image';
-import { FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
-import sagarikaImage from '@/assets/images/SagarikaGhibliInk.png';
+import bannerImage from '@/assets/images/aboutUsBanner.png';
 
 function Aboutus() {
   return (
@@ -14,18 +13,17 @@ function Aboutus() {
         <div className={styles.ownerContainer}>
           <div className={styles.ownerImg}>
             <Image
-              src={sagarikaImage}
-              alt="Sagarika Deka"
+              src={bannerImage}
+              alt="Maan Ki Umeed - Community Impact"
               width={300}
               height={300}
               className={styles.img}
               priority={false}
             />
           </div>
-          <div className={styles.ownerContactLinksContainer}>
-            <a href="#" aria-label="Instagram"><FaInstagram /></a>
-            <a href="#" aria-label="LinkedIn"><FaLinkedin /></a>
-            <a href="#" aria-label="Twitter"><FaXTwitter /></a>
+          {/* Add this caption div below the image */}
+          <div className={styles.bannerCaption}>
+            <p>Maan Ki Umeed team at a community outreach program in Assam, 2023</p>
           </div>
         </div>
 
@@ -34,7 +32,6 @@ function Aboutus() {
           <p>
             Maan Ki Umeed is a youth-led social change platform founded in 2020 in Assam, with a vision to uplift marginalized communities by harnessing the power of young people. What began as a small initiative during the pandemic has now grown into a dynamic movement that empowers children, women, and youth through education, awareness, and action.
           </p>
-          {/* <button>Have a look at our work</button> */}
         </div>
       </div>
 
@@ -43,6 +40,8 @@ function Aboutus() {
         <div className={styles.story}>
           <p>
             Rooted in the belief that lasting change starts from within communities, we work at the intersection of education, gender equality, health, and livelihood. Our aim is to build a society grounded in equity, dignity, and opportunity—where every child learns, every woman leads, and every voice matters. At Maan Ki Umeed, we foster leadership and changemaking among youth, encouraging them to challenge social norms, address injustice, and innovate sustainable solutions. Maan Ki Umeed serves as a safe and powerful space for youth to express, engage, and lead encouraging them to challenge societal norms, advocate for justice, and co-create sustainable solutions for a better future.
+            <br />
+            <button>Have a look at our work</button>
           </p>
         </div>
       </div>
@@ -50,7 +49,7 @@ function Aboutus() {
       <div className={styles.FounderContainer}>
         <div className={styles.Founderstory}>
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-            Founder: Sagarika Deka
+            Founder and CEO: Sagarika Deka
           </h2>
           <p>
             Sagarika Deka is a young changemaker, poet, and social entrepreneur from Guwahati, Assam, who believes that real change begins with courage and compassion. She is the founder of Maan Ki Umeed, a youth-led nonprofit platform that empowers young minds to create solutions for a better tomorrow.<br />
@@ -73,7 +72,7 @@ function Aboutus() {
             <div className={styles.quoteAttribution}>
               <span className={styles.quoteDash}>—</span>
               <span className={styles.quoteAuthor}>Sagarika Deka</span>
-              <span className={styles.quoteTitle}>, Founder</span>
+              {/* <span className={styles.quoteTitle}>, Founder</span> */}
             </div>
           </div>
         </div>

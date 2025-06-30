@@ -4,8 +4,15 @@ import styles from "./home.module.css";
 
 import Image from "next/image";
 // Importing images
-import bannerImagePath from "@/assets/images/bannerImg.png";
-import gay from "@/assets/images/gay.png";
+import bannerImagePath from "@/assets/images/bannerImg.jpg";
+import visionImage from "@/assets/images/vision.jpeg";
+import BecomeAmember from "@/assets/images/BecomeAmember.jpg";
+
+// Importing Pillars images
+import Education from "@/assets/images/Pillars/Education.jpg";
+import Empowerment from "@/assets/images/Pillars/Empowerment.jpg";
+import Employment from "@/assets/images/Pillars/Employment.jpg";
+import Service from "@/assets/images/Pillars/Services.jpg";
 
 // Importing SDG images
 import NoProverty from "@/assets/images/SDG/NoProverty.jpeg";
@@ -14,7 +21,6 @@ import QualityEducation from "@/assets/images/SDG/QualityEducation.png";
 import GenderEquality from "@/assets/images/SDG/GenderEquality.png";
 import ReducedInequalities from "@/assets/images/SDG/ReduceInequality.png";
 import ClimateAction from "@/assets/images/SDG/ClimateAction.png";
-
 import SDGImpactSection from "@/components/SDGImpactSection";
 
 
@@ -92,15 +98,24 @@ export default function Home() {
   // Verticals content data
   const verticalsContent = [
     {
-      title: "Art For Social Change - Baithaks",
-      text: "Host free-to-access monthly workshops on social justice...",
+      title: "Education",
+      text: "We believe education is the most powerful tool for change. We strive to ensure every child regardless of background or gender has access to quality learning through school enrollments, Sunday classes, and interactive workshops.",
+      image: Education,
     },
-    { title: "Technology", text: "We use technology to create social change." },
     {
-      title: "Community",
-      text: "We build communities to create social change.",
+      title: "Empowerment",
+      text: "We focus on empowering women and children by nurturing confidence, knowledge, leadership, and introducing the concept of changemaking. Through menstrual hygiene sessions, educational comics, opinionated articles and awareness campaigns, we challenge taboos and create pathways to self-reliance.",
+      image: Empowerment,
     },
-    { title: "Education", text: "We use education to create social change." },
+    {
+      title: "Employment",
+      text: "Skill-building and vocational training are central to our work with women and teenagers. From stitching reusable pads to creating sustainable clothing, we support women in earning with dignity and guide youth in transforming sustainable solutions into impactful ideas.",
+      image: Employment,
+    },
+    {
+      title: "Service", text: "Rooted in compassion, our youth-led team actively serves marginalized communities during floods, pandemics, or everyday struggles because real change begins with showing up.",
+      image: Service,
+    },
   ];
 
   return (
@@ -125,52 +140,29 @@ export default function Home() {
         {/* Colored Section */}
         <section className={styles.coloredSection}>
           <div className={styles.coloredSectionBlock}>
-            <Image className={`${styles.coloredSectionImg} ${styles.orderImg}`} src={gay} alt="Vision" />
+            <Image className={`${styles.coloredSectionImg} ${styles.orderImg}`} src={visionImage} alt="Vision" />
             <div className={`${styles.coloredSectionText} ${styles.orderText}`}>
               <h1>Vision</h1>
               <p>
-                We envision an inclusive and just world where all individuals,
-                regardless of their background, can thrive and contribute to
-                society. lerem ipsum dolor sit amet, consectetur adipiscing elit.
-                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                At Maan Ki Umeed, we envision a society where every child receives quality education, every woman lives with dignity and economic independence, and every young person is empowered to lead and create positive change.<br />
+                Our vision is to build an inclusive and compassionate world free from inequality, discrimination, and injustice where grassroots communities are uplifted through education, empowerment, and opportunity.<br />
+                We believe that real transformation begins when youth are trusted with responsibility, equipped with the right tools, and inspired to serve.
               </p>
             </div>
-          </div>
-          <div className={styles.coloredSectionBlock}>
-            <div className={styles.coloredSectionText}>
-              <h1>Vision</h1>
-              <p>
-                We envision an inclusive and just world where all individuals,
-                regardless of their background, can thrive and contribute to
-                society. lerem ipsum dolor sit amet, consectetur adipiscing elit.
-                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-            </div>
-            <Image className={styles.coloredSectionImg} src={gay} alt="Vision" />
           </div>
         </section>
 
         {/* Verticals Section */}
         <section>
           <div className={styles.verticals}>
-            <h1>our pillars</h1>
+            <h1>Our Pillars</h1>
           </div>
           <div className={styles.verticalsContainer}>
             {verticalsContent.map((vertical, index) => (
               <div key={index} className={styles.verticalCard}>
                 <Image
                   className={styles.verticalCardImg}
-                  src={gay}
+                  src={vertical.image}
                   alt={vertical.title}
                 />
                 <h2>{vertical.title}</h2>
@@ -196,7 +188,7 @@ export default function Home() {
               </Button>
             </div>
             <div className={styles.getInvolvedImgContainer}>
-              <Image className={styles.getInvolvedImg} src={gay} alt="gay" />
+              <Image className={styles.getInvolvedImg} src={BecomeAmember} alt="gay" />
             </div>
           </div>
         </section>

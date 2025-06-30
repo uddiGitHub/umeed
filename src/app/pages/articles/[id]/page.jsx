@@ -36,8 +36,9 @@ export default async function ArticlePage({ params }) {
             <Image
               src={article.img}
               alt={article.title}
-              layout="fill"
-              objectFit="cover"
+              layout="intrinsic"
+              width={800}
+              height={400}
               priority
             />
           </div>
