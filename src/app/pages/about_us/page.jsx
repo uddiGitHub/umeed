@@ -34,7 +34,7 @@ function Aboutus() {
           <p>
             Maan Ki Umeed is a youth-led social change platform founded in 2020 in Assam, with a vision to uplift marginalized communities by harnessing the power of young people. What began as a small initiative during the pandemic has now grown into a dynamic movement that empowers children, women, and youth through education, awareness, and action.
           </p>
-          <button>Have a look at our work</button>
+          {/* <button>Have a look at our work</button> */}
         </div>
       </div>
 
@@ -68,7 +68,7 @@ function Aboutus() {
           </p>
           <div className={styles.founderQuote}>
             <blockquote className={styles.quoteText}>
-              "You just need a reason, a little hope—and a lot of umeed"
+              You just need a reason, a little hope—and a lot of umeed
             </blockquote>
             <div className={styles.quoteAttribution}>
               <span className={styles.quoteDash}>—</span>

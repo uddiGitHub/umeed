@@ -126,17 +126,63 @@
 }
 
 .story {
-    max-width: 800px;
-    width: 100%;
+  max-width: 800px;
+  width: 100%;
+  position: relative;
+}
+
+.storyContent {
+  padding: 20px;
+  position: relative;
 }
 
 .story p {
-    font-size: 1.25rem;
-    line-height: 1.8;
-    font-weight: 500;
-    color: #222;
+  font-size: 1.25rem;
+  line-height: 1.85;
+  font-weight: 450;
+  text-align: justify;
+  position: relative;
+  padding-left: 2rem;
 }
 
+.story p::first-letter {
+  float: left;
+  font-size: 5rem;
+  line-height: 0.8;
+  padding: 0.5rem 0.5rem 0 0;
+  color: rgb(34, 34, 34);
+  font-weight: bold;
+}
+
+@media screen and (max-width: 820px) {
+  .story {
+    width: 90%;
+    padding: 10px;
+  }
+  .story p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .storyContainer {
+    padding: 40px 20px;
+    margin: 30px auto;
+  }
+  .story {
+    width: 100%;
+  }
+  .story p {
+    font-size: 1.05rem;
+    padding-left: 0;
+    text-align: left;
+  }
+  .story p::first-letter {
+    font-size: 3.5rem;
+  }
+}
 /* Founder Story */
 
 .FounderContainer {
