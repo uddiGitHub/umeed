@@ -48,7 +48,7 @@
 }
 
 .bannerHeader h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: bolder;
     color: rgb(255, 255, 255);
     text-align: center;
@@ -60,60 +60,6 @@
     }
 }
 
-/* Impact css */
-.impactContainer {
-    margin: 10px;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(250px, 1fr));
-}
-
-.impactContainer h1 {
-    grid-column: 1/-1;
-    font-size: 4rem;
-    text-align: center;
-    font-weight: bolder;
-    margin-bottom: 0;
-}
-
-.impactDescribtion {
-    grid-column: 1/-1;
-    font-size: 1.2rem;
-    text-align: center;
-    margin-top: 0;
-    top: 0;
-    margin-bottom: 2rem;
-}
-
-.impactCard {
-    text-align: center;
-    justify-items: center;
-}
-
-.impactCard h2 {
-    font-size: 2rem;
-    font-weight: bolder;
-    margin-bottom: 0;
-}
-
-.impactCard p {
-    font-size: 1.2rem;
-    margin-top: 0;
-}
-
-@media (max-width: 1024px) {
-    .impactContainer {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-    .impactContainer h1 {
-        font-size: 3rem;
-    }
-}
-
-@media (max-width: 540px) {
-    .impactContainer {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
-}
 
 /* colored Section */
 .coloredSection {

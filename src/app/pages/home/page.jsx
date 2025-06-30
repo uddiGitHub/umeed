@@ -7,6 +7,16 @@ import Image from "next/image";
 import bannerImagePath from "@/assets/images/bannerImg.png";
 import gay from "@/assets/images/gay.png";
 
+// Importing SDG images
+import NoProverty from "@/assets/images/SDG/NoProverty.jpeg";
+import GoodHealth from "@/assets/images/SDG/GoodHealth.jpeg";
+import QualityEducation from "@/assets/images/SDG/QualityEducation.png";
+import GenderEquality from "@/assets/images/SDG/GenderEquality.png";
+import ReducedInequalities from "@/assets/images/SDG/ReduceInequality.png";
+import ClimateAction from "@/assets/images/SDG/ClimateAction.png";
+
+import SDGImpactSection from "@/components/SDGImpactSection";
+
 
 // Counter component to animate the count
 import { useState, useEffect } from "react";
@@ -70,12 +80,13 @@ const commentsData = [
 ];
 
 export default function Home() {
-  // Impact statistics data
   const impactStats = [
-    { end: 1000, text: "Workshops facilitated on social change" },
-    { end: 200, text: "Events" },
-    { end: 5000, text: "People Impacted" },
-    { end: 50, text: "Collaborations" },
+    { image: NoProverty },
+    { image: GoodHealth},
+    { image: QualityEducation },
+    { image: GenderEquality },
+    { image: ReducedInequalities },
+    { image: ClimateAction }
   ];
 
   // Verticals content data
@@ -102,27 +113,14 @@ export default function Home() {
           className={[styles.bannerImage]}
         />
         <div className={styles.bannerHeader}>
-          <h1>Art For Social Change - Baithaks</h1>
+          <h1>WITH THE PEOPLE, FOR THE PEOPLE</h1>
         </div>
       </section>
 
       <section className={styles.homePage}>
         {/* Impact Section */}
-        <section className={styles.impactContainer}>
-          <h1>Impact</h1>
-          <p className={styles.impactDescribtion}>
-            We have been able to create a positive impact in the community through
-            our events and initiatives.
-          </p>
-          {impactStats.map((stat, index) => (
-            <div key={index} className={styles.impactCard}>
-              <h2>
-                <Counter end={stat.end} />+
-              </h2>
-              <p>{stat.text}</p>
-            </div>
-          ))}
-        </section>
+        <SDGImpactSection impactStats={impactStats} />
+
 
         {/* Colored Section */}
         <section className={styles.coloredSection}>
@@ -165,7 +163,7 @@ export default function Home() {
         {/* Verticals Section */}
         <section>
           <div className={styles.verticals}>
-            <h1>Our Verticals</h1>
+            <h1>our pillars</h1>
           </div>
           <div className={styles.verticalsContainer}>
             {verticalsContent.map((vertical, index) => (

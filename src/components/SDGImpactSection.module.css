@@ -1,0 +1,223 @@
+.impactContainer {
+  padding: 20px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.impactContainer::before {
+  content: "";
+  position: absolute;
+  top: 5;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  border-radius: 100px;
+  background: linear-gradient(90deg, hsl(6, 78%, 57%), hsl(145, 100%, 33%), hsl(350, 100%, 40%), hsl(358, 95%, 50%),hsl(327, 100%, 46%),hsl(137, 54%, 34%));
+}
+
+.sdgHeader {
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.sdgHeader h1 {
+  font-size: 3.5rem;
+  color: #2c3e50;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.sdgHeader p {
+  font-size: 1.8rem;
+  color: #000000;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+}
+
+.focusWord {
+  color: #000000;
+  font-weight: 700;
+  filter: none;
+}
+
+.blurred {
+  filter: blur(1px);
+  opacity: 0.8;
+}
+
+
+.sdgHeader p::after {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 4px;
+  background: hsla(46, 79%, 57%, 0.8);
+  border-radius: 2px;
+}
+
+.impactStats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.impactCard {
+  border-radius: 12px;
+  padding: 30px 20px;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileWrapper {
+  width: 60%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.impactCard:hover .profileWrapper {
+  transform: scale(1.05);
+}
+
+.profilePic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.impactCard:hover .profilePic {
+  transform: scale(1.1);
+}
+
+.impactCard h2 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin: 8px;
+  font-weight: 700;
+}
+
+.impactCard p {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.sdgBadge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+
+.impactCard:nth-child(1) .sdgBadge,
+.impactCard:nth-child(1) .impactNumber { 
+  background: #ef0030;
+  color: #fff; 
+}
+
+.impactCard:nth-child(2) .sdgBadge,
+.impactCard:nth-child(2) .impactNumber { 
+  background: hsl(145, 100%, 33%);
+  color: #fff; 
+}
+
+.impactCard:nth-child(3) .sdgBadge,
+.impactCard:nth-child(3) .impactNumber { 
+  background: hsl(350, 100%, 40%);
+  color: #fff; 
+}
+
+.impactCard:nth-child(4) .sdgBadge,
+.impactCard:nth-child(4) .impactNumber { 
+  background: hsl(358, 95%, 50%);
+  color: #fff; 
+}
+.impactCard:nth-child(5) .sdgBadge,
+.impactCard:nth-child(5) .impactNumber { 
+  background: hsl(327, 100%, 46%);
+  color: #fff; 
+}
+.impactCard:nth-child(6) .sdgBadge,
+.impactCard:nth-child(6) .impactNumber { 
+  background: hsl(137, 54%, 34%);
+  color: #fff; 
+}
+
+
+@media (max-width: 1024px) {
+  .sdgHeader h1 {
+    font-size: 3rem;
+  }
+}
+@media (max-width: 768px) {
+    
+  .impactContainer {
+    padding: 20px 20px;
+  }
+  
+  .sdgHeader h1 {
+    font-size: 2.5rem;
+  }
+  
+  .sdgHeader p {
+    font-size: 1.5rem;
+  }
+  
+  .impactStats {
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .sdgHeader h1 {
+    font-size: 2rem;
+  }
+  
+  .sdgHeader p {
+    font-size: 1.3rem;
+  }
+  
+  .impactNumber {
+    font-size: 1.8rem;
+  }
+  
+  .impactCard p {
+    font-size: 1rem;
+  }
+  .impactStats {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+/* .centerLast {
+  outline: 2px solid red;
+} */
+
+.centerLast .impactCard:last-child {
+  margin-left: auto;
+  margin-right: auto;
+}

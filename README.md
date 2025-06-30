@@ -17,6 +17,7 @@ Follow these steps to set up the project locally:
 - **[Node.js](https://nodejs.org/) v16+** - JavaScript runtime  
 - **[MongoDB](https://www.mongodb.com/)** - Database (local or Atlas)  
 - **[Clerk Account](https://clerk.dev/)** - Authentication provider (create project for API keys)
+- **[Web3Forms Access Key](https://web3forms.com/)** - For handling contact forms (create a free account to get your access key)
 
 #### Configuration:
 
@@ -60,31 +61,6 @@ Access application at:
 
 
 <hr style="border:0.5px solid"/>
-
-### Project Structure
-```
-src/
-├── app/
-│ ├── api/ # API routes (backend endpoints)
-│ ├── pages/ # Page routes (Next.js 13+ App Router)
-│ └── global.css # Global CSS styles
-│
-├── assets/ # Static assets (images, fonts, icons)
-│ ├── images/
-│
-components/ # Reusable UI components
-│ ├── common/ # Shared components (buttons, cards)
-│ ├── layout/ # Layout components
-│ └── [feature]/ # Feature-specific components
-│
-public/ # Static files
-config/
-│ ├── next.config.js # Next.js configuration
-│ └── middleware.ts # Authentication middleware (Clerk)
-│
-.env # Environment variables
-.env.example # Environment template
-```
 
 ### Contributing
 Contributions are welcome!

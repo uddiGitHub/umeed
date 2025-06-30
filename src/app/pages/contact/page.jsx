@@ -42,7 +42,7 @@ function contactus() {
             your day? We’re not your "therapist", but we are here for you.
           </p>
           <p>
-            Shoot us an email (we check it… eventually), or if you're feeling
+            Shoot with us an email, or if you're feeling
             nostalgic, go ahead and give us a good old-fashioned phone call.
             Yes, we still answer those. Shocking, we know.
           </p>

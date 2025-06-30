@@ -15,7 +15,7 @@ const Footer = () => {
         {
             icon: <FaInstagram aria-hidden="true" />,
             label: "Instagram",
-            url: "#",
+            url: "https://www.instagram.com/maan_ki_umeed/",
         },
         {
             icon: <FaLinkedin aria-hidden="true" />,
@@ -23,18 +23,8 @@ const Footer = () => {
             url: "#",
         },
         {
-            icon: <FaXTwitter aria-hidden="true" />,
-            label: "Twitter",
-            url: "#",
-        },
-        {
             icon: <FaFacebookF aria-hidden="true" />,
             label: "Facebook",
-            url: "#",
-        },
-        {
-            icon: <FaDiscord aria-hidden="true" />,
-            label: "Discord",
             url: "#",
         },
         {
