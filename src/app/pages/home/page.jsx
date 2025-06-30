@@ -82,7 +82,7 @@ const commentsData = [
 export default function Home() {
   const impactStats = [
     { image: NoProverty },
-    { image: GoodHealth},
+    { image: GoodHealth },
     { image: QualityEducation },
     { image: GenderEquality },
     { image: ReducedInequalities },
@@ -184,15 +184,15 @@ export default function Home() {
         <section className={styles.getInvolved}>
           <div className={styles.getInvolvedContainer}>
             <div className={styles.getInvolvedText}>
-              <h1>Be a Momo to Our Toto?</h1>
+              <h1>Why Join Maan Ki Umeed?</h1>
               <p>
-                Join us in our mission to challenge societal norms, break the
-                silence on gender-based violence, and create a more equitable
-                future for all. Get involved in our campaigns, come to our
-                events, or support us however, you can, every bit counts.
+                Be more than a volunteer—be a changemaker. Join a community of passionate youth creating real change at the grassroots. As a Umeed Fellow, you'll lead projects, work closely with underserved communities, write powerful articles that spark dialogue, and grow as a changemaker.<br />
+                It’s more than a fellowship—it’s a journey of purpose, voice, and leadership.
               </p>
               <Button className='bg-white text-black hover:bg-white' asChild>
-                <Link href="/pages/donation">Get Involved</Link>
+                <Link href="https://surveyheart.com/form/62696e2a74c1c748d8970799" target="_blank" rel="noopener noreferrer">
+                  Get Involved
+                </Link>
               </Button>
             </div>
             <div className={styles.getInvolvedImgContainer}>
