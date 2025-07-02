@@ -1,7 +1,9 @@
 'use client';
 import { useState } from "react";
 import styles from "./posting.module.css";
-import { CategoryCombobox } from "@/components/ui/Combobox";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+// import { CategoryCombobox } from "@/components/ui/Combobox";
 
 export default function NewsletterPosting() {
   const [category, setCategory] = useState("");
@@ -59,16 +61,17 @@ export default function NewsletterPosting() {
 
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.field}>
-          <label>
-            Category <span className="text-red-500">*</span>
-          </label>
-          <CategoryCombobox
+          <Label htmlFor="category">
+            Category 
+          </Label>
+          <Input
+            id="category"
             value={category}
-            onChange={setCategory}
-            options={categories}
-            placeholder="Select category..."
+            onChange={(e) => setCategory(e.target.value)}
+            placeholder="Enter category"
           />
         </div>
+
 
         <div className={styles.field}>
           <label>
