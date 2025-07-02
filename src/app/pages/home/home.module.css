@@ -227,8 +227,6 @@
 /* Fade others on hover */
 .verticalCard:hover~.verticalCard,
 .verticalsContainer:hover .verticalCard:not(:hover) {
-    opacity: 0.75;
-    filter: blur(1px);
     transform: scale(0.98);
     transition: all 0.3s ease;
 }

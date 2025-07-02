@@ -23,7 +23,7 @@ function Aboutus() {
           </div>
           {/* Add this caption div below the image */}
           <div className={styles.bannerCaption}>
-            <p>Maan Ki Umeed team at a community outreach program in Assam, 2023</p>
+            <p>Maan Ki Umeed team at a community outreach program in Assam</p>
           </div>
         </div>
 
@@ -41,7 +41,7 @@ function Aboutus() {
           <p>
             Rooted in the belief that lasting change starts from within communities, we work at the intersection of education, gender equality, health, and livelihood. Our aim is to build a society grounded in equity, dignity, and opportunity—where every child learns, every woman leads, and every voice matters. At Maan Ki Umeed, we foster leadership and changemaking among youth, encouraging them to challenge social norms, address injustice, and innovate sustainable solutions. Maan Ki Umeed serves as a safe and powerful space for youth to express, engage, and lead encouraging them to challenge societal norms, advocate for justice, and co-create sustainable solutions for a better future.
             <br />
-            <button>Have a look at our work</button>
+            {/* <button>Have a look at our work</button> */}
           </p>
         </div>
       </div>
