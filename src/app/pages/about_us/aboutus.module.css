@@ -130,6 +130,10 @@
 }
 
 @media screen and (max-width: 480px) {
+  .aboutusHeaderText {
+    max-width: 100%;
+    padding-right: 10px;
+  }
   .aboutusContainer {
     flex-direction: column;
   }
@@ -146,11 +150,12 @@
   .aboutusHeaderText p {
     font-size: 1.15rem;
     line-height: 1.8;
+    padding-left: 0 ;
   }
 }
 @media screen and (max-width: 412px) {
   .aboutusHeaderText p {
-    padding-left: 0 ;
+    
   }
 }
 
