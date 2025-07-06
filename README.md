@@ -1,5 +1,26 @@
-# Maan ki Umeed - Website Development
-Umeed_web is a modern, full-stack web application built with Next.js and MongoDB, designed to deliver a responsive, scalable, and dynamic user experience.
+<h1 align="center">Maan ki Umeed &mdash; Website Development</h1>
+
+<p align="center">
+  <em>A modern full-stack web framework focused on modularity, performance, and simplicity.</em>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-Fullstack-000?logo=nextdotjs&style=flat-square" />
+  <img src="https://img.shields.io/badge/MongoDB-Database-4EA94B?logo=mongodb&style=flat-square" />
+  <img src="https://img.shields.io/badge/Clerk-Authentication-3b82f6?logo=clerk&style=flat-square" />
+  <img src="https://img.shields.io/badge/Vercel-Auto--Deploy-000?logo=vercel&style=flat-square" />
+  <img src="https://img.shields.io/badge/Web3Forms-Contact%20Forms-purple?style=flat-square" />
+  <img src="https://img.shields.io/badge/Responsive-Mobile--First-10b981?style=flat-square" />
+</p>
+
+<p align="center">
+  <strong>🚀 Open for Contributions</strong><br/>
+  Help us grow this project by submitting issues, suggestions, or pull requests!
+</p>
+
+
+## Overview
+umeed_web is a full-stack web application framework that emphasizes modularity, security, and maintainability. It integrates Next.js, MongoDB, and Clerk authentication to deliver a seamless development experience, supported by a comprehensive component library and robust API endpoints.
 
 ## Features
 
