@@ -20,31 +20,25 @@
 .heroContent {
   text-align: center;
   color: white;
-  padding: 20px;
+  padding: 30px;
 }
 
 .heroContent h1 {
-  font-weight: 800;
-  font-size: 3rem;
+  font-weight: 700;
+  font-size: 2.8rem;
   margin-bottom: 15px;
-}
-
-.heroContent p {
-  font-size: 1.2rem;
-  max-width: 600px;
-  margin: 0 auto;
+  letter-spacing: -0.5px;
 }
 
 .header {
-  margin-top: 3rem;
-  margin-bottom: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
   text-align: center;
 }
 
-
 @media (max-width: 768px) {
   .hero {
-    height: 300px;
+    height: 280px;
   }
 
   .heroContent h1 {
@@ -54,14 +48,10 @@
 
 @media (max-width: 480px) {
   .hero {
-    height: 250px;
+    height: 240px;
   }
 
   .heroContent h1 {
     font-size: 1.8rem;
-  }
-
-  .heroContent p {
-    font-size: 1rem;
   }
 }

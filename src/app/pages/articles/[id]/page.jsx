@@ -4,31 +4,53 @@ import { notFound } from "next/navigation";
 import mongoose from "mongoose";
 import Image from "next/image";
 import styles from "./typography.module.css";
+import ShareButton from "@/components/shareButton";
 import ArticleInteractive from "@/components/ui/articleInteractive";
-
 import parse from 'html-react-parser';
 
 export default async function ArticlePage({ params }) {
   const { id } = await params;
 
-  // Connect to the database
   await connectDB();
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return notFound();
   }
 
-  // Fetching the article from the database
   const article = await PostItem.findById(id).lean();
   if (!article) {
     notFound();
   }
+  const wordCount = article.content ? article.content.split(/\s+/).length : 0;
+  const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
 
   return (
     <div className={styles.container}>
       <article className={styles.article}>
         <header className={styles.header}>
+          <div className={styles.categoryTag}>{article.category || "Industry Insights"}</div>
           <h1 className={styles.title}>{article.title}</h1>
+
+          <div className={styles.metaContainer}>
+            <div className={styles.authorInfo}>
+              <div className={styles.authorName}>By {article.author}</div>
+              <div className={styles.metaDivider}>•</div>
+              <div className={styles.date}>
+                {new Date(article.createdAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </div>
+              <div className={styles.metaDivider}>•</div>
+              <div className={styles.readingTime}>{readingTime} min read</div>
+            </div>
+
+            <div className={styles.shareContainer}>
+              <ShareButton title={article.title} />
+            </div>
+
+          </div>
         </header>
 
         {article.img && (
@@ -36,59 +58,27 @@ export default async function ArticlePage({ params }) {
             <Image
               src={article.img}
               alt={article.title}
-              layout="intrinsic"
-              width={800}
-              height={400}
+              layout="responsive"
+              width={1200}
+              height={630}
               priority
+              className={styles.heroImage}
             />
           </div>
         )}
-
 
         <div className={styles.content}>
           {parse(article.content)}
         </div>
 
-        {/* <div className={styles.inContentImages}>
-          {article.inContentImg1 && (
-            <div className={styles.imageWrapper}>
-              <Image
-                src={article.inContentImg1}
-                alt="Article content image 1"
-                layout="fill"
-                objectFit="contain"
-              />
-            </div>
-          )}
-          {article.inContentImg2 && (
-            <div className={styles.imageWrapper}>
-              <Image
-                src={article.inContentImg2}
-                alt="Article content image 2"
-                layout="fill"
-                objectFit="contain"
-              />
-            </div>
-          )}
+        {/* <div className={styles.articleFooter}>
+          <ArticleInteractive 
+            articleId={id} 
+            initialLikes={article.likes || 0} 
+            initialComments={article.comments || []} 
+          />
         </div> */}
-        <div className={styles.meta}>
-          <span className={styles.date}>
-            {new Date(article.createdAt).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </span>
-          <span className={styles.author}>-By {article.author}</span>
-        </div>
       </article>
-
-      {/* <ArticleInteractive 
-        // article={article}
-        articleId={id} 
-        initialLikes={article.likes || 0} 
-        initialComments={article.comments || []} 
-      /> */}
     </div>
   );
 }

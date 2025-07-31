@@ -82,58 +82,26 @@ export default function Home() {
       title: "Education",
       text: "We believe education is the most powerful tool for change. We strive to ensure every child regardless of background or gender has access to quality learning through school enrollments, Sunday classes, and interactive workshops.",
       image: Education,
+      link: "https://en.wikipedia.org/wiki/Education",
     },
     {
       title: "Empowerment",
       text: "We focus on empowering women and children by nurturing confidence, knowledge, leadership, and introducing the concept of changemaking. Through menstrual hygiene sessions, educational comics, opinionated articles and awareness campaigns, we challenge taboos and create pathways to self-reliance.",
       image: Empowerment,
+      link: "https://en.wikipedia.org/wiki/Empowerment",
     },
     {
       title: "Employment",
       text: "Skill-building and vocational training are central to our work with women and teenagers. From stitching reusable pads to creating sustainable clothing, we support women in earning with dignity and guide youth in transforming sustainable solutions into impactful ideas.",
       image: Employment,
+      link: "https://en.wikipedia.org/wiki/Employment",
     },
     {
       title: "Service", text: "Rooted in compassion, our youth-led team actively serves marginalized communities during floods, pandemics, or everyday struggles because real change begins with showing up.",
       image: Service,
+      link: "https://en.wikipedia.org/wiki/Service_(economics)",
     },
   ];
-
-
-  const peopleSection = (
-    <section className={styles.peopleSection}>
-        <div className={styles.peoplesView}>
-          <div className={styles.peoplesViewText}>
-            {["Hear", "what", "people", "think", "about"].map((word, index) => (
-              <h1 key={index}>{word}</h1>
-            ))}
-            <Image src='/Umeedlogo.png' width={150} height={150} alt="umeedLogo" />
-          </div>
-        </div>
-        <div className={styles.peoplesViewComments}>
-          <div className={styles.commentsContainer}>
-            {commentsData.map((comment, index) => (
-              <div 
-                key={index} 
-                className={styles.commentBox}
-                style={{ '--rotate': index % 2 === 0 ? '-1deg' : '1deg' }}
-              >
-                <div className={styles.profile}>
-                  <div className={styles.avatarPlaceholder} />
-                  <div className={styles.profileDescription}>
-                    <h1>{comment.name}</h1>
-                    <p>{comment.bio}</p>
-                  </div>
-                </div>
-                <div className={styles.comment}>
-                  <p>{comment.comment}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-  );
 
   return (
     <>
@@ -154,36 +122,89 @@ export default function Home() {
         <SDGImpactSection impactStats={impactStats} />
 
 
-        {/* Colored Section */}
-        <section className={styles.coloredSection}>
-          <div className={styles.coloredSectionBlock}>
-            <Image className={`${styles.coloredSectionImg} ${styles.orderImg}`} src={visionImage} alt="Vision" />
-            <div className={`${styles.coloredSectionText} ${styles.orderText}`}>
-              <h1>Vision</h1>
-              <p>
-                At Maan Ki Umeed, we envision a society where every child receives quality education, every woman lives with dignity and economic independence, and every young person is empowered to lead and create positive change.<br />
-                Our vision is to build an inclusive and compassionate world free from inequality, discrimination, and injustice where grassroots communities are uplifted through education, empowerment, and opportunity.<br />
-                We believe that real transformation begins when youth are trusted with responsibility, equipped with the right tools, and inspired to serve.
-              </p>
+        {/* vision Section */}
+        <section className={styles.visionSection}>
+          <div className={styles.visionContainer}>
+            <div className={styles.visionContent}>
+              <div className={styles.sectionHeader}>
+                <div className={styles.subtitle}>Our Guiding Principle</div>
+                <h2 className={styles.title}>Vision for Transformative Change</h2>
+              </div>
+
+              <div className={styles.visionText}>
+                <p>
+                  At Maan Ki Umeed, we envision a society where every child receives quality education,
+                  every woman lives with dignity and economic independence, and every young person is empowered
+                  to lead and create positive change.
+                </p>
+                <p>
+                  Our vision is to build an inclusive and compassionate world free from inequality,
+                  discrimination, and injustice where grassroots communities are uplifted through education,
+                  empowerment, and opportunity.
+                </p>
+                <p>
+                  We believe that real transformation begins when youth are trusted with responsibility,
+                  equipped with the right tools, and inspired to serve.
+                </p>
+              </div>
+            </div>
+
+            <div className={styles.visionImageContainer}>
+              <div className={styles.imageWrapper}>
+                <Image
+                  src={visionImage}
+                  alt="Vision for Transformative Change"
+                  className={styles.visionImage}
+                />
+                <div className={styles.imageOverlay}></div>
+              </div>
+
+              <div className={styles.visionQuote}>
+                <div className={styles.quoteIcon}>❝</div>
+                <p className={styles.quoteText}>
+                  Real change begins when youth are trusted with responsibility and inspired to serve
+                </p>
+                <div className={styles.quoteAuthor}>- Maan Ki Umeed</div>
+              </div>
             </div>
           </div>
         </section>
 
+
         {/* Verticals Section */}
-        <section>
-          <div className={styles.verticals}>
-            <h1>Our Pillars</h1>
+        <section className={styles.verticalsSection}>
+          <div className={styles.sectionHeader}>
+            <h1>Our Core Pillars</h1>
+            <p className={styles.subtitle}>Foundations of our impact-driven approach</p>
           </div>
+
           <div className={styles.verticalsContainer}>
             {verticalsContent.map((vertical, index) => (
               <div key={index} className={styles.verticalCard}>
-                <Image
-                  className={styles.verticalCardImg}
-                  src={vertical.image}
-                  alt={vertical.title}
-                />
-                <h2>{vertical.title}</h2>
-                <p>{vertical.text}</p>
+                <div className={styles.cardHeader}>
+                  <div className={styles.iconContainer}>
+                    <div className={styles.cardIcon}>{vertical.title.charAt(0)}</div>
+                  </div>
+                  <h2>{vertical.title}</h2>
+                </div>
+
+                <div className={styles.imageContainer}>
+                  <Image
+                    className={styles.verticalCardImg}
+                    src={vertical.image}
+                    alt={vertical.title}
+                  />
+                </div>
+
+                <div className={styles.cardContent}>
+                  <p>{vertical.text}</p>
+                </div>
+
+                <div className={styles.cardFooter}>
+                  <div className={styles.pillarNumber}>0{index + 1}</div>
+                  <div className={styles.divider}></div>
+                  <a href={vertical.link} target="_blank" className={styles.learnMore}>Learn more →</a>
+                </div>
               </div>
             ))}
           </div>
@@ -193,27 +214,71 @@ export default function Home() {
         <section className={styles.getInvolved}>
           <div className={styles.getInvolvedContainer}>
             <div className={styles.getInvolvedText}>
-              <h1>Why Join Maan Ki Umeed?</h1>
-              <p>
-                Be more than a volunteer—be a changemaker. Join a community of passionate youth creating real change at the grassroots. As a Umeed Fellow, you'll lead projects, work closely with underserved communities, write powerful articles that spark dialogue, and grow as a changemaker.<br />
-                It’s more than a fellowship—it’s a journey of purpose, voice, and leadership.
-              </p>
-              <Button className='bg-white text-black hover:bg-white' asChild>
+              <div className={styles.subtitle}>Join the Movement</div>
+              <h2 className={styles.title}>Why Join Maan Ki Umeed?</h2>
+             <div className={styles.description}>
+                <p>
+                  Be more than a volunteer—be a changemaker. Join a community of passionate youth creating real change at the grassroots. As a Umeed Fellow, you'll:
+                </p>
+                <ul className={styles.benefitsList}>
+                  <li>Lead impactful community projects</li>
+                  <li>Work directly with underserved populations</li>
+                  <li>Develop leadership and professional skills</li>
+                  <li>Contribute to meaningful social change</li>
+                  <li>Join a network of like-minded activists</li>
+                </ul>
+                <p>
+                  It's more than a fellowship—it's a journey of purpose, voice, and leadership.
+                </p>
+              </div>
+              <Button asChild>
                 <Link href="https://surveyheart.com/form/62696e2a74c1c748d8970799" target="_blank" rel="noopener noreferrer">
                   Get Involved
                 </Link>
               </Button>
             </div>
             <div className={styles.getInvolvedImgContainer}>
-              <Image className={styles.getInvolvedImg} src={BecomeAmember} alt="gay" />
+              <Image className={styles.getInvolvedImg} src={BecomeAmember} alt="Become a Member" />
             </div>
           </div>
         </section>
 
+
         {/* Peoples Section */}
-        {peopleSection}
+        <section className={styles.peopleSection}>
+          <div className={styles.peoplesView}>
+            <div className={styles.peoplesViewText}>
+              {["Hear", "what", "people", "think", "about"].map((word, index) => (
+                <h1 key={index}>{word}</h1>
+              ))}
+              <Image src='/Umeedlogo.png' width={150} height={150} alt="umeedLogo" />
+            </div>
+          </div>
+          <div className={styles.peoplesViewComments}>
+            <div className={styles.commentsContainer}>
+              {commentsData.map((comment, index) => (
+                <div
+                  key={index}
+                  className={styles.commentBox}
+                  style={{ '--rotate': index % 2 === 0 ? '-1deg' : '1deg' }}
+                >
+                  <div className={styles.profile}>
+                    <div className={styles.avatarPlaceholder} />
+                    <div className={styles.profileDescription}>
+                      <h1>{comment.name}</h1>
+                      <p>{comment.bio}</p>
+                    </div>
+                  </div>
+                  <div className={styles.comment}>
+                    <p>{comment.comment}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
       </section>
     </>
-    );
+  );
 }
