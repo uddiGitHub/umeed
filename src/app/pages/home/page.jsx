@@ -24,27 +24,8 @@ import ClimateAction from "@/assets/images/SDG/ClimateAction.png";
 import SDGImpactSection from "@/components/SDGImpactSection";
 
 
-// Counter component to animate the count
-import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-const Counter = ({ end }) => {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    const increment = Math.ceil(end / (4000 / 50));
-    let start = 0;
-
-    const timer = setInterval(() => {
-      start += increment;
-      start >= end ? (clearInterval(timer), setCount(end)) : setCount(start);
-    }, 50);
-
-    return () => clearInterval(timer);
-  }, [end]);
-
-  return <>{count}</>;
-};
 
 // Comments data (later this can be fetched from an API)
 const commentsData = [
@@ -117,6 +98,42 @@ export default function Home() {
       image: Service,
     },
   ];
+
+
+  const peopleSection = (
+    <section className={styles.peopleSection}>
+        <div className={styles.peoplesView}>
+          <div className={styles.peoplesViewText}>
+            {["Hear", "what", "people", "think", "about"].map((word, index) => (
+              <h1 key={index}>{word}</h1>
+            ))}
+            <Image src='/Umeedlogo.png' width={150} height={150} alt="umeedLogo" />
+          </div>
+        </div>
+        <div className={styles.peoplesViewComments}>
+          <div className={styles.commentsContainer}>
+            {commentsData.map((comment, index) => (
+              <div 
+                key={index} 
+                className={styles.commentBox}
+                style={{ '--rotate': index % 2 === 0 ? '-1deg' : '1deg' }}
+              >
+                <div className={styles.profile}>
+                  <div className={styles.avatarPlaceholder} />
+                  <div className={styles.profileDescription}>
+                    <h1>{comment.name}</h1>
+                    <p>{comment.bio}</p>
+                  </div>
+                </div>
+                <div className={styles.comment}>
+                  <p>{comment.comment}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+  );
 
   return (
     <>
@@ -194,35 +211,9 @@ export default function Home() {
         </section>
 
         {/* Peoples Section */}
-        <section className={styles.peopleSection}>
-          <div className={styles.peoplesView}>
-            <div className={styles.peoplesViewText}>
-              {["Hear", "what", "people", "think", "about"].map((word, index) => (
-                <h1 key={index}>{word}</h1>
-              ))}
-              <Image src='/Umeedlogo.png' width={150} height={150} alt="umeedLogo" />
-            </div>
-          </div>
-          <div className={styles.peoplesViewComments}>
-            <div className={styles.commentsContainer}>
-              {commentsData.map((comment, index) => (
-                <div key={index} className={styles.commentBox}>
-                  <div className={styles.profile}>
-                    <img src={comment.img} alt={comment.name} />
-                    <div className={styles.profileDescription}>
-                      <h1>{comment.name}</h1>
-                      <p>{comment.bio}</p>
-                    </div>
-                  </div>
-                  <div className={styles.comment}>
-                    <p>{comment.comment}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        {peopleSection}
+
       </section>
     </>
-  );
+    );
 }
