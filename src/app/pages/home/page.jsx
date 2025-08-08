@@ -245,7 +245,7 @@ export default function Home() {
 
 
         {/* Peoples Section */}
-        <section className={styles.peopleSection}>
+        {/* <section className={styles.peopleSection}>
           <div className={styles.peoplesView}>
             <div className={styles.peoplesViewText}>
               {["Hear", "what", "people", "think", "about"].map((word, index) => (
@@ -276,7 +276,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
       </section>
     </>

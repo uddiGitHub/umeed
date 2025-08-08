@@ -13,7 +13,7 @@ const tinos = Tinos({
 
 export const metadata = {
   title: "Maan Ki Umeed",
-  description: "It is a Organization the do some stuff I don't really have a deep knowledge about!",
+  description: "Maan Ki Umeed is a non - profit organisation, based in Assam Guwahati in the year 2020. It is focused on building a community of change makers through Education, Empowerment , Employment and Service.",
 };
 
 export default function RootLayout({ children }) {
