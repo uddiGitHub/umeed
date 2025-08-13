@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import styles from '@/components/footer/footer.module.css';
 import { FaInstagram, FaLinkedin, FaFacebookF } from "react-icons/fa6";
@@ -10,6 +10,37 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
     const developerUrl = "https://github.com/uddiGitHub";
     const founderUrl = "#";
+    const [email, setEmail] = useState("");
+    const [status, setStatus] = useState("");
+    const [isSuccess, setIsSuccess] = useState(false);
+
+    const handleSubscribe = async () => {
+        setStatus("Loading...");
+        try {
+            const res = await fetch("/api/subs", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email }),
+            });
+
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.message);
+
+            setStatus(data.message);
+            setIsSuccess(true);
+            setEmail("");
+        } catch (err) {
+            setStatus("❌ " + err.message);
+            setIsSuccess(false);
+        }
+    };
+    // Reset success message after 5 seconds
+    useEffect(() => {
+        if (isSuccess) {
+            const timer = setTimeout(() => setIsSuccess(false), 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [isSuccess]);
 
     const socialLinks = [
         {
@@ -50,22 +81,56 @@ const Footer = () => {
                             />
                             <p className={styles.tagline}>Empowering communities through hope and actions.</p>
                         </div>
-                        
-                        
                     </div>
 
                     <div className={styles.linksContainer}>
                         <div className={styles.newsletter}>
                             <h3 className={styles.newsletterTitle}>Join Our Newsletter</h3>
                             <div className={styles.newsletterForm}>
-                                <input 
-                                    type="email" 
-                                    placeholder="Your email address" 
+                                <input
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="Your email address"
                                     className={styles.newsletterInput}
-                                    aria-label="Email for newsletter"
                                 />
-                                <button className={styles.newsletterButton}>Subscribe</button>
+                                <button
+                                    className={styles.newsletterButton}
+                                    onClick={handleSubscribe}
+                                >
+                                    Subscribe
+                                </button>
                             </div>
+                            
+                            {status && (
+                                <div className={`${styles.statusMessage} ${isSuccess ? styles.success : ''}`}>
+                                    {isSuccess ? (
+                                        <div className={styles.checkAnimation}>
+                                            <svg 
+                                                className={styles.checkmark} 
+                                                xmlns="http://www.w3.org/2000/svg" 
+                                                viewBox="0 0 52 52"
+                                            >
+                                                <circle 
+                                                    className={styles.checkmarkCircle} 
+                                                    cx="26" 
+                                                    cy="26" 
+                                                    r="25" 
+                                                    fill="none" 
+                                                />
+                                                <path 
+                                                    className={styles.checkmarkCheck} 
+                                                    fill="none" 
+                                                    d="M14.1 27.2l7.1 7.2 16.7-16.8" 
+                                                />
+                                            </svg>
+                                            <span>{status}</span>
+                                        </div>
+                                    ) : (
+                                        <p>{status}</p>
+                                    )}
+                                </div>
+                            )}
                         </div>
 
                         <nav aria-label="Social media links">
@@ -85,13 +150,12 @@ const Footer = () => {
                                 ))}
                             </ul>
                         </nav>
-                        
                     </div>
                 </div>
 
                 <div className={styles.copyright}>
                     <p>&copy; {currentYear} Umeed. All rights reserved.</p>
-                    
+
                     <div className={styles.credits}>
                         <p>
                             Founded by{" "}
