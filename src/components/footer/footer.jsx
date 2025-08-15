@@ -154,7 +154,7 @@ const Footer = () => {
                 </div>
 
                 <div className={styles.copyright}>
-                    <p>&copy; {currentYear} Umeed. All rights reserved.</p>
+                    <p>&copy; {currentYear} Maan ki Umeed. All rights reserved.</p>
 
                     <div className={styles.credits}>
                         <p>

@@ -80,6 +80,7 @@ export async function POST(request) {
     // Post creation
     const newPost = new PostItem({
       ...data,
+      content: cleanContent,
       author: data.author || "UMEED",
     });
 
