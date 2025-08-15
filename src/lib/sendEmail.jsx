@@ -5,7 +5,7 @@ export default async function sendEmail(to, subject, html){
         service: 'gmail',
         auth: {
             user: process.env.NEXT_PUBLIC_ORG_EMAIL,
-            pass: "nowtvcbwwcygeknj",
+            pass: process.env.APP_PASSWORD,
         },
     });
     await transporter.sendMail({
@@ -16,5 +16,5 @@ export default async function sendEmail(to, subject, html){
     });
     console.log("Email sent successfully to:", to);
     return true;
-    
+
 }
