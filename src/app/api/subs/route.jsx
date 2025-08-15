@@ -1,5 +1,5 @@
 import connectDB from "../../../../config/db.jsx";
-import Subscribe from "../../../../models/Subscribe.jsx";
+import Subscribe from "../../../../models/Subscribes.jsx";
 
 export async function POST(req) {
   try {

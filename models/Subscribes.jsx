@@ -13,4 +13,4 @@ const SubscribeSchema = new mongoose.Schema({
     }
 });
 
-export default mongoose.models.Subscribe || mongoose.model("Subscribe", SubscribeSchema);
+export default mongoose.models.Subscribes || mongoose.model("Subscribes", SubscribeSchema);
