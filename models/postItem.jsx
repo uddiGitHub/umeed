@@ -182,7 +182,10 @@ postItemSchema.post("save", async function (doc) {
     <!-- Footer -->
     <div class="footer">
       <p>© ${new Date().getFullYear()} ${"Maan ki Umeed"}. All rights reserved.</p>
-      <small>This is an automated notification. Please do not reply to this message.</small>
+      <small>
+        This is an automated notification. Please do not reply to this message.<br>
+        ${process.env.NEXT_PUBLIC_COMPANY_ADDRESS || 'Office? Nah. We live on the internet. HQ expands worldwide as soon as we go viral.'}
+      </small>
     </div>
   </div>
 </body>
