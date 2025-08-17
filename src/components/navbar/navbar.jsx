@@ -221,8 +221,8 @@ const Navbar = () => {
                 </Link>
               ))}
             </div>
-
-            {pathname.startsWith("/pages/articles") && (
+          </div>
+          {pathname.startsWith("/pages/articles") && (
               <div className={styles.searchButtonContainer}>
                 <button
                   className={styles.searchIconButton}
@@ -233,7 +233,6 @@ const Navbar = () => {
                 </button>
               </div>
             )}
-          </div>
         </nav>
         {isMenuOpen && isMobile && (
           <div
