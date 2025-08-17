@@ -4,11 +4,6 @@
   width: 100%;
 }
 
-.header.blur {
-  backdrop-filter: blur(5px);
-  background: rgba(255, 255, 255, 0.9);
-}
-
 .navbody {
   position: relative;
   display: flex;
@@ -25,7 +20,6 @@
   margin-right: 2rem;
   transition: transform 0.3s ease;
   display: block;
-  /* aspect-ratio: 1; */
 }
 
 .logo:hover {
@@ -36,7 +30,6 @@
   position: relative;
   font-size: 1rem;
   font-weight: 500;
-  /* text-transform: uppercase; */
   text-decoration: none;
   color: #000000;
   padding: 0.5rem 1rem;
@@ -48,9 +41,11 @@
   left: 0;
   width: 96px;
   height: 90%;
-  background: linear-gradient(45deg,
-      rgba(247, 244, 244, 0.932) 0%,
-      rgba(59, 59, 59, 0.164) 100%);
+  background: linear-gradient(
+    45deg,
+    rgba(247, 244, 244, 0.932) 0%,
+    rgba(59, 59, 59, 0.164) 100%
+  );
   border-radius: 8px;
   z-index: -1;
   transition: all 0.3s ease;
@@ -70,61 +65,6 @@
   background: hsl(46, 79%, 57%);
   box-shadow: 0 0 5px rgba(255, 68, 68, 0.6);
   animation: button-glow 1.5s ease-in-out infinite;
-}
-
-.searchBox {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  position: relative;
-  z-index: 1000;
-}
-
-.searchBox input {
-  width: 0;
-  padding: 0;
-  border: none;
-  outline: none;
-  opacity: 0;
-  background: transparent;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
-}
-
-.searchBox.active {
-  display: flex;
-  align-items: baseline;
-}
-
-.searchBox form {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.searchBox.active input {
-  border: #000000 1px solid;
-  border-radius: 20px;
-  width: 200px;
-  opacity: 1;
-  padding: 5px 10px;
-  background: rgba(255, 255, 255, 0.8);
-}
-
-.searchBox button {
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.searchButton:hover {
-  opacity: 0.8;
 }
 
 .navContainer {
@@ -174,13 +114,15 @@
 .navLinks {
   display: flex;
   position: relative;
+  transition: all 0.3s ease;
 }
 
 @media (max-width: 1024px) {
   .header {
     display: block;
   }
-  .donationBorder, .donationBorder:hover  {
+  .donationBorder,
+  .donationBorder:hover {
     background: none;
     box-shadow: none;
   }
@@ -193,7 +135,6 @@
   .navbody span {
     display: none;
     background: none;
-
   }
 
   .hamburger {
@@ -235,17 +176,6 @@
     text-align: center;
   }
 
-  .searchBox {
-    align-items: baseline;
-    order: 2;
-    margin-left: auto;
-  }
-
-  .searchBox input {
-    align-items: baseline;
-    transform: translateY(-10px);
-  }
-
   .logo {
     transform: translateY(-8px);
     width: 5rem;
@@ -263,10 +193,16 @@
   .logo:hover {
     transform: translateY(-8px);
   }
-}
-
-.navLinks {
-  transition: all 0.3s ease;
+  .closeButton {
+    display: none;
+  }
+  .searchButtonContainer {
+    order: 2;
+    margin-left: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .hamburger {
@@ -297,9 +233,9 @@
   margin-top: 18vh;
   border-radius: 12px;
   padding: 1.5rem 2rem;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
   animation: slideDown 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.2);
 }
+
 .spotlightForm {
   position: relative;
   display: flex;
@@ -331,10 +267,10 @@
   color: #1a1a1a;
   background: transparent;
 }
+
 .searchIcon {
   font-size: 1.3rem;
   color: #999;
-  margin-right: 0.6rem;
 }
 
 .searchIconButton {
@@ -356,6 +292,7 @@
   color: #e8c03b;
   transform: scale(1.05);
 }
+
 .closeButton {
   position: absolute;
   right: -55px;
@@ -375,12 +312,23 @@
   background: rgba(255, 255, 255, 0.15);
   transform: translateY(-50%) scale(1.1);
 }
+
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideDown {
-  from { transform: translateY(-40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
