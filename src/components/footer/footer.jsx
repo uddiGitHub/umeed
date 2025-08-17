@@ -8,7 +8,7 @@ import { BiLogoGmail } from "react-icons/bi";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const developerUrl = "www.linkedin.com/in/uddipta-deka";
+  const developerUrl = "https://github.com/uddiGitHub";
   const founderUrl = "#";
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("");

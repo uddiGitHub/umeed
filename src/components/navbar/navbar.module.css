@@ -276,3 +276,111 @@
 .hamburger:hover {
   transform: scale(1.1);
 }
+
+.spotlightOverlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(26, 26, 26, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 2000;
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.spotlightContent {
+  width: 80%;
+  max-width: 650px;
+  margin-top: 18vh;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  animation: slideDown 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+}
+.spotlightForm {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchInputContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1.5px solid #ddd;
+  border-radius: 50px;
+  padding: 0.5rem 1.12rem;
+  background: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.searchInputContainer:focus-within {
+  border-color: #e8c03b;
+  box-shadow: 0 0 0 3px rgba(232, 192, 59, 0.2);
+}
+
+.spotlightInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1.05rem;
+  padding: 0.4rem 0.8rem;
+  color: #1a1a1a;
+  background: transparent;
+}
+.searchIcon {
+  font-size: 1.3rem;
+  color: #999;
+  margin-right: 0.6rem;
+}
+
+.searchIconButton {
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.searchIconButton:hover {
+  background: rgba(232, 192, 59, 0.1);
+  color: #e8c03b;
+  transform: scale(1.05);
+}
+.closeButton {
+  position: absolute;
+  right: -55px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-50%) scale(1.1);
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
