@@ -5,6 +5,8 @@ import Image from "next/image";
 import styles from "@/components/footer/footer.module.css";
 import { FaInstagram, FaLinkedin, FaFacebookF } from "react-icons/fa6";
 import { BiLogoGmail } from "react-icons/bi";
+import Lottie from "lottie-react";
+import confetti from "../../../public/animations/confetti.json";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -89,6 +91,21 @@ const Footer = () => {
 
           <div className={styles.linksContainer}>
             <div className={styles.newsletter}>
+              {isSuccess && (
+                <div className={styles.confettiWrapper}>
+                  <Lottie
+                    animationData={confetti}
+                    loop={false}
+                    autoplay
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%",
+                      zIndex: 10,
+                    }}
+                  />
+                </div>
+              )}
               <h3 className={styles.newsletterTitle}>Join Our Newsletter</h3>
               <div className={styles.newsletterForm}>
                 <input
@@ -192,7 +209,8 @@ const Footer = () => {
           </div>
           <div className={styles.location}>
             <p>
-              {process.env.COMPANY_ADDRESS || 'Office? Nah. We live on the internet. HQ expands worldwide as soon as we go viral.'}
+              {process.env.COMPANY_ADDRESS ||
+                "Office? Nah. We live on the internet. HQ expands worldwide as soon as we go viral."}
             </p>
           </div>
         </div>
