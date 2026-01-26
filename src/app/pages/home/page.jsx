@@ -218,7 +218,7 @@ export default function Home() {
               <h2 className={styles.title}>Why Join Maan Ki Umeed?</h2>
              <div className={styles.description}>
                 <p>
-                  Be more than a volunteer—be a changemaker. Join a community of passionate youth creating real change at the grassroots. As a Umeed Fellow, you'll:
+                  Be more than a volunteer and become a changemaker. Join a community of passionate youth creating real change at the grassroots. As a Umeed Fellow, you'll:
                 </p>
                 <ul className={styles.benefitsList}>
                   <li>Lead impactful community projects</li>
@@ -228,7 +228,7 @@ export default function Home() {
                   <li>Join a network of like-minded activists</li>
                 </ul>
                 <p>
-                  It's more than a fellowship—it's a journey of purpose, voice, and leadership.
+                  It's more than a fellowship, it's a journey of purpose, voice, and leadership.
                 </p>
               </div>
               <Button asChild>

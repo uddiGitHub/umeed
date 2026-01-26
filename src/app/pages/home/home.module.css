@@ -3,7 +3,9 @@
     margin: 0 auto;
     padding: 0 20px;
 }
-
+.homePage p{
+    text-align: justify;
+}
 /* Banner css */
 .bannerContainer {
     display: flex;

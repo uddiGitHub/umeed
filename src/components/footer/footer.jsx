@@ -207,12 +207,12 @@ const Footer = () => {
               </a>
             </p>
           </div>
-          <div className={styles.location}>
+          {/* <div className={styles.location}>
             <p>
               {process.env.COMPANY_ADDRESS ||
                 "Office? Nah. We live on the internet. HQ expands worldwide as soon as we go viral."}
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

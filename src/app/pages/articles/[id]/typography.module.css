@@ -120,6 +120,7 @@
 
 .content p {
   margin: 1.75em 0;
+  text-align: justify;
 }
 
 .content h1 {

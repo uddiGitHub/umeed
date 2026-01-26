@@ -117,7 +117,7 @@ function ArticlesContent() {
             )}
             <div className={styles.hero}>
                 <div className={styles.heroContent}>
-                    <h1>Our Latest Articles</h1>
+                    {/* <h1>Our Latest Articles</h1> */}
                 </div>
             </div>
             <div className={styles.searchControls}>
