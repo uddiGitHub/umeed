@@ -116,10 +116,22 @@ function ArticlesContent() {
                 </div>
             )}
             <div className={styles.hero}>
+                <Image
+                    src="/articlesPoster.jpg"
+                    alt="Articles banner"
+                    fill
+                    priority
+                    className={styles.heroImage}
+                    sizes="100vw"
+                />
+
+                <div className={styles.heroOverlay}></div>
+
                 <div className={styles.heroContent}>
                     {/* <h1>Our Latest Articles</h1> */}
                 </div>
             </div>
+
             <div className={styles.searchControls}>
                 {searchQuery && (
                     <div className={styles.searchStatus}>

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "@/components/footer/footer.module.css";
-import { FaInstagram, FaLinkedin, FaFacebookF } from "react-icons/fa6";
+import { FaInstagram, FaLinkedin, FaFacebookF, FaHeart, FaMapMarkerAlt, FaPhone, FaEnvelope, FaArrowRight } from "react-icons/fa";
 import { BiLogoGmail } from "react-icons/bi";
 import Lottie from "lottie-react";
 import confetti from "../../../public/animations/confetti.json";
@@ -16,8 +16,15 @@ const Footer = () => {
   const [status, setStatus] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleSubscribe = async () => {
-    setStatus("Loading...!");
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) {
+      setStatus("Please enter a valid email address");
+      setIsSuccess(false);
+      return;
+    }
+    
+    setStatus("Subscribing...");
     try {
       const res = await fetch("/api/subs", {
         method: "POST",
@@ -28,17 +35,15 @@ const Footer = () => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
 
-      setStatus(data.message);
+      setStatus("Successfully subscribed! Thank you.");
       setIsSuccess(true);
       setEmail("");
     } catch (err) {
-      setStatus(
-        "❌ Error: Oh don’t worry, the bug will magically disappear… just as soon as the developer gets paid."
-      );
+      setStatus("Unable to subscribe. Please try again.");
       setIsSuccess(false);
     }
   };
-  // Reset success message after 5 seconds
+
   useEffect(() => {
     if (isSuccess) {
       const timer = setTimeout(() => setIsSuccess(false), 5000);
@@ -48,33 +53,66 @@ const Footer = () => {
 
   const socialLinks = [
     {
-      icon: <FaInstagram aria-hidden="true" />,
+      icon: <FaInstagram />,
       label: "Instagram",
       url: "https://www.instagram.com/maan_ki_umeed/",
     },
     {
-      icon: <FaLinkedin aria-hidden="true" />,
+      icon: <FaLinkedin />,
       label: "LinkedIn",
-      url: "#",
+      url: "https://www.linkedin.com/company/maan-ki-umeed/",
     },
     {
-      icon: <FaFacebookF aria-hidden="true" />,
+      icon: <FaFacebookF />,
       label: "Facebook",
-      url: "#",
+      url: "https://www.facebook.com/share/16v5RvxcM8/",
     },
     {
-      icon: <BiLogoGmail aria-hidden="true" />,
+      icon: <BiLogoGmail />,
       label: "Email",
-      url: "#",
+      url: `mailto:${process.env.NEXT_PUBLIC_ORG_EMAIL}`,
+    },
+  ];
+
+  const quickLinks = [
+    { label: "About Us", url: "#" },
+    // { label: "Our Programs", url: "#" },
+    // { label: "Success Stories", url: "#" },
+    { label: "Volunteer", url: "#" },
+    { label: "Donate", url: "#" },
+    // { label: "Contact", url: "#" },
+    { label: "Events", url: "#" },
+    { label: "Gallery", url: "#" },
+    // { label: "Blog", url: "#" },
+  ];
+
+  const contactInfo = [
+    {
+      icon: <FaMapMarkerAlt />,
+      text: "Based in Assam, India",
+    },
+    {
+      icon: <FaPhone />,
+      text: "+91 987 654 3210",
+    },
+    {
+      icon: <FaEnvelope />,
+      text: "info@maanki-umeed.org",
     },
   ];
 
   return (
     <footer className={styles.footer} role="contentinfo">
+      {/* Decorative Elements */}
+      <div className={styles.decorativeTop}></div>
+      
       <div className={styles.container}>
-        <div className={styles.contentWrapper}>
-          <div className={styles.logoContainer}>
-            <div className={styles.logoWrapper}>
+        {/* Main Content */}
+        <div className={styles.mainContent}>
+          
+          {/* Left Column - Brand & Mission */}
+          <div className={styles.brandSection}>
+            <div className={styles.logoContainer}>
               <Image
                 src="/Umeedlogo.png"
                 alt="Umeed Foundation Logo"
@@ -83,136 +121,139 @@ const Footer = () => {
                 height={48}
                 priority={false}
               />
-              <p className={styles.tagline}>
-                Empowering communities through hope and actions.
+              <div className={styles.missionStatement}>
+                <FaHeart className={styles.heartIcon} />
+                <h3 className={styles.missionTitle}>Our Mission</h3>
+              </div>
+              <p className={styles.missionText}>
+                Empowering communities through sustainable initiatives, creating 
+                lasting impact through education, healthcare, and economic development.
               </p>
             </div>
           </div>
 
-          <div className={styles.linksContainer}>
-            <div className={styles.newsletter}>
+          {/* Middle Column - Quick Links */}
+          <div className={styles.linksSection}>
+            <h3 className={styles.sectionTitle}>Quick Navigation</h3>
+            <div className={styles.linksGrid}>
+              {quickLinks.map((link, index) => (
+                <a key={index} href={link.url} className={styles.navLink}>
+                  <span className={styles.linkIcon}>→</span>
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column - Newsletter */}
+          <div className={styles.newsletterSection}>
+            <div className={styles.newsletterCard}>
+              <div className={styles.newsletterHeader}>
+                <h3 className={styles.sectionTitle}>Stay Connected</h3>
+                <p className={styles.newsletterDescription}>
+                  Subscribe to receive updates about our initiatives, success stories, 
+                  and opportunities to make a difference.
+                </p>
+              </div>
+              
               {isSuccess && (
                 <div className={styles.confettiWrapper}>
                   <Lottie
                     animationData={confetti}
                     loop={false}
                     autoplay
-                    style={{
-                      position: "absolute",
-                      width: "100%",
-                      height: "100%",
-                      zIndex: 10,
-                    }}
                   />
                 </div>
               )}
-              <h3 className={styles.newsletterTitle}>Join Our Newsletter</h3>
-              <div className={styles.newsletterForm}>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email address"
-                  className={styles.newsletterInput}
-                />
-                <button
-                  className={styles.newsletterButton}
-                  onClick={handleSubscribe}
-                >
-                  Subscribe
-                </button>
-              </div>
-
-              {status && (
-                <div
-                  className={`${styles.statusMessage} ${
-                    isSuccess ? styles.success : ""
-                  }`}
-                >
-                  {isSuccess ? (
-                    <div className={styles.checkAnimation}>
-                      <svg
-                        className={styles.checkmark}
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 52 52"
-                      >
-                        <circle
-                          className={styles.checkmarkCircle}
-                          cx="26"
-                          cy="26"
-                          r="25"
-                          fill="none"
-                        />
-                        <path
-                          className={styles.checkmarkCheck}
-                          fill="none"
-                          d="M14.1 27.2l7.1 7.2 16.7-16.8"
-                        />
-                      </svg>
-                      <span>{status}</span>
-                    </div>
-                  ) : (
-                    <p>{status}</p>
-                  )}
+              
+              <form onSubmit={handleSubscribe} className={styles.newsletterForm}>
+                <div className={styles.inputGroup}>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    className={styles.newsletterInput}
+                    required
+                  />
+                  <button type="submit" className={styles.subscribeButton}>
+                    <span>Join Now</span>
+                    <FaArrowRight className={styles.arrowIcon} />
+                  </button>
                 </div>
-              )}
-            </div>
-
-            <nav aria-label="Social media links">
-              <ul className={styles.socialLinks}>
+                
+                {status && (
+                  <div className={`${styles.statusMessage} ${isSuccess ? styles.success : styles.error}`}>
+                    {isSuccess ? (
+                      <div className={styles.successContent}>
+                        <div className={styles.successCheck}></div>
+                        <span>{status}</span>
+                      </div>
+                    ) : (
+                      <span>{status}</span>
+                    )}
+                  </div>
+                )}
+              </form>
+              
+              <div className={styles.privacyNote}>
+                <small>We respect your privacy. Unsubscribe at any time.</small>
+              </div>
+              {/* Social Links */}
+            <div className={styles.socialSection}>
+              <h4 className={styles.sectionSubtitle}>Follow Our Journey</h4>
+              <div className={styles.socialLinks}>
                 {socialLinks.map((link, index) => (
-                  <li key={index}>
-                    <a
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Visit our ${link.label}`}
-                      className={styles.socialLink}
-                    >
-                      {link.icon}
-                    </a>
-                  </li>
+                  <a
+                    key={index}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.label}
+                    className={styles.socialLink}
+                  >
+                    {link.icon}
+                    <span className={styles.socialLabel}>{link.label}</span>
+                  </a>
                 ))}
-              </ul>
-            </nav>
+              </div>
+            </div>
+            </div>
           </div>
+          
         </div>
+        
+        {/* Divider */}
+        <div className={styles.divider}></div>
 
-        <div className={styles.copyright}>
-          <p style={{ textAlign: "center", marginTop: "1rem" }}>
-            &copy; {currentYear} Maan ki Umeed. All rights reserved.
-          </p>
-          <div className={styles.credits}>
-            <p>
-              Founded by{" "}
-              <a
-                href={founderUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.developerLink}
-              >
-                Sagarika Deka
-              </a>
+        {/* Bottom Section */}
+        <div className={styles.bottomSection}>
+          <div className={styles.copyrightInfo}>
+            <p className={styles.copyright}>
+              © {currentYear} <strong>Maan ki Umeed Foundation</strong>. All rights reserved.
             </p>
-            <span className={styles.divider}>•</span>
-            <p>
-              Website by{" "}
-              <a
-                href={developerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.developerLink}
-              >
+            <div className={styles.legalLinks}>
+              <a href="#" className={styles.legalLink}>Privacy Policy</a>
+              <span className={styles.separator}>|</span>
+              <a href="#" className={styles.legalLink}>Terms of Service</a>
+              <span className={styles.separator}>|</span>
+              <a href="#" className={styles.legalLink}>Cookie Policy</a>
+            </div>
+          </div>
+          
+          <div className={styles.credits}>
+            <div className={styles.creditItem}>
+              <span className={styles.creditLabel}>Founded by</span>
+              <a href={founderUrl} className={styles.creditName}>Sagarika Deka</a>
+            </div>
+            <div className={styles.creditDivider}></div>
+            <div className={styles.creditItem}>
+              <span className={styles.creditLabel}>Website crafted by</span>
+              <a href={developerUrl} target="_blank" rel="noopener noreferrer" className={styles.creditName}>
                 Uddipta Deka
               </a>
-            </p>
+            </div>
           </div>
-          {/* <div className={styles.location}>
-            <p>
-              {process.env.COMPANY_ADDRESS ||
-                "Office? Nah. We live on the internet. HQ expands worldwide as soon as we go viral."}
-            </p>
-          </div> */}
         </div>
       </div>
     </footer>
