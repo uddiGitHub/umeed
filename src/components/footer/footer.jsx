@@ -133,7 +133,7 @@ const Footer = () => {
           </div>
 
           {/* Middle Column - Quick Links */}
-          <div className={styles.linksSection}>
+          {/* <div className={styles.linksSection}>
             <h3 className={styles.sectionTitle}>Quick Navigation</h3>
             <div className={styles.linksGrid}>
               {quickLinks.map((link, index) => (
@@ -143,7 +143,7 @@ const Footer = () => {
                 </a>
               ))}
             </div>
-          </div>
+          </div> */}
 
           {/* Right Column - Newsletter */}
           <div className={styles.newsletterSection}>

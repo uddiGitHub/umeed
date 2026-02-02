@@ -44,7 +44,7 @@
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.511.0",
     "mongoose": "^8.15.1",
-    "next": "15.3.8",
+    "next": "^15.5.11",
     "nodemailer": "^7.0.5",
     "pdfjs-dist": "^3.11.174",
     "react": "^19.0.0",

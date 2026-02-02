@@ -175,7 +175,9 @@ export default function Home() {
         <section className={styles.verticalsSection}>
           <div className={styles.sectionHeader}>
             <h1>Our Core Pillars</h1>
-            <p className={styles.subtitle}>Foundations of our impact-driven approach</p>
+            <p className={styles.subtitle} style={{
+              textAlign: 'center'
+            }}>Foundations of our impact-driven approach</p>
           </div>
 
           <div className={styles.verticalsContainer}>
@@ -216,7 +218,7 @@ export default function Home() {
             <div className={styles.getInvolvedText}>
               <div className={styles.subtitle}>Join the Movement</div>
               <h2 className={styles.title}>Why Join Maan Ki Umeed?</h2>
-             <div className={styles.description}>
+              <div className={styles.description}>
                 <p>
                   Be more than a volunteer and become a changemaker. Join a community of passionate youth creating real change at the grassroots. As a Umeed Fellow, you'll:
                 </p>
