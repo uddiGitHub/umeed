@@ -15,6 +15,9 @@ const tinos = Tinos({
 export const metadata = {
   title: "Maan Ki Umeed",
   description: "Maan Ki Umeed is a non - profit organisation, based in Assam Guwahati in the year 2020. It is focused on building a community of change makers through Education, Empowerment , Employment and Service.",
+  verification: {
+    google: "NQ4NYNcH2JpE-yTLq5rvFqBxYbBRNay_6jHKZTw0nyo",
+  },
 };
 
 export default function RootLayout({ children }) {
