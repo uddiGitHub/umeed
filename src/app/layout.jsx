@@ -1,5 +1,5 @@
 import { Tinos } from "next/font/google";
-import "@/app/globals.css";
+import "./globals.css";
 
 import { ClerkProvider } from "@clerk/nextjs";
 import AuthHeader from "@/components/AuthHeader";
