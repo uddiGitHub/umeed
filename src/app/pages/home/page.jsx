@@ -4,25 +4,24 @@ import styles from "./home.module.css";
 
 import Image from "next/image";
 // Importing images
-import bannerImagePath from "@/assets/images/bannerImg.jpg";
-import visionImage from "@/assets/images/vision.jpeg";
-import BecomeAmember from "@/assets/images/BecomeAmember.jpg";
+import bannerImagePath from "@/assets/images/bannerImg.webp";
+import visionImage from "@/assets/images/vision.webp";
+import BecomeAmember from "@/assets/images/BecomeAmember.webp";
 
 // Importing Pillars images
-import Education from "@/assets/images/Pillars/Education.jpg";
-import Empowerment from "@/assets/images/Pillars/Empowerment.jpg";
-import Employment from "@/assets/images/Pillars/Employment.jpg";
-import Service from "@/assets/images/Pillars/Services.jpg";
+import Education from "@/assets/images/Pillars/Education.webp";
+import Empowerment from "@/assets/images/Pillars/Empowerment.webp";
+import Employment from "@/assets/images/Pillars/Employment.webp";
+import Service from "@/assets/images/Pillars/Services.webp";
 
 // Importing SDG images
-import NoProverty from "@/assets/images/SDG/NoProverty.jpeg";
-import GoodHealth from "@/assets/images/SDG/GoodHealth.jpeg";
-import QualityEducation from "@/assets/images/SDG/QualityEducation.png";
-import GenderEquality from "@/assets/images/SDG/GenderEquality.png";
-import ReducedInequalities from "@/assets/images/SDG/ReduceInequality.png";
-import ClimateAction from "@/assets/images/SDG/ClimateAction.png";
+import NoProverty from "@/assets/images/SDG/NoProverty.webp";
+import GoodHealth from "@/assets/images/SDG/GoodHealth.webp";
+import QualityEducation from "@/assets/images/SDG/QualityEducation.webp";
+import GenderEquality from "@/assets/images/SDG/GenderEquality.webp";
+import ReducedInequalities from "@/assets/images/SDG/ReduceInequality.webp";
+import ClimateAction from "@/assets/images/SDG/ClimateAction.webp";
 import SDGImpactSection from "@/components/SDGImpactSection";
-
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -82,35 +81,35 @@ export default function Home() {
       title: "Education",
       text: "We believe education is the most powerful tool for change. We strive to ensure every child regardless of background or gender has access to quality learning through school enrollments, Sunday classes, and interactive workshops.",
       image: Education,
-      link: "https://en.wikipedia.org/wiki/Education",
+      link: "/pdfs/MAAN KI UMEED FOUNDATION EDUCATION REPORT.pdf",
     },
     {
       title: "Empowerment",
       text: "We focus on empowering women and children by nurturing confidence, knowledge, leadership, and introducing the concept of changemaking. Through menstrual hygiene sessions, educational comics, opinionated articles and awareness campaigns, we challenge taboos and create pathways to self-reliance.",
       image: Empowerment,
-      link: "https://en.wikipedia.org/wiki/Empowerment",
+      link: "/pdfs/MAAN KI UMEED FOUNDATION EMPOWERMENT REPORT.pdf",
     },
     {
       title: "Employment",
       text: "Skill-building and vocational training are central to our work with women and teenagers. From stitching reusable pads to creating sustainable clothing, we support women in earning with dignity and guide youth in transforming sustainable solutions into impactful ideas.",
       image: Employment,
-      link: "https://en.wikipedia.org/wiki/Employment",
+      link: "/pdfs/MAAN KI UMEED FOUNDATION EMPLOYMENT REPORT.pdf",
     },
     {
       title: "Service", text: "Rooted in compassion, our youth-led team actively serves marginalized communities during floods, pandemics, or everyday struggles because real change begins with showing up.",
       image: Service,
-      link: "https://en.wikipedia.org/wiki/Service_(economics)",
+      link: "/pdfs/MAAN KI UMEED FOUNDATION SERVICE REPORT.pdf",
     },
   ];
 
   return (
-    <>
+    <main>
       {/* Banner Section */}
       <section className={styles.bannerContainer}>
         <Image
           src={bannerImagePath}
-          alt="Banner"
-          className={[styles.bannerImage]}
+          alt="" // Decorative image, text is provided in the overlay heading
+          className={styles.bannerImage}
         />
         <div className={styles.bannerHeader}>
           <h1>WITH THE PEOPLE, FOR THE PEOPLE</h1>
@@ -120,7 +119,6 @@ export default function Home() {
       <section className={styles.homePage}>
         {/* Impact Section */}
         <SDGImpactSection impactStats={impactStats} />
-
 
         {/* vision Section */}
         <section className={styles.visionSection}>
@@ -170,11 +168,10 @@ export default function Home() {
           </div>
         </section>
 
-
         {/* Verticals Section */}
         <section className={styles.verticalsSection}>
           <div className={styles.sectionHeader}>
-            <h1>Our Core Pillars</h1>
+            <h2>Our Core Pillars</h2>
             <p className={styles.subtitle} style={{
               textAlign: 'center'
             }}>Foundations of our impact-driven approach</p>
@@ -187,7 +184,7 @@ export default function Home() {
                   <div className={styles.iconContainer}>
                     <div className={styles.cardIcon}>{vertical.title.charAt(0)}</div>
                   </div>
-                  <h2>{vertical.title}</h2>
+                  <h3>{vertical.title}</h3>
                 </div>
 
                 <div className={styles.imageContainer}>
@@ -245,42 +242,8 @@ export default function Home() {
           </div>
         </section>
 
-
-        {/* Peoples Section */}
-        {/* <section className={styles.peopleSection}>
-          <div className={styles.peoplesView}>
-            <div className={styles.peoplesViewText}>
-              {["Hear", "what", "people", "think", "about"].map((word, index) => (
-                <h1 key={index}>{word}</h1>
-              ))}
-              <Image src='/Umeedlogo.png' width={150} height={150} alt="umeedLogo" />
-            </div>
-          </div>
-          <div className={styles.peoplesViewComments}>
-            <div className={styles.commentsContainer}>
-              {commentsData.map((comment, index) => (
-                <div
-                  key={index}
-                  className={styles.commentBox}
-                  style={{ '--rotate': index % 2 === 0 ? '-1deg' : '1deg' }}
-                >
-                  <div className={styles.profile}>
-                    <div className={styles.avatarPlaceholder} />
-                    <div className={styles.profileDescription}>
-                      <h1>{comment.name}</h1>
-                      <p>{comment.bio}</p>
-                    </div>
-                  </div>
-                  <div className={styles.comment}>
-                    <p>{comment.comment}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section> */}
-
+        {/* Peoples Section (commented out) */}
       </section>
-    </>
+    </main>
   );
 }

@@ -35,7 +35,6 @@ function ArticlesContent() {
 
     const searchParams = useSearchParams();
     const searchQuery = searchParams.get('search') || '';
-    // const [totalCount, setTotalCount] = useState(0);
     const postsPerPage = 8;
 
     const fetchArticles = async () => {
@@ -49,7 +48,6 @@ function ArticlesContent() {
             const data = await response.json();
             setArticles(data.posts || []);
             setTotalPages(data.totalPages);
-            // setTotalCount(data.totalCount);
         } catch (error) {
             console.error("Error fetching articles:", error);
         } finally {
@@ -108,44 +106,59 @@ function ArticlesContent() {
         });
     };
 
+    // Visually hidden style for screen reader headings
+    const srOnly = {
+        position: 'absolute',
+        width: '1px',
+        height: '1px',
+        padding: 0,
+        margin: '-1px',
+        overflow: 'hidden',
+        clip: 'rect(0,0,0,0)',
+        whiteSpace: 'nowrap',
+        borderWidth: 0
+    };
+
     return (
-        <div className={styles.container}>
+        <main className={styles.container}>
             {isNavigating && (
-                <div className={styles.navigationOverlay}>
+                <div className={styles.navigationOverlay} aria-label="Loading page" role="status">
                     <div className={styles.navigationSpinner}></div>
                 </div>
             )}
-            <div className={styles.hero}>
+            
+            <header className={styles.hero}>
                 <Image
                     src="/articlesPoster.jpg"
-                    alt="Articles banner"
+                    alt="" // Decorative banner image – heading provides context
                     fill
                     priority
                     className={styles.heroImage}
                     sizes="100vw"
                 />
-
                 <div className={styles.heroOverlay}></div>
-
                 <div className={styles.heroContent}>
-                    {/* <h1>Our Latest Articles</h1> */}
+                    <h1>Our Latest Articles</h1>
                 </div>
-            </div>
+            </header>
 
             <div className={styles.searchControls}>
                 {searchQuery && (
                     <div className={styles.searchStatus}>
-                        <p>Showing results for: "{searchQuery}"</p>
+                        <p>Showing results for: "<strong>{searchQuery}</strong>"</p>
                         <button onClick={clearSearch} className={styles.clearSearch}>
                             Clear search
                         </button>
                     </div>
                 )}
             </div>
+
             {/* Article Content */}
-            <section className={styles.mainContent}>
+            <section className={styles.mainContent} aria-labelledby="articles-heading">
+                <h2 id="articles-heading" style={srOnly}>Articles List</h2>
+                
                 {loading ? (
-                    <div className={styles.loading}>
+                    <div className={styles.loading} aria-live="polite">
                         <div className={styles.spinner}></div>
                         <p>Loading articles...</p>
                     </div>
@@ -153,7 +166,11 @@ function ArticlesContent() {
                     <>
                         <div className={styles.articlesGrid}>
                             {articles.map((article) => (
-                                <article key={article._id} onClick={() => navigateToArticle(article._id)} className={styles.articleCard}>
+                                <article 
+                                    key={article._id} 
+                                    onClick={() => navigateToArticle(article._id)} 
+                                    className={styles.articleCard}
+                                >
                                     {article.img && (
                                         <div className={styles.imageContainer}>
                                             <Image
@@ -168,8 +185,7 @@ function ArticlesContent() {
                                     )}
 
                                     <div className={styles.articleContent}>
-
-                                        <h2 className="scroll-m-20 text-left text-2xl font-bold tracking-tight text-balance">{article.title}</h2>
+                                        <h3 className="scroll-m-20 text-left text-2xl font-bold tracking-tight text-balance">{article.title}</h3>
                                         <p className={styles.excerpt}>{getExcerpt(article.content)}</p>
                                         <div className={styles.meta}>
                                             <button
@@ -182,7 +198,9 @@ function ArticlesContent() {
                                                 Read More
                                             </button>
                                             <div className={styles.metaArticleInfo}>
-                                                <span className={styles.date}>{formatDate(article.createdAt)}</span>
+                                                <time dateTime={article.createdAt} className={styles.date}>
+                                                    {formatDate(article.createdAt)}
+                                                </time>
                                                 <span className={styles.author}>By {article.author || "Unknown"}</span>
                                             </div>
                                         </div>
@@ -246,6 +264,7 @@ function ArticlesContent() {
                             className={styles.noArticlesIcon}
                             viewBox="0 0 20 20"
                             fill="currentColor"
+                            aria-hidden="true"
                         >
                             <path
                                 fillRule="evenodd"
@@ -258,6 +277,6 @@ function ArticlesContent() {
                     </div>
                 )}
             </section>
-        </div>
+        </main>
     );
 }

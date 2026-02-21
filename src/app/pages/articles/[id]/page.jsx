@@ -23,9 +23,8 @@ export default async function ArticlePage({ params }) {
   const wordCount = article.content ? article.content.split(/\s+/).length : 0;
   const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
-
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <article className={styles.article}>
         <header className={styles.header}>
           <div className={styles.categoryTag}>{article.category || "Industry Insights"}</div>
@@ -33,23 +32,22 @@ export default async function ArticlePage({ params }) {
 
           <div className={styles.metaContainer}>
             <div className={styles.authorInfo}>
-              <div className={styles.authorName}>By {article.author}</div>
-              <div className={styles.metaDivider}>•</div>
-              <div className={styles.date}>
+              <span className={styles.authorName}>By {article.author}</span>
+              <span className={styles.metaDivider}>•</span>
+              <time dateTime={article.createdAt} className={styles.date}>
                 {new Date(article.createdAt).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "short",
                   day: "numeric",
                 })}
-              </div>
-              <div className={styles.metaDivider}>•</div>
-              <div className={styles.readingTime}>{readingTime} min read</div>
+              </time>
+              <span className={styles.metaDivider}>•</span>
+              <span className={styles.readingTime}>{readingTime} min read</span>
             </div>
 
             <div className={styles.shareContainer}>
               <ShareButton title={article.title} />
             </div>
-
           </div>
         </header>
 
@@ -57,7 +55,7 @@ export default async function ArticlePage({ params }) {
           <div className={styles.heroImage}>
             <Image
               src={article.img}
-              alt={article.title}
+              alt={`Featured image for ${article.title}`}
               layout="responsive"
               width={1200}
               height={630}
@@ -67,18 +65,20 @@ export default async function ArticlePage({ params }) {
           </div>
         )}
 
-        <div className={styles.content}>
+        <section className={styles.content} aria-labelledby="article-content-heading">
+          <h2 id="article-content-heading" className="srOnly">Article Content</h2>
           {parse(article.content)}
-        </div>
+        </section>
 
-        {/* <div className={styles.articleFooter}>
+        {/* Uncomment when ready */}
+        {/* <footer className={styles.articleFooter}>
           <ArticleInteractive 
             articleId={id} 
             initialLikes={article.likes || 0} 
             initialComments={article.comments || []} 
           />
-        </div> */}
+        </footer> */}
       </article>
-    </div>
+    </main>
   );
 }

@@ -47,7 +47,7 @@ export default function NewsletterPosting() {
       setFile(null);
     } catch (err) {
       console.error(err);
-      setError("An error occurred while submitting the newsletter.");
+      setError(err.message || "An error occurred during submission.");
     } finally {
       setIsSubmitting(false);
     }
