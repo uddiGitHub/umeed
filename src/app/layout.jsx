@@ -4,6 +4,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import AuthHeader from "@/components/AuthHeader";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 // font is set to Tinos
 const tinos = Tinos({
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
           <AuthHeader />
           {children}
           <SpeedInsights />
+          <Analytics />
         </ClerkProvider>
       </body>
     </html>
