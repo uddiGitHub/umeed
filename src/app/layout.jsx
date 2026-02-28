@@ -1,6 +1,6 @@
 import { Tinos } from "next/font/google";
 import "./globals.css";
-import Script from "next/script"; 
+import Script from "next/script";
 
 import { ClerkProvider } from "@clerk/nextjs";
 import AuthHeader from "@/components/AuthHeader";
@@ -27,15 +27,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className={tinos.className}>
-        <ClerkProvider>
-          <AuthHeader />
-          {children}
-          <SpeedInsights />
-          <Analytics />
-        </ClerkProvider>
-
-        {/* Google Analytics */}
+      <head>
         {gaMeasurementId && (
           <>
             <Script
@@ -52,6 +44,14 @@ export default function RootLayout({ children }) {
             </Script>
           </>
         )}
+      </head>
+      <body className={tinos.className}>
+        <ClerkProvider>
+          <AuthHeader />
+          {children}
+          <SpeedInsights />
+          <Analytics />
+        </ClerkProvider>
       </body>
     </html>
   );
