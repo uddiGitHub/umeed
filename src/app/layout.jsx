@@ -28,6 +28,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        {/* Google Analytics */}
         {gaMeasurementId && (
           <>
             <Script
@@ -45,10 +46,14 @@ export default function RootLayout({ children }) {
           </>
         )}
       </head>
+
       <body className={tinos.className}>
         <ClerkProvider>
           <AuthHeader />
+
           {children}
+
+          {/* Vercel Analytics */}
           <SpeedInsights />
           <Analytics />
         </ClerkProvider>
