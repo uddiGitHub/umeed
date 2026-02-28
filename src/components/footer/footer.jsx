@@ -21,6 +21,27 @@ const Footer = () => {
   const [isTermsOpen, setIsTermsOpen] = useState(false);
   const [isCookieOpen, setIsCookieOpen] = useState(false);
 
+  // Cookie consent banner visibility – only shown after mount if no consent
+  const [showBanner, setShowBanner] = useState(false);
+
+  useEffect(() => {
+    // Check localStorage only on the client after mount
+    const stored = localStorage.getItem('cookieConsent');
+    if (stored !== 'accepted' && stored !== 'rejected') {
+      setShowBanner(true);
+    }
+  }, []);
+
+  const acceptCookies = () => {
+    localStorage.setItem('cookieConsent', 'accepted');
+    setShowBanner(false);
+  };
+
+  const handleAcceptFromModal = () => {
+    acceptCookies();
+    closeAllModals();
+  };
+
   const handleSubscribe = async (e) => {
     e.preventDefault();
     if (!email) {
@@ -291,6 +312,30 @@ const Footer = () => {
         </div>
       </div>
 
+      {/* Cookie Consent Banner – only shown after mount if no consent */}
+      {showBanner && (
+        <div className={styles.cookieBanner}>
+          <div className={styles.cookieBannerContent}>
+            <p className={styles.cookieBannerText}>
+              We use cookies to enhance your browsing experience and analyze our traffic. 
+              By clicking "Accept", you consent to our use of cookies. 
+              <button 
+                onClick={() => {
+                  closeAllModals();
+                  setIsCookieOpen(true);
+                }} 
+                className={styles.cookiePolicyLink}
+              >
+                Learn more
+              </button>
+            </p>
+            <button onClick={acceptCookies} className={styles.cookieAcceptButton}>
+              Accept
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Privacy Policy Modal */}
       {isPrivacyOpen && (
         <div className={styles.modalOverlay} onClick={closeAllModals}>
@@ -304,7 +349,7 @@ const Footer = () => {
             </button>
             <h2>Privacy Policy</h2>
             <div className={styles.modalBody}>
-              <p><strong>Last Updated: 21 February 2026</strong></p>
+              <p><strong>Last Updated: 28 February 2026</strong></p>
               <p>
                 This Privacy Policy explains how Maanki Umeed ("we", "our", or "us") collects, uses, and protects information when you visit our website <a href="https://www.maankiumeed.com" target="_blank" rel="noopener noreferrer">https://www.maankiumeed.com</a>.
               </p>
@@ -314,53 +359,52 @@ const Footer = () => {
               <p>However, we may collect limited technical information automatically when you visit our website, including:</p>
               <ul>
                 <li>IP address</li>
-                <li>Browser type</li>
-                <li>Device type</li>
-                <li>Operating system</li>
-                <li>Pages visited</li>
+                <li>Browser type and version</li>
+                <li>Device type and operating system</li>
+                <li>Pages visited and time spent</li>
+                <li>Referring website</li>
                 <li>Date and time of access</li>
               </ul>
-              <p>This information is collected for performance, security, and operational purposes only.</p>
+              <p>This information is collected through Google Analytics and Vercel Speed Insights for performance monitoring and website improvement.</p>
 
-              <h3>2. Performance Monitoring</h3>
-              <p>We use performance monitoring tools provided by Vercel (Vercel Speed Insights) to analyze website speed and technical performance.</p>
-              <p>These tools:</p>
+              <h3>2. Google Analytics</h3>
+              <p>We use Google Analytics to understand how visitors interact with our website. Google Analytics uses cookies to collect anonymous information such as:</p>
               <ul>
-                <li>Collect aggregated performance data</li>
-                <li>Do not collect personally identifiable information</li>
-                <li>Do not track users across websites</li>
-                <li>Are not used for advertising or marketing</li>
+                <li>How often users visit the site</li>
+                <li>Which pages they view</li>
+                <li>Where they came from (referral source)</li>
               </ul>
+              <p>Google Analytics collects only the IP address assigned to you on the date you visit, not your name or other identifying information. We do not combine the information collected through Google Analytics with personally identifiable information.</p>
+              <p>Google’s ability to use and share information collected by Google Analytics about your visits to this site is restricted by the <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">Google Analytics Terms of Use</a> and the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a>.</p>
+              <p>You can opt out of Google Analytics by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a>.</p>
 
-              <h3>3. How We Use Information</h3>
+              <h3>3. Performance Monitoring (Vercel Speed Insights)</h3>
+              <p>We use Vercel Speed Insights to analyze website speed and technical performance. This tool collects aggregated performance data and does not collect personally identifiable information. It helps us improve website speed and user experience.</p>
+
+              <h3>4. How We Use Information</h3>
               <p>We use collected information to:</p>
               <ul>
-                <li>Maintain website functionality</li>
-                <li>Improve website performance and speed</li>
+                <li>Maintain and improve website functionality</li>
+                <li>Analyze website traffic and usage patterns</li>
+                <li>Optimize website performance and speed</li>
                 <li>Ensure website security</li>
                 <li>Diagnose technical issues</li>
               </ul>
               <p>We do not sell, rent, or trade personal information.</p>
 
-              <h3>4. Cookies</h3>
-              <p>Our website uses only essential and performance-related cookies. For detailed information, please review our <button onClick={() => { closeAllModals(); setIsCookieOpen(true); }} className={styles.inlineLink}>Cookie Policy</button>.</p>
+              <h3>5. Cookies</h3>
+              <p>Our website uses cookies for analytics and essential functions. For detailed information, please review our <button onClick={() => { closeAllModals(); setIsCookieOpen(true); }} className={styles.inlineLink}>Cookie Policy</button>.</p>
 
-              <h3>5. Third-Party Services</h3>
-              <p>Our website is hosted on infrastructure provided by Vercel. These services may process limited technical data necessary for hosting, security, and performance.</p>
-              <p>We do not use:</p>
-              <ul>
-                <li>Advertising networks</li>
-                <li>Marketing tracking tools</li>
-                <li>Behavioral profiling systems</li>
-              </ul>
+              <h3>6. Third-Party Services</h3>
+              <p>We use Google Analytics and Vercel as third-party service providers. These services may process limited technical data necessary for analytics, hosting, security, and performance. We do not use advertising networks, marketing tracking tools, or behavioral profiling systems.</p>
 
-              <h3>6. Data Security</h3>
+              <h3>7. Data Security</h3>
               <p>We implement reasonable technical and organizational measures to protect information from unauthorized access, misuse, or disclosure. However, no method of internet transmission is 100% secure.</p>
 
-              <h3>7. Data Retention</h3>
-              <p>We retain technical data only as long as necessary for operational, security, and performance purposes.</p>
+              <h3>8. Data Retention</h3>
+              <p>We retain technical data only as long as necessary for operational, security, and performance purposes. Google Analytics data is retained for 26 months.</p>
 
-              <h3>8. Your Rights</h3>
+              <h3>9. Your Rights</h3>
               <p>Depending on your location (including under India's Digital Personal Data Protection Act, 2023 or other applicable laws), you may have rights to:</p>
               <ul>
                 <li>Request access to your personal data</li>
@@ -370,10 +414,10 @@ const Footer = () => {
               </ul>
               <p>To exercise these rights, contact us using the details below.</p>
 
-              <h3>9. Changes to This Policy</h3>
+              <h3>10. Changes to This Policy</h3>
               <p>We may update this Privacy Policy periodically. Updates will be posted on this page with a revised “Last Updated” date.</p>
 
-              <h3>10. Contact Us</h3>
+              <h3>11. Contact Us</h3>
               <p>If you have questions about this Privacy Policy, please contact:</p>
               <p>📧 <a href="mailto:maankiumeed2020@gmail.com">maankiumeed2020@gmail.com</a></p>
             </div>
@@ -402,7 +446,7 @@ const Footer = () => {
             </button>
             <h2>Terms and Conditions</h2>
             <div className={styles.modalBody}>
-              <p><strong>Last Updated: 21 February 2026</strong></p>
+              <p><strong>Last Updated: 28 February 2026</strong></p>
               <p>
                 Welcome to Maanki Umeed ("we", "our", or "us").
               </p>
@@ -440,9 +484,8 @@ const Footer = () => {
               <h3>3. No User Accounts</h3>
               <p>We do not require users to create accounts or log in. You are not required to provide personal information to browse this website.</p>
 
-              <h3>4. Third-Party Services</h3>
-              <p>Our website is hosted using services provided by Vercel.</p>
-              <p>We are not responsible for interruptions, downtime, or technical issues caused by third-party service providers.</p>
+              <h3>4. Third-Party Services and Analytics</h3>
+              <p>Our website uses Google Analytics and Vercel services for analytics and performance monitoring. These services may collect anonymous usage data as described in our Privacy and Cookie Policies. By using our website, you consent to the processing of data by these third parties in accordance with their respective policies.</p>
 
               <h3>5. Disclaimer</h3>
               <p>The content on this website is provided for general informational purposes only.</p>
@@ -465,13 +508,13 @@ const Footer = () => {
               </ul>
               <p>arising from the use of this website.</p>
 
-              <h3>7. Privacy</h3>
+              <h3>7. Privacy and Cookies</h3>
               <p>Your use of this website is also governed by our:</p>
               <ul>
                 <li><button onClick={() => { closeAllModals(); setIsPrivacyOpen(true); }} className={styles.inlineLink}>Privacy Policy</button></li>
                 <li><button onClick={() => { closeAllModals(); setIsCookieOpen(true); }} className={styles.inlineLink}>Cookie Policy</button></li>
               </ul>
-              <p>Please review those documents for details on how we handle data.</p>
+              <p>Please review those documents for details on how we handle data, including the use of Google Analytics.</p>
 
               <h3>8. Changes to These Terms</h3>
               <p>We may update these Terms and Conditions at any time. Updates will be posted on this page with a revised "Last Updated" date.</p>
@@ -509,7 +552,7 @@ const Footer = () => {
             </button>
             <h2>Cookie Policy</h2>
             <div className={styles.modalBody}>
-              <p><strong>Last Updated: 21 February 2026</strong></p>
+              <p><strong>Last Updated: 28 February 2026</strong></p>
               <p>
                 This Cookie Policy explains how Maanki Umeed ("we", "our", or "us") uses cookies and similar technologies when you visit our website <a href="https://www.maankiumeed.com" target="_blank" rel="noopener noreferrer">https://www.maankiumeed.com</a>.
               </p>
@@ -518,38 +561,46 @@ const Footer = () => {
               <p>Cookies are small text files stored on your device when you visit a website. They help websites function properly and improve user experience.</p>
 
               <h3>2. Cookies We Use</h3>
-              <p>We use only essential and performance-related technologies necessary for operating and improving our website.</p>
+              <p>We use the following categories of cookies:</p>
+              
               <p><strong>a) Essential Cookies</strong><br />These cookies are required for basic website functionality, including page navigation and security. Without these cookies, certain parts of the website may not function correctly.</p>
-              <p><strong>b) Performance Monitoring (Vercel Speed Insights)</strong><br />We use Vercel Speed Insights provided by Vercel to monitor website performance and loading speed.</p>
-              <p>Vercel Speed Insights:</p>
+              
+              <p><strong>b) Analytics Cookies (Google Analytics)</strong><br />We use Google Analytics to collect anonymous information about how visitors use our website. These cookies help us understand:</p>
               <ul>
-                <li>Collects aggregated and anonymous performance data</li>
-                <li>Does not collect personally identifiable information</li>
-                <li>Does not use advertising or marketing trackers</li>
-                <li>Does not track users across different websites</li>
+                <li>Number of visitors and page views</li>
+                <li>Which pages are most popular</li>
+                <li>How users navigate through the site</li>
+                <li>Approximate geographic location (by IP address)</li>
+                <li>Technology used (browser, device, operating system)</li>
               </ul>
-              <p>This information helps us improve website speed and overall user experience.</p>
+              <p>Google Analytics sets cookies such as <code>_ga</code>, <code>_gid</code>, and <code>_gat</code>. These cookies are used to distinguish users, throttle request rates, and generate analytics data. Information collected is anonymized and does not personally identify you.</p>
+              <p>You can learn more about Google Analytics cookies and how to opt out at:</p>
+              <ul>
+                <li><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener noreferrer">Google Analytics Cookie Usage</a></li>
+                <li><a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a></li>
+              </ul>
+              
+              <p><strong>c) Performance Monitoring (Vercel Speed Insights)</strong><br />We use Vercel Speed Insights provided by Vercel to monitor website performance and loading speed. This tool may set cookies or use similar technologies to collect aggregated, anonymous performance data. It does not collect personally identifiable information and is not used for advertising.</p>
 
               <h3>3. No Advertising or Marketing Cookies</h3>
-              <p>We do not use:</p>
-              <ul>
-                <li>Advertising cookies</li>
-                <li>Third-party marketing trackers</li>
-                <li>Behavioral profiling technologies</li>
-                <li>Social media tracking pixels</li>
-              </ul>
+              <p>We do not use advertising cookies, third-party marketing trackers, behavioral profiling technologies, or social media tracking pixels.</p>
 
-              <h3>4. Third-Party Infrastructure Services</h3>
-              <p>Our website is hosted and operated using infrastructure services provided by Vercel. These services may process limited technical data (such as IP address and device information) strictly for security, performance, and operational purposes.</p>
-
-              <h3>5. Managing Cookies</h3>
+              <h3>4. Managing Cookies</h3>
               <p>You can control or disable cookies through your browser settings. Most browsers allow you to:</p>
               <ul>
                 <li>View stored cookies</li>
-                <li>Delete cookies</li>
+                <li>Delete individual or all cookies</li>
                 <li>Block future cookies</li>
               </ul>
-              <p>Please note that disabling essential cookies may affect the functionality of the website.</p>
+              <p>Please note that disabling essential cookies may affect the functionality of the website. Disabling analytics cookies will not affect your ability to use the site but will prevent us from improving it based on your usage.</p>
+              <p>You can also opt out of Google Analytics completely by installing the browser add-on linked above.</p>
+
+              <h3>5. Third-Party Services</h3>
+              <p>Our website uses Google Analytics and Vercel services. These third parties may set their own cookies or similar technologies. Please refer to their respective privacy policies for more information:</p>
+              <ul>
+                <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a></li>
+                <li><a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Vercel Privacy Policy</a></li>
+              </ul>
 
               <h3>6. Changes to This Policy</h3>
               <p>We may update this Cookie Policy from time to time. Any updates will be posted on this page with a revised "Last Updated" date.</p>
@@ -561,7 +612,7 @@ const Footer = () => {
             <div className={styles.modalFooter}>
               <button
                 className={styles.modalAcceptButton}
-                onClick={closeAllModals}
+                onClick={handleAcceptFromModal}
               >
                 Accept
               </button>
