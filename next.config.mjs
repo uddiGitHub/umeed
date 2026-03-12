@@ -13,22 +13,19 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**', // Allows all HTTPS domains
+        hostname: 'drive.google.com',
       },
       {
-        protocol: 'http',
-        hostname: '**', // Allows all HTTP domains
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com', 
       },
     ],
   },
-  
-  // ... rest of your configuration remains unchanged
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
       'pdfjs-dist': 'pdfjs-dist',
     };
-    
     return config;
   },
   async headers() {

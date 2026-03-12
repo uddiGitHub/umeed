@@ -1,6 +1,6 @@
 "use client";
-import React from "react";
 import styles from "./home.module.css";
+import React, { useState, useEffect } from "react";
 
 import Image from "next/image";
 // Importing images
@@ -101,6 +101,26 @@ export default function Home() {
       link: "/pdfs/MAAN KI UMEED FOUNDATION SERVICE REPORT.pdf",
     },
   ];
+  const [previewImages, setPreviewImages] = useState([]);
+  const [loadingPreview, setLoadingPreview] = useState(true);
+  const galleryLink = "/pages/gallery";
+
+  useEffect(() => {
+    async function fetchPreviewImages() {
+      try {
+        const res = await fetch("/api/gallery-images");
+        if (!res.ok) throw new Error("Failed to fetch preview images");
+        const data = await res.json();
+        // Take first 4 images
+        setPreviewImages(data.slice(0, 4));
+      } catch (err) {
+        console.error("Error fetching preview:", err);
+      } finally {
+        setLoadingPreview(false);
+      }
+    }
+    fetchPreviewImages();
+  }, []);
 
   return (
     <main>
@@ -241,6 +261,38 @@ export default function Home() {
             </div>
           </div>
         </section>
+         <section className={styles.galleryPreview}>
+        <div className={styles.sectionHeader}>
+          <h2>From Our Gallery</h2>
+          <p className={styles.subtitle}>Moments captured in our journey</p>
+        </div>
+
+        {loadingPreview ? (
+          <div className={styles.previewLoader}>Loading preview...</div>
+        ) : (
+          <>
+            <div className={styles.previewGrid}>
+              {previewImages.map((img) => (
+                <div key={img.id} className={styles.previewCard}>
+                  <div className={styles.previewImageWrapper}>
+                    <img
+                      src={img.thumbnail}
+                      alt={img.name}
+                      className={styles.previewImage}
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className={styles.previewButtonContainer}>
+              <Link href={galleryLink} className={styles.previewButton}>
+                View Full Gallery →
+              </Link>
+            </div>
+          </>
+        )}
+      </section>
 
         {/* Peoples Section (commented out) */}
       </section>
