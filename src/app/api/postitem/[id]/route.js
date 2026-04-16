@@ -63,7 +63,13 @@ export async function PUT(request, { params }) {
       allowedAttributes: {
         a: ["href", "target"],
         img: ["src", "alt"],
-        "*": ["style"],
+        "*": ["style", "class"],
+      },
+      allowedStyles: {
+        "*": {
+          "color": [/^.*$/],
+          "text-align": [/^left$/, /^right$/, /^center$/, /^justify$/],
+        }
       },
       allowedSchemes: ["http", "https", "data"],
     });

@@ -6,9 +6,22 @@ const MenuBar = ({ editor }) => {
     if (!editor) return null;
 
     return (
-        <div className="flex flex-wrap gap-1 p-2 border-b bg-white rounded-t-lg shadow-sm">
+        <div className="flex flex-wrap gap-1 p-2 border-b bg-white rounded-t-lg shadow-sm items-center">
+            {/* Color Picker */}
+            <div className="relative flex items-center">
+              <input
+                type="color"
+                onInput={event => editor.chain().focus().setColor(event.target.value).run()}
+                value={editor.getAttributes('textStyle').color || '#000000'}
+                className="w-8 h-8 rounded cursor-pointer border-none p-0 bg-transparent"
+                title="Text Color"
+              />
+            </div>
+
+            <div className="border-l border-gray-300 mx-1 h-6"></div>
+
             {/* Headings */}
-            {/* <button
+            <button
                 type="button"
                 onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
                 className={`p-2 rounded-md ${editor.isActive('heading', { level: 1 })
@@ -17,7 +30,7 @@ const MenuBar = ({ editor }) => {
                 title="Heading 1"
             >
                 <span className="font-bold text-lg">H1</span>
-            </button> */}
+            </button>
 
             <button
                 type="button"
@@ -116,6 +129,61 @@ const MenuBar = ({ editor }) => {
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
                     <path fill="none" d="M0 0h24v24H0z" />
                     <path d="M8 4h13v2H8V4zM5 3v3h1v1H3V6h1V4H3V3h2zM3 14v-2.5h2V11H3v-1h3v2.5H4v.5h2v1H3zm2 5.5H3v-1h2V18H3v-1h3v4H3v-1h2v-.5zM8 11h13v2H8v-2zm0 7h13v2H8v-2z" />
+                </svg>
+            </button>
+
+            {/* Alignment */}
+            <div className="border-l border-gray-300 mx-1 h-6"></div>
+
+            <button
+                type="button"
+                onClick={() => editor.chain().focus().setTextAlign('left').run()}
+                className={`p-2 rounded-md ${editor.isActive({ textAlign: 'left' })
+                    ? 'bg-blue-100 text-blue-700 border border-blue-300'
+                    : 'hover:bg-gray-100'}`}
+                title="Align Left"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+                    <path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 15h14v2H3v-2zm0-5h18v2H3v-2zm0-5h14v2H3V9z"/>
+                </svg>
+            </button>
+
+            <button
+                type="button"
+                onClick={() => editor.chain().focus().setTextAlign('center').run()}
+                className={`p-2 rounded-md ${editor.isActive({ textAlign: 'center' })
+                    ? 'bg-blue-100 text-blue-700 border border-blue-300'
+                    : 'hover:bg-gray-100'}`}
+                title="Align Center"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+                    <path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm2 15h14v2H5v-2zm-2-5h18v2H3v-2zm2-5h14v2H5V9z"/>
+                </svg>
+            </button>
+
+            <button
+                type="button"
+                onClick={() => editor.chain().focus().setTextAlign('right').run()}
+                className={`p-2 rounded-md ${editor.isActive({ textAlign: 'right' })
+                    ? 'bg-blue-100 text-blue-700 border border-blue-300'
+                    : 'hover:bg-gray-100'}`}
+                title="Align Right"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+                    <path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm4 15h14v2H7v-2zm-4-5h18v2H3v-2zm4-5h14v2H7V9z"/>
+                </svg>
+            </button>
+
+            <button
+                type="button"
+                onClick={() => editor.chain().focus().setTextAlign('justify').run()}
+                className={`p-2 rounded-md ${editor.isActive({ textAlign: 'justify' })
+                    ? 'bg-blue-100 text-blue-700 border border-blue-300'
+                    : 'hover:bg-gray-100'}`}
+                title="Justify"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+                    <path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 15h18v2H3v-2zm0-5h18v2H3v-2zm0-5h18v2H3V9z"/>
                 </svg>
             </button>
         </div>

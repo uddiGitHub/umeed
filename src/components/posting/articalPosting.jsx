@@ -15,6 +15,9 @@ import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import Placeholder from '@tiptap/extension-placeholder'
+import TextAlign from '@tiptap/extension-text-align'
+import Color from '@tiptap/extension-color'
+import TextStyle from '@tiptap/extension-text-style'
 
 import { MenuBar } from "../ui/MenuBar";
 
@@ -54,6 +57,11 @@ export default function ArticlePosting({ initialData, onCancel }) {
         },
       }),
       Underline,
+      TextAlign.configure({
+        types: ['heading', 'paragraph'],
+      }),
+      TextStyle,
+      Color,
       Placeholder.configure({
         placeholder: 'Write your post content here...',
       }),
