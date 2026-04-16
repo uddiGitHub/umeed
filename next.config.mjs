@@ -28,6 +28,11 @@ const nextConfig = {
     };
     return config;
   },
+  turbopack: {
+    resolveAlias: {
+      'pdfjs-dist': 'pdfjs-dist',
+    },
+  },
   async headers() {
     return [
       {
