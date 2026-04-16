@@ -19,16 +19,16 @@ import Placeholder from '@tiptap/extension-placeholder'
 import { MenuBar } from "../ui/MenuBar";
 
 
-export default function ArticlePosting() {
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [content, setContent] = useState("");
-  const [image, setImage] = useState("");
+export default function ArticlePosting({ initialData, onCancel }) {
+  const [title, setTitle] = useState(initialData?.title || "");
+  const [category, setCategory] = useState(initialData?.category || "");
+  const [content, setContent] = useState(initialData?.content || "");
+  const [image, setImage] = useState(initialData?.img || "");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
   const { getToken } = useAuth();
-  const [author, setAuthor] = useState("UMEED");
+  const [author, setAuthor] = useState(initialData?.author || "UMEED");
 
   // Initialize Tiptap editor
   const editor = useEditor({
@@ -58,7 +58,7 @@ export default function ArticlePosting() {
         placeholder: 'Write your post content here...',
       }),
     ],
-    content: "",
+    content: initialData?.content || "",
     onUpdate: ({ editor }) => {
       setContent(editor.getHTML());
     },
@@ -76,8 +76,12 @@ export default function ArticlePosting() {
         return;
       }
 
-      const response = await fetch("/api/postitem", {
-        method: "POST",
+      const isEditing = !!initialData;
+      const url = isEditing ? `/api/postitem/${initialData._id}` : "/api/postitem";
+      const method = isEditing ? "PUT" : "POST";
+
+      const response = await fetch(url, {
+        method,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -91,8 +95,11 @@ export default function ArticlePosting() {
         throw new Error(result.error || "Failed to create post");
       }
 
-      // router.push(`/admin/posts/${result._id}`); //later change this when edit article feature is implemented
-      router.push("/pages/articles");
+      if (onCancel) {
+        onCancel();
+      } else {
+        router.push("/pages/articles");
+      }
 
     } catch (err) {
       setError(err.message);
@@ -105,7 +112,7 @@ export default function ArticlePosting() {
   return (
     <div className={styles.pageWrapper}>
       <div className={styles.containerArticlePosting}>
-        <h2 className={styles.heading}>Create New Article Post</h2>
+        <h2 className={styles.heading}>{initialData ? "Edit Article" : "Create New Article Post"}</h2>
 
         {error && <div className={styles.error}>{error}</div>}
 
@@ -166,21 +173,33 @@ export default function ArticlePosting() {
             />
           </div>
 
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className={styles.button}
-            id="submit-post-button"
-          >
-            {isSubmitting ? (
-              <>
-                <Loader2 className={styles.loader} />
-                Creating Post...
-              </>
-            ) : (
-              "Create Post"
+          <div className="flex gap-4">
+            {onCancel && (
+              <button
+                type="button"
+                onClick={onCancel}
+                disabled={isSubmitting}
+                className={`${styles.button} !bg-gray-200 !text-black hover:!bg-gray-300`}
+              >
+                Cancel
+              </button>
             )}
-          </button>
+            <button
+               type="submit"
+               disabled={isSubmitting}
+               className={styles.button}
+               id="submit-post-button"
+            >
+              {isSubmitting ? (
+                <span className="flex items-center justify-center">
+                  <Loader2 className={styles.loader} />
+                  {initialData ? "Updating..." : "Creating Post..."}
+                </span>
+              ) : (
+                initialData ? "Update Post" : "Create Post"
+              )}
+            </button>
+          </div>
         </form>
       </div>
     </div>

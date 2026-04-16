@@ -17,8 +17,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 
-import ArticlePosting from "@/components/posting/articalPosting";
-import NewsletterPosting from "@/components/posting/newsletterPosting";
+import AdminContent from "@/components/admin/AdminContent";
 
 export default async function AdminPage({ searchParams }) {
   const resolvedSearchParams = await searchParams;
@@ -91,10 +90,7 @@ export default async function AdminPage({ searchParams }) {
               </BreadcrumbList>
             </Breadcrumb>
           </header>
-          <div className="flex justify-center p-4">
-            {type === "article" && <ArticlePosting />}
-            {type === "newsletter" && <NewsletterPosting />}
-          </div>
+            <AdminContent type={type} />
         </SidebarInset>
       </SidebarProvider>
     </main>

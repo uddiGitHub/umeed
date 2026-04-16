@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 // import { CategoryCombobox } from "@/components/ui/Combobox";
 
-export default function NewsletterPosting() {
+export default function NewsletterPosting({ onCancel }) {
   const [category, setCategory] = useState("");
   const [file, setFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -86,27 +86,39 @@ export default function NewsletterPosting() {
           />
         </div>
 
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className={styles.button}
-        >
-          {isSubmitting ? (
-            <span className="flex items-center justify-center">
-              <span className={styles.loader}></span>
-              Submitting...
-            </span>
-          ) : (
-            "Submit Newsletter"
+        <div className="flex gap-4 w-full">
+          {onCancel && (
+            <button
+              type="button"
+              onClick={onCancel}
+              disabled={isSubmitting}
+              className={`${styles.button} !bg-gray-200 !text-black hover:!bg-gray-300 w-full`}
+            >
+              Cancel
+            </button>
           )}
-        </button>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className={`${styles.button} w-full`}
+          >
+            {isSubmitting ? (
+              <span className="flex items-center justify-center">
+                <span className={styles.loader}></span>
+                Submitting...
+              </span>
+            ) : (
+              "Submit Newsletter"
+            )}
+          </button>
+        </div>
       </form>
       {showModal && (
         <div className={styles.modalOverlay}>
           <div className={styles.modalBox}>
             <h2>Success!</h2>
             <p>Newsletter submitted successfully.</p>
-            <button onClick={() => window.location.reload()} className={styles.modalButton}>
+            <button onClick={() => onCancel ? onCancel() : window.location.reload()} className={styles.modalButton}>
               OK
             </button>
           </div>

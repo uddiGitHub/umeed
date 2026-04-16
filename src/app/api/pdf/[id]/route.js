@@ -52,3 +52,33 @@ export async function GET(_request, { params }) {
     );
   }
 }
+
+export async function DELETE(request, { params }) {
+  try {
+    const { getAuth } = await import("@clerk/nextjs/server");
+    const token = request.headers.get("authorization")?.replace("Bearer ", "");
+    const { userId } = token ? getAuth(request) : { userId: null };
+
+    if (!userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { id } = await params;
+    if (!ObjectId.isValid(id)) {
+      return NextResponse.json({ error: 'Invalid file ID format' }, { status: 400 });
+    }
+
+    const bucket = await initBucket();
+    const objectId = new ObjectId(id);
+
+    await bucket.delete(objectId);
+    
+    return NextResponse.json({ success: true, message: "PDF deleted" });
+  } catch (error) {
+    console.error('[PDF DELETE ERROR]', error);
+    return NextResponse.json(
+      { error: 'Internal Server Error: ' + error.message },
+      { status: 500 }
+    );
+  }
+}
