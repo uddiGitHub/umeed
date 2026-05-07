@@ -1,3 +1,129 @@
+/* ══════════════════════════════════════
+   Scroll Reveal Animation System
+   ══════════════════════════════════════ */
+
+/* Hidden state (before scroll reveal) */
+.revealHidden {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(0.95);
+    will-change: transform, opacity, filter;
+}
+
+/* Active state (after scroll reveal triggers) */
+.revealActive {
+    opacity: 1;
+    filter: blur(0);
+    transform: none !important;
+}
+
+/* Fade Up — sections slide up gently */
+.revealFadeUp {
+    transform: translateY(50px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Slide from Right — for left-aligned content */
+.revealSlideRight {
+    transform: translateX(-60px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Slide from Left — for right-aligned content (images) */
+.revealSlideLeft {
+    transform: translateX(60px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Stagger Up — for card grids, each card staggers */
+.revealStaggerUp {
+    transform: translateY(40px) scale(0.95);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Blur In — soft entrance for headers */
+.revealBlurIn {
+    transform: translateY(20px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Skew In — dynamic perspective entrance */
+.revealSkewIn {
+    transform: translateY(50px) skewY(5deg);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Scale in — subtle zoom effect for images */
+.revealScale {
+    transform: scale(0.92);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Continuous scroll parallax */
+.parallaxScroll {
+    transform: translateY(var(--scroll-offset, 0px)) scale(1.15);
+    will-change: transform;
+}
+
+/* Banner-specific text reveal with slight upward drift */
+.bannerTextReveal {
+    animation: bannerTextDrift 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes bannerTextDrift {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Parallax-like subtle float for decorative elements */
+@keyframes gentleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .revealFadeUp,
+    .revealSlideRight,
+    .revealSlideLeft,
+    .revealStaggerUp,
+    .revealBlurIn,
+    .revealSkewIn,
+    .revealScale {
+        transition: opacity 0.3s ease !important;
+        transform: none !important;
+        filter: none !important;
+    }
+
+    .bannerTextReveal {
+        animation: none !important;
+        opacity: 1 !important;
+    }
+
+    .bannerImage {
+        animation: none !important;
+    }
+}
+
+/* ══════════════════════════════════════ */
+
 .homePage {
     max-width: 1200px;
     margin: 0 auto;
@@ -38,6 +164,16 @@
             rgba(0, 0, 0, 0) 100%);
 
     opacity: 90%;
+    animation: bannerKenBurns 20s ease-in-out infinite alternate;
+}
+
+@keyframes bannerKenBurns {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.08);
+    }
 }
 
 .bannerHeader {
@@ -349,8 +485,8 @@
 }
 
 .verticalCard:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
 }
 
 .cardHeader {
@@ -472,7 +608,8 @@
 }
 
 .previewCard:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
 .previewImageWrapper {

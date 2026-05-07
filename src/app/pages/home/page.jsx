@@ -1,6 +1,7 @@
 "use client";
 import styles from "./home.module.css";
 import React, { useState, useEffect } from "react";
+import { useScrollReveal, useStaggerReveal, useParallax } from "@/hooks/useScrollReveal";
 
 import Image from "next/image";
 // Importing images
@@ -122,34 +123,63 @@ export default function Home() {
     fetchPreviewImages();
   }, []);
 
+  // Scroll reveal hooks for each section
+  const bannerReveal = useScrollReveal({ threshold: 0.1, rootMargin: "0px" });
+  const sdgReveal = useScrollReveal({ threshold: 0.1 });
+  const visionHeaderReveal = useScrollReveal({ threshold: 0.2 });
+  const visionTextReveal = useScrollReveal({ threshold: 0.15 });
+  const visionImageReveal = useScrollReveal({ threshold: 0.15 });
+  const pillarsReveal = useStaggerReveal(verticalsContent.length, { threshold: 0.1 });
+  const getInvolvedReveal = useScrollReveal({ threshold: 0.1 });
+  const galleryReveal = useStaggerReveal(4, { threshold: 0.1 });
+
+  // Continuous Parallax hooks
+  const visionParallax = useParallax(0.12);
+  const getInvolvedParallax = useParallax(0.12);
+
   return (
     <main>
       {/* Banner Section */}
-      <section className={styles.bannerContainer}>
+      <section
+        ref={bannerReveal.ref}
+        className={`${styles.bannerContainer} ${bannerReveal.isVisible ? styles.revealActive : styles.revealHidden}`}
+      >
         <Image
           src={bannerImagePath}
           alt="" // Decorative image, text is provided in the overlay heading
           className={styles.bannerImage}
         />
-        <div className={styles.bannerHeader}>
+        <div className={`${styles.bannerHeader} ${bannerReveal.isVisible ? styles.bannerTextReveal : ''}`}>
           <h1>WITH THE PEOPLE, FOR THE PEOPLE</h1>
         </div>
       </section>
 
       <section className={styles.homePage}>
         {/* Impact Section */}
-        <SDGImpactSection impactStats={impactStats} />
+        <div
+          ref={sdgReveal.ref}
+          className={`${styles.revealBlurIn} ${sdgReveal.isVisible ? styles.revealActive : styles.revealHidden}`}
+        >
+          <SDGImpactSection impactStats={impactStats} />
+        </div>
 
         {/* vision Section */}
         <section className={styles.visionSection}>
           <div className={styles.visionContainer}>
             <div className={styles.visionContent}>
-              <div className={styles.sectionHeader}>
+              <div
+                ref={visionHeaderReveal.ref}
+                className={`${styles.sectionHeader} ${styles.revealBlurIn} ${visionHeaderReveal.isVisible ? styles.revealActive : styles.revealHidden}`}
+              >
                 <div className={styles.subtitle}>Our Guiding Principle</div>
                 <h2 className={styles.title}>Vision for Transformative Change</h2>
               </div>
 
-              <div className={styles.visionText}>
+              <div
+                ref={visionTextReveal.ref}
+                className={`${styles.visionText} ${styles.revealSlideRight} ${visionTextReveal.isVisible ? styles.revealActive : styles.revealHidden}`}
+                style={{ transitionDelay: '150ms' }}
+              >
                 <p>
                   At Maan Ki Umeed, we envision a society where every child receives quality education,
                   every woman lives with dignity and economic independence, and every young person is empowered
@@ -167,13 +197,18 @@ export default function Home() {
               </div>
             </div>
 
-            <div className={styles.visionImageContainer}>
-              <div className={styles.imageWrapper}>
-                <Image
-                  src={visionImage}
-                  alt="Vision for Transformative Change"
-                  className={styles.visionImage}
-                />
+            <div
+              ref={visionImageReveal.ref}
+              className={`${styles.visionImageContainer} ${styles.revealSlideLeft} ${visionImageReveal.isVisible ? styles.revealActive : styles.revealHidden}`}
+            >
+              <div className={styles.imageWrapper} ref={visionParallax}>
+                <div className={styles.parallaxScroll} style={{ width: '100%', height: '100%' }}>
+                  <Image
+                    src={visionImage}
+                    alt="Vision for Transformative Change"
+                    className={styles.visionImage}
+                  />
+                </div>
                 <div className={styles.imageOverlay}></div>
               </div>
 
@@ -190,16 +225,22 @@ export default function Home() {
 
         {/* Verticals Section */}
         <section className={styles.verticalsSection}>
-          <div className={styles.sectionHeader}>
+          <div
+            className={`${styles.sectionHeader} ${styles.revealBlurIn} ${pillarsReveal.isVisible ? styles.revealActive : styles.revealHidden}`}
+          >
             <h2>Our Core Pillars</h2>
             <p className={styles.subtitle} style={{
               textAlign: 'center'
             }}>Foundations of our impact-driven approach</p>
           </div>
 
-          <div className={styles.verticalsContainer}>
+          <div ref={pillarsReveal.ref} className={styles.verticalsContainer}>
             {verticalsContent.map((vertical, index) => (
-              <div key={index} className={styles.verticalCard}>
+              <div
+                key={index}
+                className={`${styles.verticalCard} ${styles.revealSkewIn} ${pillarsReveal.isVisible ? styles.revealActive : styles.revealHidden}`}
+                style={{ transitionDelay: pillarsReveal.getDelay(index) }}
+              >
                 <div className={styles.cardHeader}>
                   <div className={styles.iconContainer}>
                     <div className={styles.cardIcon}>{vertical.title.charAt(0)}</div>
@@ -230,7 +271,10 @@ export default function Home() {
         </section>
 
         {/* Get Involved Section */}
-        <section className={styles.getInvolved}>
+        <section
+          ref={getInvolvedReveal.ref}
+          className={`${styles.getInvolved} ${styles.revealBlurIn} ${getInvolvedReveal.isVisible ? styles.revealActive : styles.revealHidden}`}
+        >
           <div className={styles.getInvolvedContainer}>
             <div className={styles.getInvolvedText}>
               <div className={styles.subtitle}>Join the Movement</div>
@@ -256,13 +300,20 @@ export default function Home() {
                 </Link>
               </Button>
             </div>
-            <div className={styles.getInvolvedImgContainer}>
-              <Image className={styles.getInvolvedImg} src={BecomeAmember} alt="Become a Member" />
+            <div className={styles.getInvolvedImgContainer} ref={getInvolvedParallax}>
+              <div className={styles.parallaxScroll} style={{ width: '100%', height: '100%' }}>
+                <Image className={styles.getInvolvedImg} src={BecomeAmember} alt="Become a Member" />
+              </div>
             </div>
           </div>
         </section>
-         <section className={styles.galleryPreview}>
-        <div className={styles.sectionHeader}>
+         <section 
+          ref={galleryReveal.ref}
+          className={styles.galleryPreview}
+         >
+        <div
+          className={`${styles.sectionHeader} ${styles.revealBlurIn} ${galleryReveal.isVisible ? styles.revealActive : styles.revealHidden}`}
+        >
           <h2>From Our Gallery</h2>
           <p className={styles.subtitle}>Moments captured in our journey</p>
         </div>
@@ -272,8 +323,12 @@ export default function Home() {
         ) : (
           <>
             <div className={styles.previewGrid}>
-              {previewImages.map((img) => (
-                <div key={img.id} className={styles.previewCard}>
+              {previewImages.map((img, index) => (
+                <div
+                  key={img.id}
+                  className={`${styles.previewCard} ${styles.revealSkewIn} ${galleryReveal.isVisible ? styles.revealActive : styles.revealHidden}`}
+                  style={{ transitionDelay: galleryReveal.getDelay(index) }}
+                >
                   <div className={styles.previewImageWrapper}>
                     <img
                       src={img.thumbnail}
@@ -285,7 +340,10 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <div className={styles.previewButtonContainer}>
+            <div
+              className={`${styles.previewButtonContainer} ${styles.revealBlurIn} ${galleryReveal.isVisible ? styles.revealActive : styles.revealHidden}`}
+              style={{ transitionDelay: '400ms' }}
+            >
               <Link href={galleryLink} className={styles.previewButton}>
                 View Full Gallery →
               </Link>

@@ -1,66 +1,81 @@
+/* ══════════════════════════════════════
+   SDG Impact Section — Modern Redesign
+   ══════════════════════════════════════ */
+
 .impactContainer {
-  padding: 20px 20px;
+  padding: 2rem 1.5rem;
   position: relative;
   overflow: hidden;
+  margin-top: 2rem;
 }
+
 .impactContainer::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 5px;
+  height: 4px;
   border-radius: 100px;
-  background: linear-gradient(90deg, hsl(6, 78%, 57%), hsl(145, 100%, 33%), hsl(350, 100%, 40%), hsl(358, 95%, 50%),hsl(327, 100%, 46%),hsl(137, 54%, 34%));
+  background: linear-gradient(90deg,
+    #ef0030,
+    #009934,
+    #c5192d,
+    #ff3a21,
+    #ff1493,
+    #3f7e44);
 }
 
 .sdgHeader {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 3.5rem;
   position: relative;
 }
 
 .sdgHeader h1 {
-  font-size: 3.5rem;
-  color: #2c3e50;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--text-primary);
   font-weight: 700;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
 }
 
 .sdgHeader p {
-  font-size: 1.8rem;
-  color: #000000;
+  font-size: 1.6rem;
+  color: var(--text-primary);
   font-weight: 600;
   position: relative;
   display: inline-block;
 }
 
 .focusWord {
-  color: #000000;
+  color: var(--accent-primary);
   font-weight: 700;
   filter: none;
 }
 
 .blurred {
   filter: blur(1px);
-  opacity: 0.8;
+  opacity: 0.65;
 }
 
 .impactStats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 0.5rem;
 }
 
 .impactCard {
-  border-radius: 12px;
-  padding: 30px 20px;
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
   text-align: center;
-  border: 1px solid #e0e0e0;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-light);
+  background: var(--bg-card);
+  transition: all 0.4s var(--ease-out-expo);
   position: relative;
   overflow: hidden;
   display: flex;
@@ -68,141 +83,124 @@
   align-items: center;
 }
 
+.impactCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
 .profileWrapper {
-  width: 60%;
+  width: 55%;
   height: auto;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  margin-bottom: 25px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
   overflow: hidden;
   position: relative;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s var(--ease-out-expo);
 }
 
 .impactCard:hover .profileWrapper {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .profilePic {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s var(--ease-out-expo);
 }
 
 .impactCard:hover .profilePic {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 .impactCard h2 {
-  font-size: 1.8rem;
-  color: #2c3e50;
-  margin: 8px;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin: 0.5rem 0;
   font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .impactCard p {
-  font-size: 1.1rem;
-  color: #7f8c8d;
-  line-height: 1.6;
-  margin-top: 10px;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-top: 0.5rem;
 }
 
 .sdgBadge {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 1rem;
+  right: 1rem;
   color: white;
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 5px 12px;
-  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.35rem 0.85rem;
+  border-radius: 100px;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
+/* SDG Colors */
+.impactCard:nth-child(1) .sdgBadge { background: #ef0030; }
+.impactCard:nth-child(2) .sdgBadge { background: #009934; }
+.impactCard:nth-child(3) .sdgBadge { background: #c5192d; }
+.impactCard:nth-child(4) .sdgBadge { background: #ff3a21; }
+.impactCard:nth-child(5) .sdgBadge { background: #ff1493; }
+.impactCard:nth-child(6) .sdgBadge { background: #3f7e44; }
 
-.impactCard:nth-child(1) .sdgBadge,
-.impactCard:nth-child(1) .impactNumber { 
-  background: #ef0030;
-  color: #fff; 
-}
+.impactCard:nth-child(1) .impactNumber { background: #ef0030; color: #fff; }
+.impactCard:nth-child(2) .impactNumber { background: #009934; color: #fff; }
+.impactCard:nth-child(3) .impactNumber { background: #c5192d; color: #fff; }
+.impactCard:nth-child(4) .impactNumber { background: #ff3a21; color: #fff; }
+.impactCard:nth-child(5) .impactNumber { background: #ff1493; color: #fff; }
+.impactCard:nth-child(6) .impactNumber { background: #3f7e44; color: #fff; }
 
-.impactCard:nth-child(2) .sdgBadge,
-.impactCard:nth-child(2) .impactNumber { 
-  background: hsl(145, 100%, 33%);
-  color: #fff; 
-}
-
-.impactCard:nth-child(3) .sdgBadge,
-.impactCard:nth-child(3) .impactNumber { 
-  background: hsl(350, 100%, 40%);
-  color: #fff; 
-}
-
-.impactCard:nth-child(4) .sdgBadge,
-.impactCard:nth-child(4) .impactNumber { 
-  background: hsl(358, 95%, 50%);
-  color: #fff; 
-}
-.impactCard:nth-child(5) .sdgBadge,
-.impactCard:nth-child(5) .impactNumber { 
-  background: hsl(327, 100%, 46%);
-  color: #fff; 
-}
-.impactCard:nth-child(6) .sdgBadge,
-.impactCard:nth-child(6) .impactNumber { 
-  background: hsl(137, 54%, 34%);
-  color: #fff; 
-}
-
-
+/* Responsive */
 @media (max-width: 1024px) {
   .sdgHeader h1 {
-    font-size: 3rem;
+    font-size: 2.8rem;
   }
 }
+
 @media (max-width: 768px) {
-    
   .impactContainer {
-    padding: 20px 20px;
+    padding: 1.5rem 1rem;
   }
-  
+
   .sdgHeader h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
-  
+
   .sdgHeader p {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
-  
+
   .impactStats {
-    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   }
 }
 
 @media (max-width: 480px) {
   .sdgHeader h1 {
-    font-size: 2rem;
+    font-size: 1.85rem;
   }
-  
+
   .sdgHeader p {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
-  
-  .impactNumber {
-    font-size: 1.8rem;
-  }
-  
+
   .impactCard p {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
+
   .impactStats {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
 }
-/* .centerLast {
-  outline: 2px solid red;
-} */
 
 .centerLast .impactCard:last-child {
   margin-left: auto;
